@@ -23,6 +23,7 @@ export default function MobileAvatarPage() {
                 variant={values.variant as AvatarVariant}
                 size={values.size as AvatarSize}
                 initials={values.initials as string}
+                source="https://i.pravatar.cc/300"
                 activityRing={values.activityRing as boolean}
                 presenceBadge={values.presenceBadge as boolean}
               />
