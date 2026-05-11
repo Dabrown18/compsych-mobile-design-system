@@ -1,0 +1,28 @@
+.main {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(280px, 1fr);
+  min-height: 240px;
+}
+
+@media (max-width: 800px) {
+  .main {
+    grid-template-columns: 1fr;
+  }
+}
+
+.stage {
+  padding: 40px;
+  background: var(--sys-color-surface-container-low, #f9fafb);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 1px solid var(--sys-color-outline-variant, #d7dbe0);
+  min-width: 0;
+}
+
+@media (max-width: 800px) {
+  .stage {
+    border-right: none;
+    border-bottom: 1px solid var(--sys-color-outline-variant, #d7dbe0);
+  }
+}

@@ -1,0 +1,133 @@
+/*
+ * PhoneFrame — CSS iPhone-style device mockup.
+ * Proportions based on iPhone 15 Pro (393 × 852 logical px).
+ * Rendered at ~60% scale to fit the playground stage.
+ */
+
+.device {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Scale the whole frame so it fits neatly in a playground stage. */
+  width: 260px;
+  flex-shrink: 0;
+}
+
+.bezel {
+  position: relative;
+  width: 260px;
+  height: 536px;
+  background: #1a1a1a;
+  border-radius: 40px;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.12),
+    0 0 0 1px rgba(0, 0, 0, 0.5),
+    0 24px 48px rgba(0, 0, 0, 0.32),
+    0 8px 16px rgba(0, 0, 0, 0.16);
+  padding: 12px;
+}
+
+/* Side buttons */
+.bezel::before {
+  content: '';
+  position: absolute;
+  left: -3px;
+  top: 96px;
+  width: 3px;
+  height: 36px;
+  background: #2a2a2a;
+  border-radius: 2px 0 0 2px;
+  box-shadow: 0 50px 0 #2a2a2a, 0 100px 0 #2a2a2a;
+}
+
+.bezel::after {
+  content: '';
+  position: absolute;
+  right: -3px;
+  top: 140px;
+  width: 3px;
+  height: 60px;
+  background: #2a2a2a;
+  border-radius: 0 2px 2px 0;
+}
+
+.screen {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: var(--sys-color-surface, #f9fafb);
+  border-radius: 30px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Dynamic Island */
+.dynamicIsland {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 24px;
+  background: #1a1a1a;
+  border-radius: 12px;
+  z-index: 10;
+}
+
+/* Status bar */
+.statusBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px 6px;
+  flex-shrink: 0;
+  color: var(--sys-color-on-surface, #1b1d22);
+}
+
+.statusTime {
+  font-size: 13px;
+  font-weight: 600;
+  font-family: inherit;
+  line-height: 1;
+}
+
+.statusIcons {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--sys-color-on-surface, #1b1d22);
+}
+
+/* Scrollable content area */
+.content {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  /* Hide scrollbar inside the phone frame */
+  scrollbar-width: none;
+}
+
+.content::-webkit-scrollbar {
+  display: none;
+}
+
+/* Home indicator */
+.homeIndicator {
+  flex-shrink: 0;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 6px;
+}
+
+.homeIndicator::after {
+  content: '';
+  display: block;
+  width: 100px;
+  height: 4px;
+  background: var(--sys-color-on-surface, #1b1d22);
+  border-radius: 2px;
+  opacity: 0.25;
+}

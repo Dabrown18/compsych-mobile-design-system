@@ -1,0 +1,65 @@
+.root {
+  display: flex;
+  background: var(--sys-color-surface, #ffffff);
+  border-bottom: 1px solid var(--sys-color-outline-variant, #d7dbe0);
+  width: 100%;
+  overflow: hidden;
+}
+
+.root.scrollable {
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.root.scrollable::-webkit-scrollbar {
+  display: none;
+}
+
+.tab {
+  flex: 1;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 90px;
+  height: 48px;
+  padding: 0 16px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--sys-color-on-surface-variant, #565f6c);
+  font-family: inherit;
+  transition: color 150ms ease-out;
+  -webkit-tap-highlight-color: transparent;
+  white-space: nowrap;
+}
+
+.tab:hover {
+  background: color-mix(
+    in srgb,
+    var(--sys-color-on-surface, #1b1d22) 6%,
+    transparent
+  );
+}
+
+.tab.active {
+  color: var(--sys-color-primary, #075cba);
+}
+
+.label {
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.01em;
+}
+
+.indicator {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--sys-color-primary, #075cba);
+  border-radius: 3px 3px 0 0;
+}

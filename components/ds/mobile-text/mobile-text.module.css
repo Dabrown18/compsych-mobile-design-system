@@ -1,0 +1,115 @@
+.root {
+  margin: 0;
+  font-family: var(--font-display, 'DM Sans', sans-serif);
+}
+
+/* ---- Variants ---- */
+
+.display_large {
+  font-size: calc(var(--sys-typography-display-large-font-size, 80) * 1px);
+  line-height: calc(var(--sys-typography-display-large-line-height, 80) * 1px);
+  font-weight: 400;
+  letter-spacing: calc(var(--sys-typography-display-large-tracking, -2.4) * 1px);
+}
+.display_medium {
+  font-size: calc(var(--sys-typography-display-medium-font-size, 72) * 1px);
+  line-height: calc(var(--sys-typography-display-medium-line-height, 79.2) * 1px);
+  font-weight: 400;
+  letter-spacing: calc(var(--sys-typography-display-medium-tracking, -1.44) * 1px);
+}
+.display_small {
+  font-size: calc(var(--sys-typography-display-small-font-size, 64) * 1px);
+  line-height: calc(var(--sys-typography-display-small-line-height, 76.8) * 1px);
+  font-weight: 400;
+  letter-spacing: calc(var(--sys-typography-display-small-tracking, -0.64) * 1px);
+}
+.headline_large {
+  font-size: calc(var(--sys-typography-headline-large-font-size, 48) * 1px);
+  line-height: calc(var(--sys-typography-headline-large-line-height, 57.6) * 1px);
+  font-weight: 400;
+  letter-spacing: calc(var(--sys-typography-headline-large-tracking, -0.48) * 1px);
+}
+.headline_medium {
+  font-size: calc(var(--sys-typography-headline-medium-font-size, 40) * 1px);
+  line-height: calc(var(--sys-typography-headline-medium-line-height, 48) * 1px);
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.headline_small {
+  font-size: calc(var(--sys-typography-headline-small-font-size, 32) * 1px);
+  line-height: calc(var(--sys-typography-headline-small-line-height, 38.4) * 1px);
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.title_large {
+  font-size: calc(var(--sys-typography-title-large-font-size, 28) * 1px);
+  line-height: calc(var(--sys-typography-title-large-line-height, 36.4) * 1px);
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.title_medium {
+  font-size: calc(var(--sys-typography-title-medium-font-size, 24) * 1px);
+  line-height: calc(var(--sys-typography-title-medium-line-height, 31.2) * 1px);
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.title_small {
+  font-size: calc(var(--sys-typography-title-small-font-size, 20) * 1px);
+  line-height: calc(var(--sys-typography-title-small-line-height, 28) * 1px);
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.body_large {
+  font-size: calc(var(--sys-typography-body-large-font-size, 20) * 1px);
+  line-height: calc(var(--sys-typography-body-large-line-height, 30) * 1px);
+  font-weight: 400;
+  letter-spacing: 0;
+  font-family: var(--font-inter, 'Inter', sans-serif);
+}
+.body_medium {
+  font-size: calc(var(--sys-typography-body-medium-font-size, 16) * 1px);
+  line-height: calc(var(--sys-typography-body-medium-line-height, 24) * 1px);
+  font-weight: 400;
+  letter-spacing: 0;
+  font-family: var(--font-inter, 'Inter', sans-serif);
+}
+.body_small {
+  font-size: calc(var(--sys-typography-body-small-font-size, 14) * 1px);
+  line-height: calc(var(--sys-typography-body-small-line-height, 21) * 1px);
+  font-weight: 400;
+  letter-spacing: 0;
+  font-family: var(--font-inter, 'Inter', sans-serif);
+}
+.label_large {
+  font-size: calc(var(--sys-typography-label-large-font-size, 16) * 1px);
+  line-height: calc(var(--sys-typography-label-large-line-height, 22) * 1px);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  font-family: var(--font-inter, 'Inter', sans-serif);
+}
+.label_medium {
+  font-size: calc(var(--sys-typography-label-medium-font-size, 14) * 1px);
+  line-height: calc(var(--sys-typography-label-medium-line-height, 20) * 1px);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  font-family: var(--font-inter, 'Inter', sans-serif);
+}
+.label_small {
+  font-size: calc(var(--sys-typography-label-small-font-size, 12) * 1px);
+  line-height: calc(var(--sys-typography-label-small-line-height, 16) * 1px);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  font-family: var(--font-inter, 'Inter', sans-serif);
+}
+
+/* ---- Colors ---- */
+
+.color_default { color: var(--sys-color-on-surface, #1b1d22); }
+.color_muted    { color: var(--sys-color-on-surface-variant, #565f6c); }
+.color_primary  { color: var(--sys-color-primary, #075cba); }
+.color_error    { color: var(--sys-color-error, #d93025); }
+.color_inverse  { color: var(--sys-color-inverse-on-surface, #f1f3f4); }
+
+/* ---- Emphasized weight ---- */
+
+.emphasized { font-weight: 500; }

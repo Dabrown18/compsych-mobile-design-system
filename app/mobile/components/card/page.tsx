@@ -1,0 +1,100 @@
+'use client';
+
+import type { ReactNode } from 'react';
+import { Card, type CardVariant, type CardSize } from '@/components/ds/mobile-card/mobile-card';
+import { MobilePlayground } from '@/components/mobile-playground/mobile-playground';
+import { FoundationPageShell } from '@/components/foundation-page-shell';
+
+const VARIANTS: CardVariant[] = ['outlined', 'tonal', 'filled', 'doubled', 'image'];
+const SIZES: CardSize[] = ['sm', 'md', 'lg'];
+
+const HeartIcon = () => (
+  <svg viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em">
+    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+  </svg>
+);
+
+export default function MobileCardPage() {
+  return (
+    <FoundationPageShell
+      eyebrow="Mobile"
+      title="Card"
+      description="Content surface with five visual variants and three layout sizes. Supports a title, description, icon, and image. The sm size uses a horizontal row layout; md/lg use a vertical column layout. Set interactive or onPress to make the card tappable."
+    >
+      <Section heading="Playground" lead="Adjust variant, size, and content to preview every combination.">
+        <MobilePlayground
+          render={(values) => (
+            <div style={{ padding: 24, width: '100%' }}>
+              <Card
+                variant={values.variant as CardVariant}
+                size={values.size as CardSize}
+                title={values.title as string}
+                description={values.description as string}
+                icon={values.showIcon ? <HeartIcon /> : undefined}
+              />
+            </div>
+          )}
+          controls={[
+            { name: 'variant', type: 'enum', label: 'Variant', options: VARIANTS, defaultValue: 'outlined' },
+            { name: 'size', type: 'enum', label: 'Size', options: SIZES, defaultValue: 'lg' },
+            { name: 'title', type: 'string', label: 'Title', defaultValue: 'Therapy Session', placeholder: 'Card title' },
+            { name: 'description', type: 'string', label: 'Description', defaultValue: 'Tuesday, June 3 · 2:00 PM with Dr. Patel', placeholder: 'Card description' },
+            { name: 'showIcon', type: 'boolean', label: 'Icon', defaultValue: false },
+          ]}
+        />
+      </Section>
+
+      <Section heading="Variants" lead="Five visual styles: outlined (default + shadow), tonal (primary-fixed), filled (primary bg), doubled (nested card), image (photo background).">
+        <Surface>
+          <div className="flex flex-col gap-4 w-full max-w-sm">
+            {VARIANTS.map((v) => (
+              <div key={v} className="flex flex-col gap-1">
+                <code className="ref-caption font-mono" style={{ color: 'var(--sys-color-on-surface-variant)' }}>{v}</code>
+                <Card
+                  variant={v}
+                  title="Upcoming Appointment"
+                  description="Tuesday, June 3 · 2:00 PM"
+                  icon={<HeartIcon />}
+                />
+              </div>
+            ))}
+          </div>
+        </Surface>
+      </Section>
+
+      <Section heading="Sizes" lead="sm uses a horizontal row; md and lg use a vertical column with increasing spacing.">
+        <Surface>
+          <div className="flex flex-col gap-4 w-full max-w-sm">
+            {SIZES.map((s) => (
+              <div key={s} className="flex flex-col gap-1">
+                <code className="ref-caption font-mono" style={{ color: 'var(--sys-color-on-surface-variant)' }}>{s}</code>
+                <Card size={s} title="Session with Dr. Patel" description="Tuesday · 2:00 PM" icon={<HeartIcon />} />
+              </div>
+            ))}
+          </div>
+        </Surface>
+      </Section>
+    </FoundationPageShell>
+  );
+}
+
+function Section({ heading, lead, children }: { heading: string; lead?: string; children: ReactNode }) {
+  return (
+    <section className="flex flex-col gap-4">
+      <div className="flex flex-col gap-1 max-w-3xl">
+        <h2 className="ref-heading-lg" style={{ margin: 0 }}>{heading}</h2>
+        {lead && <p className="ref-body" style={{ color: 'var(--sys-color-on-surface-variant)', margin: 0 }}>{lead}</p>}
+      </div>
+      {children}
+    </section>
+  );
+}
+
+function Surface({ children }: { children: ReactNode }) {
+  return (
+    <div className="rounded-lg p-8 flex items-start justify-center"
+      style={{ border: '1px solid var(--sys-color-outline-variant)', backgroundColor: 'var(--sys-color-surface-container-low)' }}>
+      {children}
+    </div>
+  );
+}
