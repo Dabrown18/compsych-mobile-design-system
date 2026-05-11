@@ -4,6 +4,7 @@ import { useState, type ReactNode } from 'react';
 import { ActionSheet } from '@/components/ds/mobile-action-sheet/mobile-action-sheet';
 import { MobilePlayground } from '@/components/mobile-playground/mobile-playground';
 import { FoundationPageShell } from '@/components/foundation-page-shell';
+import { PhoneFrame } from '@/components/phone-frame/phone-frame';
 
 export default function MobileActionSheetPage() {
   return (
@@ -49,26 +50,31 @@ export default function MobileActionSheetPage() {
 function ActionSheetDemo({ title, primaryLabel, secondaryLabel, destructive }: { title?: string; primaryLabel: string; secondaryLabel: string; destructive: boolean }) {
   const [open, setOpen] = useState(false);
   return (
-    <div style={{ padding: 24, display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', minHeight: 120 }}>
-      <button
-        type="button"
-        onClick={() => setOpen(true)}
-        style={{
-          height: 44, paddingInline: 24, borderRadius: 9999,
-          border: 'none', background: 'var(--sys-color-primary)',
-          color: 'var(--sys-color-on-primary)', fontSize: 15, fontWeight: 600, cursor: 'pointer',
-        }}
-      >
-        Show sheet
-      </button>
-      <ActionSheet
-        visible={open}
-        onClose={() => setOpen(false)}
-        title={title}
-        primaryAction={{ label: primaryLabel, destructive, onPress: () => setOpen(false) }}
-        secondaryAction={{ label: secondaryLabel, onPress: () => setOpen(false) }}
-      />
-    </div>
+    <PhoneFrame>
+      <div style={{ position: 'relative', height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 12, padding: '0 16px' }}>
+        <p className="ref-body" style={{ color: 'var(--sys-color-on-surface-variant)', margin: 0, textAlign: 'center' }}>
+          Background screen content
+        </p>
+        <button
+          type="button"
+          onClick={() => setOpen(true)}
+          style={{
+            height: 44, paddingInline: 24, borderRadius: 9999,
+            border: 'none', background: 'var(--sys-color-primary)',
+            color: 'var(--sys-color-on-primary)', fontSize: 15, fontWeight: 600, cursor: 'pointer',
+          }}
+        >
+          Show sheet
+        </button>
+        <ActionSheet
+          visible={open}
+          onClose={() => setOpen(false)}
+          title={title}
+          primaryAction={{ label: primaryLabel, destructive, onPress: () => setOpen(false) }}
+          secondaryAction={{ label: secondaryLabel, onPress: () => setOpen(false) }}
+        />
+      </div>
+    </PhoneFrame>
   );
 }
 

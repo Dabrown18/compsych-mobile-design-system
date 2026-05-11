@@ -22,7 +22,7 @@ export function ActionSheet({ visible, onClose, title, children, primaryAction, 
 
   return (
     <div style={{
-      position: 'fixed',
+      position: 'absolute',
       inset: 0,
       zIndex: 50,
       display: 'flex',
