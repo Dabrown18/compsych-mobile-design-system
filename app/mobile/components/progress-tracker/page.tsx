@@ -79,7 +79,7 @@ export default function MobileProgressTrackerPage() {
         </Surface>
       </Section>
 
-      <Section heading="React Native">
+      <Section heading="Code Example">
         <CodeBlock code={`import { View } from 'react-native';
 import { ProgressTracker } from '@compsych/mobile-ui';
 

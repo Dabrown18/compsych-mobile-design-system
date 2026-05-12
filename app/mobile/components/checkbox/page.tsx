@@ -66,7 +66,7 @@ export default function MobileCheckboxPage() {
         </Surface>
       </Section>
 
-      <Section heading="React Native">
+      <Section heading="Code Example">
         <CodeBlock code={`import { useState } from 'react';
 import { View } from 'react-native';
 import { Checkbox } from '@compsych/mobile-ui';

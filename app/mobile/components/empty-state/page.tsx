@@ -49,7 +49,7 @@ export default function MobileEmptyStatePage() {
         </Surface>
       </Section>
 
-      <Section heading="React Native">
+      <Section heading="Code Example">
         <CodeBlock code={`import { View } from 'react-native';
 import { EmptyState } from '@compsych/mobile-ui';
 import { SearchX } from 'lucide-react-native';

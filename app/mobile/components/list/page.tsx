@@ -69,7 +69,7 @@ export default function MobileListPage() {
         </Surface>
       </Section>
 
-      <Section heading="React Native">
+      <Section heading="Code Example">
         <CodeBlock code={`import { View } from 'react-native';
 import { List } from '@compsych/mobile-ui';
 

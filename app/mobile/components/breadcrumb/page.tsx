@@ -56,7 +56,7 @@ export default function MobileBreadcrumbPage() {
           </div>
         </Surface>
       </Section>
-      <Section heading="React Native">
+      <Section heading="Code Example">
         <CodeBlock code={`import { View } from 'react-native';
 import { Breadcrumb } from '@compsych/mobile-ui';
 

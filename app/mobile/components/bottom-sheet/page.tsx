@@ -126,7 +126,7 @@ export default function BottomSheetPage() {
         </div>
       </Section>
 
-      <Section heading="React Native">
+      <Section heading="Code Example">
         <CodeBlock code={`import { useState } from 'react';
 import { View, Button } from 'react-native';
 import { BottomSheet } from '@compsych/mobile-ui';

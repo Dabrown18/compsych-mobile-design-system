@@ -61,7 +61,7 @@ export default function MobileTooltipPage() {
         </Surface>
       </Section>
 
-      <Section heading="React Native">
+      <Section heading="Code Example">
         <CodeBlock code={`import { View } from 'react-native';
 import { Tooltip } from '@compsych/mobile-ui';
 import { InfoIcon } from 'lucide-react-native';

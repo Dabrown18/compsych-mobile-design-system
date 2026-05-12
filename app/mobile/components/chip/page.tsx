@@ -75,7 +75,7 @@ export default function MobileChipPage() {
         </Surface>
       </Section>
 
-      <Section heading="React Native">
+      <Section heading="Code Example">
         <CodeBlock code={`import { useState } from 'react';
 import { ScrollView } from 'react-native';
 import { Chip } from '@compsych/mobile-ui';

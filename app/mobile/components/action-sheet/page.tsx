@@ -44,7 +44,7 @@ export default function MobileActionSheetPage() {
           </div>
         </Surface>
       </Section>
-      <Section heading="React Native">
+      <Section heading="Code Example">
         <CodeBlock code={`import { useState } from 'react';
 import { View, Button } from 'react-native';
 import { ActionSheet } from '@compsych/mobile-ui';

@@ -80,7 +80,7 @@ export default function TabBarPage() {
         </div>
       </Section>
 
-      <Section heading="React Native">
+      <Section heading="Code Example">
         <CodeBlock code={`import { useState } from 'react';
 import { View } from 'react-native';
 import { TabBar } from '@compsych/mobile-ui';

@@ -76,7 +76,7 @@ export default function MobileCardPage() {
         </Surface>
       </Section>
 
-      <Section heading="React Native">
+      <Section heading="Code Example">
         <CodeBlock code={`import { Card } from '@compsych/mobile-ui';
 import { Heart } from 'lucide-react-native';
 

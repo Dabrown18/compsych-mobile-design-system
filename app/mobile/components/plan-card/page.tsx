@@ -72,7 +72,7 @@ export default function MobilePlanCardPage() {
         </Surface>
       </Section>
 
-      <Section heading="React Native">
+      <Section heading="Code Example">
         <CodeBlock code={`import { View } from 'react-native';
 import { PlanCard } from '@compsych/mobile-ui';
 

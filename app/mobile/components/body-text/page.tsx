@@ -115,7 +115,7 @@ export default function BodyTextPage() {
         </Surface>
       </Section>
 
-      <Section heading="React Native">
+      <Section heading="Code Example">
         <CodeBlock code={`import { View } from 'react-native';
 import { BodyText } from '@compsych/mobile-ui';
 

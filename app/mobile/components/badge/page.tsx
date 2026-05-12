@@ -70,7 +70,7 @@ export default function MobileBadgePage() {
           </div>
         </Surface>
       </Section>
-      <Section heading="React Native">
+      <Section heading="Code Example">
         <CodeBlock code={`import { View } from 'react-native';
 import { Badge } from '@compsych/mobile-ui';
 

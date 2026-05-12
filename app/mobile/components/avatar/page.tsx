@@ -84,7 +84,7 @@ export default function MobileAvatarPage() {
           </div>
         </Surface>
       </Section>
-      <Section heading="React Native">
+      <Section heading="Code Example">
         <CodeBlock code={`import { View } from 'react-native';
 import { Avatar } from '@compsych/mobile-ui';
 

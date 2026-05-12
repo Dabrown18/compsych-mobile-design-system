@@ -102,7 +102,7 @@ export default function MobileListItemPage() {
         </div>
       </Section>
 
-      <Section heading="React Native">
+      <Section heading="Code Example">
         <CodeBlock code={`import { View } from 'react-native';
 import { ListItem } from '@compsych/mobile-ui';
 import { Bell, Settings } from 'lucide-react-native';
