@@ -38,6 +38,30 @@ export default function MobileChipPage() {
           ]}
         />
       </Section>
+      <Section heading="Code Example">
+        <CodeBlock code={`import { useState } from 'react';
+import { ScrollView } from 'react-native';
+import { Chip } from '@compsych/mobile-ui';
+
+const FILTERS = ['All', 'Therapy', 'Coaching', 'Crisis'];
+
+export default function Screen() {
+  const [active, setActive] = useState('All');
+
+  return (
+    <ScrollView horizontal contentContainerStyle={{ gap: 8, padding: 16 }}>
+      {FILTERS.map((f) => (
+        <Chip
+          key={f}
+          label={f}
+          selected={active === f}
+          onPress={() => setActive(f)}
+        />
+      ))}
+    </ScrollView>
+  );
+}`} language="tsx" />
+      </Section>
 
       <Section heading="Usage" lead="Five semantic usages mapping to different sys.* color roles.">
         <Surface>
@@ -75,30 +99,6 @@ export default function MobileChipPage() {
         </Surface>
       </Section>
 
-      <Section heading="Code Example">
-        <CodeBlock code={`import { useState } from 'react';
-import { ScrollView } from 'react-native';
-import { Chip } from '@compsych/mobile-ui';
-
-const FILTERS = ['All', 'Therapy', 'Coaching', 'Crisis'];
-
-export default function Screen() {
-  const [active, setActive] = useState('All');
-
-  return (
-    <ScrollView horizontal contentContainerStyle={{ gap: 8, padding: 16 }}>
-      {FILTERS.map((f) => (
-        <Chip
-          key={f}
-          label={f}
-          selected={active === f}
-          onPress={() => setActive(f)}
-        />
-      ))}
-    </ScrollView>
-  );
-}`} language="tsx" />
-      </Section>
     </FoundationPageShell>
   );
 }

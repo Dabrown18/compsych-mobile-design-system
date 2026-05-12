@@ -40,6 +40,27 @@ export default function MobileCheckboxPage() {
           ]}
         />
       </Section>
+      <Section heading="Code Example">
+        <CodeBlock code={`import { useState } from 'react';
+import { View } from 'react-native';
+import { Checkbox } from '@compsych/mobile-ui';
+
+export default function Screen() {
+  const [checked, setChecked] = useState(false);
+
+  return (
+    <View style={{ padding: 16, gap: 12 }}>
+      <Checkbox
+        checked={checked}
+        onValueChange={setChecked}
+        label="I agree to the terms"
+      />
+      <Checkbox checked label="Pre-selected option" />
+      <Checkbox checked={false} disabled label="Unavailable option" />
+    </View>
+  );
+}`} language="tsx" />
+      </Section>
 
       <Section heading="States" lead="Unchecked, checked, indeterminate, disabled, and invalid.">
         <Surface>
@@ -66,27 +87,6 @@ export default function MobileCheckboxPage() {
         </Surface>
       </Section>
 
-      <Section heading="Code Example">
-        <CodeBlock code={`import { useState } from 'react';
-import { View } from 'react-native';
-import { Checkbox } from '@compsych/mobile-ui';
-
-export default function Screen() {
-  const [checked, setChecked] = useState(false);
-
-  return (
-    <View style={{ padding: 16, gap: 12 }}>
-      <Checkbox
-        checked={checked}
-        onValueChange={setChecked}
-        label="I agree to the terms"
-      />
-      <Checkbox checked label="Pre-selected option" />
-      <Checkbox checked={false} disabled label="Unavailable option" />
-    </View>
-  );
-}`} language="tsx" />
-      </Section>
     </FoundationPageShell>
   );
 }

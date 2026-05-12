@@ -56,22 +56,6 @@ export default function MobilePlanCardPage() {
           ]}
         />
       </Section>
-
-      <Section heading="Collapsed and expanded">
-        <Surface>
-          <div className="flex flex-col gap-4 w-full max-w-sm">
-            <div className="flex flex-col gap-1">
-              <code className="ref-caption font-mono" style={{ color: 'var(--sys-color-on-surface-variant)' }}>collapsed</code>
-              <PlanCard title="My EAP Plan" tag="Active" icon={<HeartIcon />} items={PLAN_ITEMS} />
-            </div>
-            <div className="flex flex-col gap-1">
-              <code className="ref-caption font-mono" style={{ color: 'var(--sys-color-on-surface-variant)' }}>expanded</code>
-              <PlanCard title="My EAP Plan" tag="Active" icon={<HeartIcon />} items={PLAN_ITEMS} expanded />
-            </div>
-          </div>
-        </Surface>
-      </Section>
-
       <Section heading="Code Example">
         <CodeBlock code={`import { View } from 'react-native';
 import { PlanCard } from '@compsych/mobile-ui';
@@ -97,6 +81,22 @@ export default function Screen() {
   );
 }`} language="tsx" />
       </Section>
+
+      <Section heading="Collapsed and expanded">
+        <Surface>
+          <div className="flex flex-col gap-4 w-full max-w-sm">
+            <div className="flex flex-col gap-1">
+              <code className="ref-caption font-mono" style={{ color: 'var(--sys-color-on-surface-variant)' }}>collapsed</code>
+              <PlanCard title="My EAP Plan" tag="Active" icon={<HeartIcon />} items={PLAN_ITEMS} />
+            </div>
+            <div className="flex flex-col gap-1">
+              <code className="ref-caption font-mono" style={{ color: 'var(--sys-color-on-surface-variant)' }}>expanded</code>
+              <PlanCard title="My EAP Plan" tag="Active" icon={<HeartIcon />} items={PLAN_ITEMS} expanded />
+            </div>
+          </div>
+        </Surface>
+      </Section>
+
     </FoundationPageShell>
   );
 }

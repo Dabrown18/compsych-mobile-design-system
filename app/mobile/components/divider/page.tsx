@@ -37,6 +37,27 @@ export default function MobileDividerPage() {
           ]}
         />
       </Section>
+      <Section heading="Code Example">
+        <CodeBlock code={`import { View } from 'react-native';
+import { Divider } from '@compsych/mobile-ui';
+
+export default function Screen() {
+  return (
+    <View style={{ padding: 16, gap: 16 }}>
+      {/* Full-width */}
+      <Divider />
+
+      {/* Inset — indented from left */}
+      <Divider inset />
+
+      {/* Vertical inside a row */}
+      <View style={{ flexDirection: 'row', height: 24, alignItems: 'center', gap: 12 }}>
+        <Divider orientation="vertical" />
+      </View>
+    </View>
+  );
+}`} language="tsx" />
+      </Section>
 
       <Section heading="Variants">
         <Surface>
@@ -65,27 +86,6 @@ export default function MobileDividerPage() {
         </Surface>
       </Section>
 
-      <Section heading="Code Example">
-        <CodeBlock code={`import { View } from 'react-native';
-import { Divider } from '@compsych/mobile-ui';
-
-export default function Screen() {
-  return (
-    <View style={{ padding: 16, gap: 16 }}>
-      {/* Full-width */}
-      <Divider />
-
-      {/* Inset — indented from left */}
-      <Divider inset />
-
-      {/* Vertical inside a row */}
-      <View style={{ flexDirection: 'row', height: 24, alignItems: 'center', gap: 12 }}>
-        <Divider orientation="vertical" />
-      </View>
-    </View>
-  );
-}`} language="tsx" />
-      </Section>
     </FoundationPageShell>
   );
 }

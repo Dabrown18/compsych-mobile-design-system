@@ -38,6 +38,21 @@ export default function MobileButtonPage() {
           ]}
         />
       </Section>
+      <Section heading="Code Example">
+        <CodeBlock code={`import { View } from 'react-native';
+import { Button } from '@compsych/mobile-ui';
+
+export default function Screen() {
+  return (
+    <View style={{ padding: 16, gap: 12 }}>
+      <Button label="Continue" variant="filled" onPress={() => {}} />
+      <Button label="Learn more" variant="outlined" onPress={() => {}} />
+      <Button label="Dismiss" variant="text" onPress={() => {}} />
+      <Button label="Save" variant="tonal" loading onPress={() => {}} />
+    </View>
+  );
+}`} language="tsx" />
+      </Section>
 
       <Section heading="Variants" lead="Seven variants spanning filled → text and danger tones.">
         <Surface>
@@ -76,21 +91,6 @@ export default function MobileButtonPage() {
         </Surface>
       </Section>
 
-      <Section heading="Code Example">
-        <CodeBlock code={`import { View } from 'react-native';
-import { Button } from '@compsych/mobile-ui';
-
-export default function Screen() {
-  return (
-    <View style={{ padding: 16, gap: 12 }}>
-      <Button label="Continue" variant="filled" onPress={() => {}} />
-      <Button label="Learn more" variant="outlined" onPress={() => {}} />
-      <Button label="Dismiss" variant="text" onPress={() => {}} />
-      <Button label="Save" variant="tonal" loading onPress={() => {}} />
-    </View>
-  );
-}`} language="tsx" />
-      </Section>
     </FoundationPageShell>
   );
 }

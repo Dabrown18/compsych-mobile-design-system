@@ -33,6 +33,24 @@ export default function MobileBreadcrumbPage() {
           ]}
         />
       </Section>
+      <Section heading="Code Example">
+        <CodeBlock code={`import { View } from 'react-native';
+import { Breadcrumb } from '@compsych/mobile-ui';
+
+export default function Screen() {
+  return (
+    <View style={{ padding: 16 }}>
+      <Breadcrumb
+        items={[
+          { label: 'Home', onPress: () => {} },
+          { label: 'Benefits', onPress: () => {} },
+          { label: 'Mental Health' },
+        ]}
+      />
+    </View>
+  );
+}`} language="tsx" />
+      </Section>
 
       <Section heading="Sizes">
         <Surface>
@@ -55,24 +73,6 @@ export default function MobileBreadcrumbPage() {
             <Breadcrumb items={[...DEMO_ITEMS, { label: 'Session details' }]} />
           </div>
         </Surface>
-      </Section>
-      <Section heading="Code Example">
-        <CodeBlock code={`import { View } from 'react-native';
-import { Breadcrumb } from '@compsych/mobile-ui';
-
-export default function Screen() {
-  return (
-    <View style={{ padding: 16 }}>
-      <Breadcrumb
-        items={[
-          { label: 'Home', onPress: () => {} },
-          { label: 'Benefits', onPress: () => {} },
-          { label: 'Mental Health' },
-        ]}
-      />
-    </View>
-  );
-}`} language="tsx" />
       </Section>
     </FoundationPageShell>
   );

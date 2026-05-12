@@ -40,6 +40,28 @@ export default function MobileAlertPage() {
           ]}
         />
       </Section>
+      <Section heading="Code Example">
+        <CodeBlock code={`import { View } from 'react-native';
+import { Alert } from '@compsych/mobile-ui';
+
+export default function Screen() {
+  return (
+    <View style={{ padding: 16, gap: 12 }}>
+      <Alert
+        variant="info"
+        title="Session expiring"
+        description="You will be signed out in 5 minutes."
+      />
+      <Alert
+        variant="error"
+        title="Something went wrong"
+        description="Please try again or contact support."
+      />
+      <Alert variant="success" title="Changes saved" />
+    </View>
+  );
+}`} language="tsx" />
+      </Section>
 
       <Section heading="Variants" lead="Six variants — each maps to a distinct sys.* color container + on-container pair.">
         <Surface>
@@ -69,28 +91,6 @@ export default function MobileAlertPage() {
             </div>
           </div>
         </Surface>
-      </Section>
-      <Section heading="Code Example">
-        <CodeBlock code={`import { View } from 'react-native';
-import { Alert } from '@compsych/mobile-ui';
-
-export default function Screen() {
-  return (
-    <View style={{ padding: 16, gap: 12 }}>
-      <Alert
-        variant="info"
-        title="Session expiring"
-        description="You will be signed out in 5 minutes."
-      />
-      <Alert
-        variant="error"
-        title="Something went wrong"
-        description="Please try again or contact support."
-      />
-      <Alert variant="success" title="Changes saved" />
-    </View>
-  );
-}`} language="tsx" />
       </Section>
     </FoundationPageShell>
   );

@@ -58,6 +58,31 @@ export default function MobileListItemPage() {
           ]}
         />
       </Section>
+      <Section heading="Code Example">
+        <CodeBlock code={`import { View } from 'react-native';
+import { ListItem } from '@compsych/mobile-ui';
+import { Bell, Settings } from 'lucide-react-native';
+
+export default function Screen() {
+  return (
+    <View style={{ padding: 16 }}>
+      <ListItem
+        headline="Notifications"
+        subhead="Manage alerts"
+        leadingContent={<Bell size={24} />}
+        showChevron
+        onPress={() => {}}
+      />
+      <ListItem
+        headline="Settings"
+        leadingContent={<Settings size={24} />}
+        showChevron
+        onPress={() => {}}
+      />
+    </View>
+  );
+}`} language="tsx" />
+      </Section>
 
       <Section heading="Sizes" lead="Three line heights: sm (48dp), md (56dp), lg (72dp — fits two lines of supporting text).">
         <Surface>
@@ -102,31 +127,6 @@ export default function MobileListItemPage() {
         </div>
       </Section>
 
-      <Section heading="Code Example">
-        <CodeBlock code={`import { View } from 'react-native';
-import { ListItem } from '@compsych/mobile-ui';
-import { Bell, Settings } from 'lucide-react-native';
-
-export default function Screen() {
-  return (
-    <View style={{ padding: 16 }}>
-      <ListItem
-        headline="Notifications"
-        subhead="Manage alerts"
-        leadingContent={<Bell size={24} />}
-        showChevron
-        onPress={() => {}}
-      />
-      <ListItem
-        headline="Settings"
-        leadingContent={<Settings size={24} />}
-        showChevron
-        onPress={() => {}}
-      />
-    </View>
-  );
-}`} language="tsx" />
-      </Section>
     </FoundationPageShell>
   );
 }

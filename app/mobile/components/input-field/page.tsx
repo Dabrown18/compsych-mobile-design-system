@@ -41,6 +41,35 @@ export default function MobileInputPage() {
           ]}
         />
       </Section>
+      <Section heading="Code Example">
+        <CodeBlock code={`import { useState } from 'react';
+import { View } from 'react-native';
+import { Input } from '@compsych/mobile-ui';
+
+export default function Screen() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  return (
+    <View style={{ padding: 16, gap: 16 }}>
+      <Input
+        label="Email"
+        value={email}
+        onChangeText={setEmail}
+        keyboardType="email-address"
+        autoCapitalize="none"
+      />
+      <Input
+        label="Password"
+        value={password}
+        onChangeText={setPassword}
+        secureTextEntry
+        error="Must be at least 8 characters"
+      />
+    </View>
+  );
+}`} language="tsx" />
+      </Section>
 
       <Section heading="Sizes" lead="sm (40px), md (48px), lg (56px).">
         <Surface>
@@ -74,35 +103,6 @@ export default function MobileInputPage() {
         </Surface>
       </Section>
 
-      <Section heading="Code Example">
-        <CodeBlock code={`import { useState } from 'react';
-import { View } from 'react-native';
-import { Input } from '@compsych/mobile-ui';
-
-export default function Screen() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-
-  return (
-    <View style={{ padding: 16, gap: 16 }}>
-      <Input
-        label="Email"
-        value={email}
-        onChangeText={setEmail}
-        keyboardType="email-address"
-        autoCapitalize="none"
-      />
-      <Input
-        label="Password"
-        value={password}
-        onChangeText={setPassword}
-        secureTextEntry
-        error="Must be at least 8 characters"
-      />
-    </View>
-  );
-}`} language="tsx" />
-      </Section>
     </FoundationPageShell>
   );
 }

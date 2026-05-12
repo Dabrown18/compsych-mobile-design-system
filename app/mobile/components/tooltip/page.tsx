@@ -34,6 +34,25 @@ export default function MobileTooltipPage() {
           ]}
         />
       </Section>
+      <Section heading="Code Example">
+        <CodeBlock code={`import { View } from 'react-native';
+import { Tooltip } from '@compsych/mobile-ui';
+import { InfoIcon } from 'lucide-react-native';
+
+export default function Screen() {
+  return (
+    <View style={{ padding: 16, gap: 16 }}>
+      <Tooltip content="Sessions reset on your plan renewal date.">
+        <InfoIcon size={20} />
+      </Tooltip>
+
+      <Tooltip content="Your data is encrypted end-to-end." placement="bottom">
+        <InfoIcon size={20} />
+      </Tooltip>
+    </View>
+  );
+}`} language="tsx" />
+      </Section>
 
       <Section heading="Variants">
         <Surface>
@@ -61,25 +80,6 @@ export default function MobileTooltipPage() {
         </Surface>
       </Section>
 
-      <Section heading="Code Example">
-        <CodeBlock code={`import { View } from 'react-native';
-import { Tooltip } from '@compsych/mobile-ui';
-import { InfoIcon } from 'lucide-react-native';
-
-export default function Screen() {
-  return (
-    <View style={{ padding: 16, gap: 16 }}>
-      <Tooltip content="Sessions reset on your plan renewal date.">
-        <InfoIcon size={20} />
-      </Tooltip>
-
-      <Tooltip content="Your data is encrypted end-to-end." placement="bottom">
-        <InfoIcon size={20} />
-      </Tooltip>
-    </View>
-  );
-}`} language="tsx" />
-      </Section>
     </FoundationPageShell>
   );
 }

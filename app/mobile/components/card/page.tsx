@@ -44,6 +44,17 @@ export default function MobileCardPage() {
           ]}
         />
       </Section>
+      <Section heading="Code Example">
+        <CodeBlock code={`import { Card } from '@compsych/mobile-ui';
+import { Heart } from 'lucide-react-native';
+
+<Card
+  variant="tonal"
+  headline="Today's check-in"
+  icon={<Heart size={20} />}
+  onPress={() => {}}
+/>`} language="tsx" />
+      </Section>
 
       <Section heading="Variants" lead="Five visual styles: outlined (default + shadow), tonal (primary-fixed), filled (primary bg), doubled (nested card), image (photo background).">
         <Surface>
@@ -76,17 +87,6 @@ export default function MobileCardPage() {
         </Surface>
       </Section>
 
-      <Section heading="Code Example">
-        <CodeBlock code={`import { Card } from '@compsych/mobile-ui';
-import { Heart } from 'lucide-react-native';
-
-<Card
-  variant="tonal"
-  headline="Today's check-in"
-  icon={<Heart size={20} />}
-  onPress={() => {}}
-/>`} language="tsx" />
-      </Section>
     </FoundationPageShell>
   );
 }

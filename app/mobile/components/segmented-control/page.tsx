@@ -36,6 +36,25 @@ export default function MobileSegmentedControlPage() {
           ]}
         />
       </Section>
+      <Section heading="Code Example">
+        <CodeBlock code={`import { useState } from 'react';
+import { View } from 'react-native';
+import { SegmentedControl } from '@compsych/mobile-ui';
+
+export default function Screen() {
+  const [view, setView] = useState('Day');
+
+  return (
+    <View style={{ padding: 16, gap: 16 }}>
+      <SegmentedControl
+        options={['Day', 'Week', 'Month']}
+        value={view}
+        onValueChange={setView}
+      />
+    </View>
+  );
+}`} language="tsx" />
+      </Section>
 
       <Section heading="Default (intrinsic width)">
         <Surface>
@@ -60,25 +79,6 @@ export default function MobileSegmentedControlPage() {
         </Surface>
       </Section>
 
-      <Section heading="Code Example">
-        <CodeBlock code={`import { useState } from 'react';
-import { View } from 'react-native';
-import { SegmentedControl } from '@compsych/mobile-ui';
-
-export default function Screen() {
-  const [view, setView] = useState('Day');
-
-  return (
-    <View style={{ padding: 16, gap: 16 }}>
-      <SegmentedControl
-        options={['Day', 'Week', 'Month']}
-        value={view}
-        onValueChange={setView}
-      />
-    </View>
-  );
-}`} language="tsx" />
-      </Section>
     </FoundationPageShell>
   );
 }

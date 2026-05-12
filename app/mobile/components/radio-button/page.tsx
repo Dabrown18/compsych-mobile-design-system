@@ -40,6 +40,30 @@ export default function MobileRadioButtonPage() {
           ]}
         />
       </Section>
+      <Section heading="Code Example">
+        <CodeBlock code={`import { useState } from 'react';
+import { View } from 'react-native';
+import { RadioButton } from '@compsych/mobile-ui';
+
+const OPTIONS = ['Phone call', 'Video session', 'In person'];
+
+export default function Screen() {
+  const [selected, setSelected] = useState('Phone call');
+
+  return (
+    <View style={{ padding: 16, gap: 12 }}>
+      {OPTIONS.map((opt) => (
+        <RadioButton
+          key={opt}
+          label={opt}
+          selected={selected === opt}
+          onValueChange={() => setSelected(opt)}
+        />
+      ))}
+    </View>
+  );
+}`} language="tsx" />
+      </Section>
 
       <Section heading="States">
         <Surface>
@@ -66,30 +90,6 @@ export default function MobileRadioButtonPage() {
         </Surface>
       </Section>
 
-      <Section heading="Code Example">
-        <CodeBlock code={`import { useState } from 'react';
-import { View } from 'react-native';
-import { RadioButton } from '@compsych/mobile-ui';
-
-const OPTIONS = ['Phone call', 'Video session', 'In person'];
-
-export default function Screen() {
-  const [selected, setSelected] = useState('Phone call');
-
-  return (
-    <View style={{ padding: 16, gap: 12 }}>
-      {OPTIONS.map((opt) => (
-        <RadioButton
-          key={opt}
-          label={opt}
-          selected={selected === opt}
-          onValueChange={() => setSelected(opt)}
-        />
-      ))}
-    </View>
-  );
-}`} language="tsx" />
-      </Section>
     </FoundationPageShell>
   );
 }

@@ -38,35 +38,6 @@ export default function MobilePaginationPage() {
           ]}
         />
       </Section>
-
-      <Section heading="Full vs compact">
-        <Surface>
-          <div className="flex flex-col gap-6 w-full items-center">
-            <div className="flex flex-col items-center gap-2">
-              <code className="ref-caption font-mono" style={{ color: 'var(--sys-color-on-surface-variant)' }}>full</code>
-              <PaginationDemo totalPages={10} compact={false} size="lg" />
-            </div>
-            <div className="flex flex-col items-center gap-2">
-              <code className="ref-caption font-mono" style={{ color: 'var(--sys-color-on-surface-variant)' }}>compact</code>
-              <PaginationDemo totalPages={10} compact={true} size="lg" />
-            </div>
-          </div>
-        </Surface>
-      </Section>
-
-      <Section heading="Sizes">
-        <Surface>
-          <div className="flex flex-col gap-4 w-full items-center">
-            {SIZES.map((s) => (
-              <div key={s} className="flex flex-col items-center gap-2">
-                <code className="ref-caption font-mono" style={{ color: 'var(--sys-color-on-surface-variant)' }}>{s}</code>
-                <PaginationDemo totalPages={5} compact={false} size={s} />
-              </div>
-            ))}
-          </div>
-        </Surface>
-      </Section>
-
       <Section heading="Code Example">
         <CodeBlock code={`import { useState } from 'react';
 import { View } from 'react-native';
@@ -97,6 +68,35 @@ export default function Screen() {
   );
 }`} language="tsx" />
       </Section>
+
+      <Section heading="Full vs compact">
+        <Surface>
+          <div className="flex flex-col gap-6 w-full items-center">
+            <div className="flex flex-col items-center gap-2">
+              <code className="ref-caption font-mono" style={{ color: 'var(--sys-color-on-surface-variant)' }}>full</code>
+              <PaginationDemo totalPages={10} compact={false} size="lg" />
+            </div>
+            <div className="flex flex-col items-center gap-2">
+              <code className="ref-caption font-mono" style={{ color: 'var(--sys-color-on-surface-variant)' }}>compact</code>
+              <PaginationDemo totalPages={10} compact={true} size="lg" />
+            </div>
+          </div>
+        </Surface>
+      </Section>
+
+      <Section heading="Sizes">
+        <Surface>
+          <div className="flex flex-col gap-4 w-full items-center">
+            {SIZES.map((s) => (
+              <div key={s} className="flex flex-col items-center gap-2">
+                <code className="ref-caption font-mono" style={{ color: 'var(--sys-color-on-surface-variant)' }}>{s}</code>
+                <PaginationDemo totalPages={5} compact={false} size={s} />
+              </div>
+            ))}
+          </div>
+        </Surface>
+      </Section>
+
     </FoundationPageShell>
   );
 }

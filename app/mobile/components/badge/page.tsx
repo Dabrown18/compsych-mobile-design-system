@@ -34,6 +34,21 @@ export default function MobileBadgePage() {
           ]}
         />
       </Section>
+      <Section heading="Code Example">
+        <CodeBlock code={`import { View } from 'react-native';
+import { Badge } from '@compsych/mobile-ui';
+
+export default function Screen() {
+  return (
+    <View style={{ flexDirection: 'row', gap: 8, padding: 16 }}>
+      <Badge label="New" badgeStyle="filled" />
+      <Badge label="3" badgeStyle="danger" size="sm" />
+      <Badge label="Active" badgeStyle="positive" />
+      <Badge badgeStyle="dot" />
+    </View>
+  );
+}`} language="tsx" />
+      </Section>
 
       <Section heading="Styles" lead="Six visual styles — filled (primary), positive (success), danger (error), elevated (surface + shadow), tonal (surface-container), dot (presence indicator).">
         <Surface>
@@ -69,21 +84,6 @@ export default function MobileBadgePage() {
             ))}
           </div>
         </Surface>
-      </Section>
-      <Section heading="Code Example">
-        <CodeBlock code={`import { View } from 'react-native';
-import { Badge } from '@compsych/mobile-ui';
-
-export default function Screen() {
-  return (
-    <View style={{ flexDirection: 'row', gap: 8, padding: 16 }}>
-      <Badge label="New" badgeStyle="filled" />
-      <Badge label="3" badgeStyle="danger" size="sm" />
-      <Badge label="Active" badgeStyle="positive" />
-      <Badge badgeStyle="dot" />
-    </View>
-  );
-}`} language="tsx" />
       </Section>
     </FoundationPageShell>
   );

@@ -57,6 +57,23 @@ export default function HeaderTextPage() {
           ]}
         />
       </Section>
+      <Section heading="Code Example">
+        <CodeBlock code={`import { View } from 'react-native';
+import { HeaderText } from '@compsych/mobile-ui';
+
+export default function Screen() {
+  return (
+    <View style={{ padding: 16, gap: 8 }}>
+      <HeaderText variant="headlineLarge">Headline Large</HeaderText>
+      <HeaderText variant="headlineMedium">Headline Medium</HeaderText>
+      <HeaderText variant="headlineSmall">Headline Small</HeaderText>
+      <HeaderText variant="titleLarge">Title Large</HeaderText>
+      <HeaderText variant="titleMedium">Title Medium</HeaderText>
+      <HeaderText variant="titleSmall">Title Small</HeaderText>
+    </View>
+  );
+}`} language="tsx" />
+      </Section>
 
       <Section heading="Display" lead="large, medium, small — hero-scale text for splash screens and onboarding.">
         <Surface>
@@ -130,23 +147,6 @@ export default function HeaderTextPage() {
         </div>
       </Section>
 
-      <Section heading="Code Example">
-        <CodeBlock code={`import { View } from 'react-native';
-import { HeaderText } from '@compsych/mobile-ui';
-
-export default function Screen() {
-  return (
-    <View style={{ padding: 16, gap: 8 }}>
-      <HeaderText variant="headlineLarge">Headline Large</HeaderText>
-      <HeaderText variant="headlineMedium">Headline Medium</HeaderText>
-      <HeaderText variant="headlineSmall">Headline Small</HeaderText>
-      <HeaderText variant="titleLarge">Title Large</HeaderText>
-      <HeaderText variant="titleMedium">Title Medium</HeaderText>
-      <HeaderText variant="titleSmall">Title Small</HeaderText>
-    </View>
-  );
-}`} language="tsx" />
-      </Section>
     </FoundationPageShell>
   );
 }

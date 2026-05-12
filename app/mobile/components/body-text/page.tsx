@@ -55,6 +55,22 @@ export default function BodyTextPage() {
           ]}
         />
       </Section>
+      <Section heading="Code Example">
+        <CodeBlock code={`import { View } from 'react-native';
+import { BodyText } from '@compsych/mobile-ui';
+
+export default function Screen() {
+  return (
+    <View style={{ padding: 16, gap: 8 }}>
+      <BodyText variant="large">Large body copy for reading.</BodyText>
+      <BodyText variant="medium">Standard paragraph text.</BodyText>
+      <BodyText variant="small">Fine print or captions.</BodyText>
+      <BodyText variant="labelLarge">Button label</BodyText>
+      <BodyText variant="labelMedium">Tag label</BodyText>
+    </View>
+  );
+}`} language="tsx" />
+      </Section>
 
       <Section heading="Body variants" lead="large (20px), medium (16px), small (14px). For readable prose, descriptions, and content.">
         <Surface>
@@ -115,22 +131,6 @@ export default function BodyTextPage() {
         </Surface>
       </Section>
 
-      <Section heading="Code Example">
-        <CodeBlock code={`import { View } from 'react-native';
-import { BodyText } from '@compsych/mobile-ui';
-
-export default function Screen() {
-  return (
-    <View style={{ padding: 16, gap: 8 }}>
-      <BodyText variant="large">Large body copy for reading.</BodyText>
-      <BodyText variant="medium">Standard paragraph text.</BodyText>
-      <BodyText variant="small">Fine print or captions.</BodyText>
-      <BodyText variant="labelLarge">Button label</BodyText>
-      <BodyText variant="labelMedium">Tag label</BodyText>
-    </View>
-  );
-}`} language="tsx" />
-      </Section>
 
       <Section heading="Canonical sources">
         <div className="flex flex-col gap-2">

@@ -32,23 +32,6 @@ export default function MobileEmptyStatePage() {
           ]}
         />
       </Section>
-
-      <Section heading="Examples">
-        <Surface>
-          <div className="flex flex-col gap-8 w-full">
-            <div className="flex flex-col gap-1">
-              <code className="ref-caption font-mono" style={{ color: 'var(--sys-color-on-surface-variant)' }}>no results (no action)</code>
-              <EmptyState title="No results" description="Try adjusting your search or filters." viewport="mobile" />
-            </div>
-            <div style={{ height: 1, background: 'var(--sys-color-outline-variant)' }} />
-            <div className="flex flex-col gap-1">
-              <code className="ref-caption font-mono" style={{ color: 'var(--sys-color-on-surface-variant)' }}>first-run (with action)</code>
-              <EmptyState title="No appointments yet" description="Book a session to get started with your care plan." actionLabel="Book appointment" viewport="mobile" />
-            </div>
-          </div>
-        </Surface>
-      </Section>
-
       <Section heading="Code Example">
         <CodeBlock code={`import { View } from 'react-native';
 import { EmptyState } from '@compsych/mobile-ui';
@@ -68,6 +51,23 @@ export default function Screen() {
   );
 }`} language="tsx" />
       </Section>
+
+      <Section heading="Examples">
+        <Surface>
+          <div className="flex flex-col gap-8 w-full">
+            <div className="flex flex-col gap-1">
+              <code className="ref-caption font-mono" style={{ color: 'var(--sys-color-on-surface-variant)' }}>no results (no action)</code>
+              <EmptyState title="No results" description="Try adjusting your search or filters." viewport="mobile" />
+            </div>
+            <div style={{ height: 1, background: 'var(--sys-color-outline-variant)' }} />
+            <div className="flex flex-col gap-1">
+              <code className="ref-caption font-mono" style={{ color: 'var(--sys-color-on-surface-variant)' }}>first-run (with action)</code>
+              <EmptyState title="No appointments yet" description="Book a session to get started with your care plan." actionLabel="Book appointment" viewport="mobile" />
+            </div>
+          </div>
+        </Surface>
+      </Section>
+
     </FoundationPageShell>
   );
 }

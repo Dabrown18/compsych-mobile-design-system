@@ -99,6 +99,31 @@ export default function BottomSheetPage() {
           ]}
         />
       </Section>
+      <Section heading="Code Example">
+        <CodeBlock code={`import { useState } from 'react';
+import { View, Button } from 'react-native';
+import { BottomSheet } from '@compsych/mobile-ui';
+
+export default function Screen() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <View style={{ flex: 1 }}>
+      <Button title="Show sheet" onPress={() => setOpen(true)} />
+      <BottomSheet
+        visible={open}
+        onClose={() => setOpen(false)}
+        title="Quick actions"
+        size="half"
+        showHandle
+        showOverlay
+      >
+        {/* sheet content */}
+      </BottomSheet>
+    </View>
+  );
+}`} language="tsx" />
+      </Section>
 
       <Section heading="Sizes" lead="Three size presets: peek (180px), half (55% of screen), full (90% of screen).">
         <div className="flex flex-wrap gap-8">
@@ -126,31 +151,6 @@ export default function BottomSheetPage() {
         </div>
       </Section>
 
-      <Section heading="Code Example">
-        <CodeBlock code={`import { useState } from 'react';
-import { View, Button } from 'react-native';
-import { BottomSheet } from '@compsych/mobile-ui';
-
-export default function Screen() {
-  const [open, setOpen] = useState(false);
-
-  return (
-    <View style={{ flex: 1 }}>
-      <Button title="Show sheet" onPress={() => setOpen(true)} />
-      <BottomSheet
-        visible={open}
-        onClose={() => setOpen(false)}
-        title="Quick actions"
-        size="half"
-        showHandle
-        showOverlay
-      >
-        {/* sheet content */}
-      </BottomSheet>
-    </View>
-  );
-}`} language="tsx" />
-      </Section>
 
       <Section heading="Canonical sources">
         <div className="flex flex-col gap-2">

@@ -58,20 +58,6 @@ export default function MobileSnackbarPage() {
           ]}
         />
       </Section>
-
-      <Section heading="Variants" lead="Static preview of both variants.">
-        <Surface>
-          <div className="flex flex-col gap-4 w-full max-w-sm">
-            {VARIANTS.map((v) => (
-              <div key={v} className="flex flex-col gap-2">
-                <code className="ref-caption font-mono" style={{ color: 'var(--sys-color-on-surface-variant)' }}>{v}</code>
-                <Snackbar visible message="Appointment saved" variant={v} actionLabel="Undo" />
-              </div>
-            ))}
-          </div>
-        </Surface>
-      </Section>
-
       <Section heading="Code Example">
         <CodeBlock code={`import { useState } from 'react';
 import { View, Button } from 'react-native';
@@ -93,6 +79,20 @@ export default function Screen() {
   );
 }`} language="tsx" />
       </Section>
+
+      <Section heading="Variants" lead="Static preview of both variants.">
+        <Surface>
+          <div className="flex flex-col gap-4 w-full max-w-sm">
+            {VARIANTS.map((v) => (
+              <div key={v} className="flex flex-col gap-2">
+                <code className="ref-caption font-mono" style={{ color: 'var(--sys-color-on-surface-variant)' }}>{v}</code>
+                <Snackbar visible message="Appointment saved" variant={v} actionLabel="Undo" />
+              </div>
+            ))}
+          </div>
+        </Surface>
+      </Section>
+
     </FoundationPageShell>
   );
 }

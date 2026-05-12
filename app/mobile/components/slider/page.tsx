@@ -23,30 +23,6 @@ export default function MobileSliderPage() {
           controls={[]}
         />
       </Section>
-
-      <Section heading="Examples">
-        <Surface>
-          <div className="flex flex-col gap-8 w-full">
-            <div className="flex flex-col gap-2">
-              <code className="ref-caption font-mono" style={{ color: 'var(--sys-color-on-surface-variant)' }}>default (0–100, step 1)</code>
-              <Slider defaultValue={40} />
-            </div>
-            <div className="flex flex-col gap-2">
-              <code className="ref-caption font-mono" style={{ color: 'var(--sys-color-on-surface-variant)' }}>step 10</code>
-              <Slider defaultValue={50} step={10} />
-            </div>
-            <div className="flex flex-col gap-2">
-              <code className="ref-caption font-mono" style={{ color: 'var(--sys-color-on-surface-variant)' }}>custom range (18–65)</code>
-              <Slider defaultValue={30} min={18} max={65} />
-            </div>
-            <div className="flex flex-col gap-2">
-              <code className="ref-caption font-mono" style={{ color: 'var(--sys-color-on-surface-variant)' }}>disabled</code>
-              <Slider defaultValue={60} disabled />
-            </div>
-          </div>
-        </Surface>
-      </Section>
-
       <Section heading="Code Example">
         <CodeBlock code={`import { useState } from 'react';
 import { View } from 'react-native';
@@ -77,6 +53,30 @@ export default function Screen() {
   );
 }`} language="tsx" />
       </Section>
+
+      <Section heading="Examples">
+        <Surface>
+          <div className="flex flex-col gap-8 w-full">
+            <div className="flex flex-col gap-2">
+              <code className="ref-caption font-mono" style={{ color: 'var(--sys-color-on-surface-variant)' }}>default (0–100, step 1)</code>
+              <Slider defaultValue={40} />
+            </div>
+            <div className="flex flex-col gap-2">
+              <code className="ref-caption font-mono" style={{ color: 'var(--sys-color-on-surface-variant)' }}>step 10</code>
+              <Slider defaultValue={50} step={10} />
+            </div>
+            <div className="flex flex-col gap-2">
+              <code className="ref-caption font-mono" style={{ color: 'var(--sys-color-on-surface-variant)' }}>custom range (18–65)</code>
+              <Slider defaultValue={30} min={18} max={65} />
+            </div>
+            <div className="flex flex-col gap-2">
+              <code className="ref-caption font-mono" style={{ color: 'var(--sys-color-on-surface-variant)' }}>disabled</code>
+              <Slider defaultValue={60} disabled />
+            </div>
+          </div>
+        </Surface>
+      </Section>
+
     </FoundationPageShell>
   );
 }

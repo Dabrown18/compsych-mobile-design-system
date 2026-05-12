@@ -51,6 +51,32 @@ export default function TabBarPage() {
           ]}
         />
       </Section>
+      <Section heading="Code Example">
+        <CodeBlock code={`import { useState } from 'react';
+import { View } from 'react-native';
+import { TabBar } from '@compsych/mobile-ui';
+import { Home, Search, Bell, User } from 'lucide-react-native';
+
+export default function Screen() {
+  const [activeTab, setActiveTab] = useState(0);
+
+  return (
+    <View style={{ flex: 1 }}>
+      {/* Screen content here */}
+      <TabBar
+        tabs={[
+          { label: 'Home', icon: <Home size={24} /> },
+          { label: 'Search', icon: <Search size={24} /> },
+          { label: 'Alerts', icon: <Bell size={24} />, badge: 3 },
+          { label: 'Profile', icon: <User size={24} /> },
+        ]}
+        activeTab={activeTab}
+        onTabChange={setActiveTab}
+      />
+    </View>
+  );
+}`} language="tsx" />
+      </Section>
 
       <Section heading="Variants" lead="Fixed tabs divide the bar equally. Scrollable tabs overflow horizontally for long label sets.">
         <div className="flex flex-col gap-4">
@@ -80,32 +106,6 @@ export default function TabBarPage() {
         </div>
       </Section>
 
-      <Section heading="Code Example">
-        <CodeBlock code={`import { useState } from 'react';
-import { View } from 'react-native';
-import { TabBar } from '@compsych/mobile-ui';
-import { Home, Search, Bell, User } from 'lucide-react-native';
-
-export default function Screen() {
-  const [activeTab, setActiveTab] = useState(0);
-
-  return (
-    <View style={{ flex: 1 }}>
-      {/* Screen content here */}
-      <TabBar
-        tabs={[
-          { label: 'Home', icon: <Home size={24} /> },
-          { label: 'Search', icon: <Search size={24} /> },
-          { label: 'Alerts', icon: <Bell size={24} />, badge: 3 },
-          { label: 'Profile', icon: <User size={24} /> },
-        ]}
-        activeTab={activeTab}
-        onTabChange={setActiveTab}
-      />
-    </View>
-  );
-}`} language="tsx" />
-      </Section>
     </FoundationPageShell>
   );
 }

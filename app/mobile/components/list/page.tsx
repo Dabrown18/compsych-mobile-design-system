@@ -44,31 +44,6 @@ export default function MobileListPage() {
           ]}
         />
       </Section>
-
-      <Section heading="Simple" lead="Label only, with optional leading icon and chevron on press.">
-        <Surface>
-          <div style={{ width: '100%', maxWidth: 360 }}>
-            <List items={[
-              { label: 'Appointments', icon: <CalendarIcon />, onPress: () => {} },
-              { label: 'My Therapist', icon: <PersonIcon />, onPress: () => {} },
-              { label: 'Notifications', onPress: () => {} },
-            ]} />
-          </div>
-        </Surface>
-      </Section>
-
-      <Section heading="Detailed" lead="Label + subLabel, suitable for richer navigation rows.">
-        <Surface>
-          <div style={{ width: '100%', maxWidth: 360 }}>
-            <List type="detailed" items={[
-              { label: 'Appointments', subLabel: 'Next: Tue June 3 · 2:00 PM', icon: <CalendarIcon />, onPress: () => {} },
-              { label: 'My Therapist', subLabel: 'Dr. Sarah Patel · EAP Provider', icon: <PersonIcon />, onPress: () => {} },
-              { label: 'Notifications', subLabel: 'SMS and push enabled' },
-            ]} />
-          </div>
-        </Surface>
-      </Section>
-
       <Section heading="Code Example">
         <CodeBlock code={`import { View } from 'react-native';
 import { List } from '@compsych/mobile-ui';
@@ -96,6 +71,31 @@ export default function Screen() {
   );
 }`} language="tsx" />
       </Section>
+
+      <Section heading="Simple" lead="Label only, with optional leading icon and chevron on press.">
+        <Surface>
+          <div style={{ width: '100%', maxWidth: 360 }}>
+            <List items={[
+              { label: 'Appointments', icon: <CalendarIcon />, onPress: () => {} },
+              { label: 'My Therapist', icon: <PersonIcon />, onPress: () => {} },
+              { label: 'Notifications', onPress: () => {} },
+            ]} />
+          </div>
+        </Surface>
+      </Section>
+
+      <Section heading="Detailed" lead="Label + subLabel, suitable for richer navigation rows.">
+        <Surface>
+          <div style={{ width: '100%', maxWidth: 360 }}>
+            <List type="detailed" items={[
+              { label: 'Appointments', subLabel: 'Next: Tue June 3 · 2:00 PM', icon: <CalendarIcon />, onPress: () => {} },
+              { label: 'My Therapist', subLabel: 'Dr. Sarah Patel · EAP Provider', icon: <PersonIcon />, onPress: () => {} },
+              { label: 'Notifications', subLabel: 'SMS and push enabled' },
+            ]} />
+          </div>
+        </Surface>
+      </Section>
+
     </FoundationPageShell>
   );
 }

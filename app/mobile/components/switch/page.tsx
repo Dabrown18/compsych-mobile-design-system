@@ -30,6 +30,32 @@ export default function MobileSwitchPage() {
           ]}
         />
       </Section>
+      <Section heading="Code Example">
+        <CodeBlock code={`import { useState } from 'react';
+import { View } from 'react-native';
+import { Switch } from '@compsych/mobile-ui';
+
+export default function Screen() {
+  const [notifications, setNotifications] = useState(true);
+  const [darkMode, setDarkMode] = useState(false);
+
+  return (
+    <View style={{ padding: 16, gap: 16 }}>
+      <Switch
+        value={notifications}
+        onValueChange={setNotifications}
+        label="Push notifications"
+      />
+      <Switch
+        value={darkMode}
+        onValueChange={setDarkMode}
+        label="Dark mode"
+      />
+      <Switch value disabled label="Managed by admin" />
+    </View>
+  );
+}`} language="tsx" />
+      </Section>
 
       <Section heading="States" lead="Off (default), on (toggled), and disabled.">
         <Surface>
@@ -74,32 +100,6 @@ export default function MobileSwitchPage() {
         </Surface>
       </Section>
 
-      <Section heading="Code Example">
-        <CodeBlock code={`import { useState } from 'react';
-import { View } from 'react-native';
-import { Switch } from '@compsych/mobile-ui';
-
-export default function Screen() {
-  const [notifications, setNotifications] = useState(true);
-  const [darkMode, setDarkMode] = useState(false);
-
-  return (
-    <View style={{ padding: 16, gap: 16 }}>
-      <Switch
-        value={notifications}
-        onValueChange={setNotifications}
-        label="Push notifications"
-      />
-      <Switch
-        value={darkMode}
-        onValueChange={setDarkMode}
-        label="Dark mode"
-      />
-      <Switch value disabled label="Managed by admin" />
-    </View>
-  );
-}`} language="tsx" />
-      </Section>
     </FoundationPageShell>
   );
 }

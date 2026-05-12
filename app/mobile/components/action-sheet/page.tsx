@@ -32,18 +32,6 @@ export default function MobileActionSheetPage() {
           ]}
         />
       </Section>
-
-      <Section heading="Anatomy">
-        <Surface>
-          <div style={{ width: '100%', maxWidth: 360, borderRadius: 20, border: '1px solid var(--sys-color-outline-variant)', background: 'var(--sys-color-surface-container-low)', padding: '8px 16px 32px', display: 'flex', flexDirection: 'column', gap: 8 }}>
-            <div style={{ alignSelf: 'center', width: 36, height: 4, borderRadius: 2, background: 'var(--sys-color-outline-variant)' }} />
-            <p style={{ margin: '4px 0', textAlign: 'center', fontSize: 17, fontWeight: 600, color: 'var(--sys-color-on-surface)' }}>Cancel appointment?</p>
-            <p style={{ margin: '0 0 4px', fontSize: 14, color: 'var(--sys-color-on-surface-variant)', textAlign: 'center' }}>This action cannot be undone.</p>
-            <div style={{ height: 48, borderRadius: 9999, background: 'var(--sys-color-error)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--sys-color-on-error)', fontSize: 16, fontWeight: 600 }}>Yes, cancel</div>
-            <div style={{ height: 48, borderRadius: 9999, border: '1px solid var(--sys-color-outline)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--sys-color-on-surface)', fontSize: 16 }}>Keep appointment</div>
-          </div>
-        </Surface>
-      </Section>
       <Section heading="Code Example">
         <CodeBlock code={`import { useState } from 'react';
 import { View, Button } from 'react-native';
@@ -72,6 +60,18 @@ export default function Screen() {
     </View>
   );
 }`} language="tsx" />
+      </Section>
+
+      <Section heading="Anatomy">
+        <Surface>
+          <div style={{ width: '100%', maxWidth: 360, borderRadius: 20, border: '1px solid var(--sys-color-outline-variant)', background: 'var(--sys-color-surface-container-low)', padding: '8px 16px 32px', display: 'flex', flexDirection: 'column', gap: 8 }}>
+            <div style={{ alignSelf: 'center', width: 36, height: 4, borderRadius: 2, background: 'var(--sys-color-outline-variant)' }} />
+            <p style={{ margin: '4px 0', textAlign: 'center', fontSize: 17, fontWeight: 600, color: 'var(--sys-color-on-surface)' }}>Cancel appointment?</p>
+            <p style={{ margin: '0 0 4px', fontSize: 14, color: 'var(--sys-color-on-surface-variant)', textAlign: 'center' }}>This action cannot be undone.</p>
+            <div style={{ height: 48, borderRadius: 9999, background: 'var(--sys-color-error)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--sys-color-on-error)', fontSize: 16, fontWeight: 600 }}>Yes, cancel</div>
+            <div style={{ height: 48, borderRadius: 9999, border: '1px solid var(--sys-color-outline)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--sys-color-on-surface)', fontSize: 16 }}>Keep appointment</div>
+          </div>
+        </Surface>
       </Section>
     </FoundationPageShell>
   );

@@ -39,6 +39,29 @@ export default function MobileAvatarPage() {
           ]}
         />
       </Section>
+      <Section heading="Code Example">
+        <CodeBlock code={`import { View } from 'react-native';
+import { Avatar } from '@compsych/mobile-ui';
+
+export default function Screen() {
+  return (
+    <View style={{ flexDirection: 'row', gap: 12, padding: 16 }}>
+      {/* Text initials */}
+      <Avatar variant="text" size="md" initials="CP" />
+
+      {/* Photo */}
+      <Avatar
+        variant="image"
+        size="md"
+        source={{ uri: 'https://example.com/photo.jpg' }}
+      />
+
+      {/* Icon with activity ring */}
+      <Avatar variant="icon" size="lg" activityRing presenceBadge />
+    </View>
+  );
+}`} language="tsx" />
+      </Section>
 
       <Section heading="Variants" lead="text uses initials, image renders a photo, icon uses a person glyph by default.">
         <Surface>
@@ -83,29 +106,6 @@ export default function MobileAvatarPage() {
             </div>
           </div>
         </Surface>
-      </Section>
-      <Section heading="Code Example">
-        <CodeBlock code={`import { View } from 'react-native';
-import { Avatar } from '@compsych/mobile-ui';
-
-export default function Screen() {
-  return (
-    <View style={{ flexDirection: 'row', gap: 12, padding: 16 }}>
-      {/* Text initials */}
-      <Avatar variant="text" size="md" initials="CP" />
-
-      {/* Photo */}
-      <Avatar
-        variant="image"
-        size="md"
-        source={{ uri: 'https://example.com/photo.jpg' }}
-      />
-
-      {/* Icon with activity ring */}
-      <Avatar variant="icon" size="lg" activityRing presenceBadge />
-    </View>
-  );
-}`} language="tsx" />
       </Section>
     </FoundationPageShell>
   );
