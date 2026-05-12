@@ -4,6 +4,7 @@ import type { ReactNode } from 'react';
 import { Avatar, type AvatarSize, type AvatarVariant } from '@/components/ds/mobile-avatar/mobile-avatar';
 import { MobilePlayground } from '@/components/mobile-playground/mobile-playground';
 import { FoundationPageShell } from '@/components/foundation-page-shell';
+import { CodeBlock } from '@/components/code-block/code-block';
 
 const SIZES: AvatarSize[] = ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl'];
 const VARIANTS: AvatarVariant[] = ['text', 'image', 'icon'];
@@ -82,6 +83,29 @@ export default function MobileAvatarPage() {
             </div>
           </div>
         </Surface>
+      </Section>
+      <Section heading="React Native">
+        <CodeBlock code={`import { View } from 'react-native';
+import { Avatar } from '@compsych/mobile-ui';
+
+export default function Screen() {
+  return (
+    <View style={{ flexDirection: 'row', gap: 12, padding: 16 }}>
+      {/* Text initials */}
+      <Avatar variant="text" size="md" initials="CP" />
+
+      {/* Photo */}
+      <Avatar
+        variant="image"
+        size="md"
+        source={{ uri: 'https://example.com/photo.jpg' }}
+      />
+
+      {/* Icon with activity ring */}
+      <Avatar variant="icon" size="lg" activityRing presenceBadge />
+    </View>
+  );
+}`} language="tsx" />
       </Section>
     </FoundationPageShell>
   );

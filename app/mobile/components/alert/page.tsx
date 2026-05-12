@@ -4,6 +4,7 @@ import type { ReactNode } from 'react';
 import { Alert, type AlertVariant, type AlertSize } from '@/components/ds/mobile-alert/mobile-alert';
 import { MobilePlayground } from '@/components/mobile-playground/mobile-playground';
 import { FoundationPageShell } from '@/components/foundation-page-shell';
+import { CodeBlock } from '@/components/code-block/code-block';
 
 const VARIANTS: AlertVariant[] = ['default', 'elevated', 'informative', 'warning', 'positive', 'danger'];
 const SIZES: AlertSize[] = ['sm', 'lg'];
@@ -68,6 +69,28 @@ export default function MobileAlertPage() {
             </div>
           </div>
         </Surface>
+      </Section>
+      <Section heading="React Native">
+        <CodeBlock code={`import { View } from 'react-native';
+import { Alert } from '@compsych/mobile-ui';
+
+export default function Screen() {
+  return (
+    <View style={{ padding: 16, gap: 12 }}>
+      <Alert
+        variant="info"
+        title="Session expiring"
+        description="You will be signed out in 5 minutes."
+      />
+      <Alert
+        variant="error"
+        title="Something went wrong"
+        description="Please try again or contact support."
+      />
+      <Alert variant="success" title="Changes saved" />
+    </View>
+  );
+}`} language="tsx" />
       </Section>
     </FoundationPageShell>
   );

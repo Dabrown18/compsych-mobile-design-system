@@ -4,6 +4,7 @@ import type { ReactNode } from 'react';
 import { Tooltip, type TooltipVariant, type TooltipDirection } from '@/components/ds/mobile-tooltip/mobile-tooltip';
 import { MobilePlayground } from '@/components/mobile-playground/mobile-playground';
 import { FoundationPageShell } from '@/components/foundation-page-shell';
+import { CodeBlock } from '@/components/code-block/code-block';
 
 const VARIANTS: TooltipVariant[] = ['filled', 'elevated'];
 const DIRECTIONS: TooltipDirection[] = ['none', 'top', 'bottom', 'left', 'right'];
@@ -58,6 +59,26 @@ export default function MobileTooltipPage() {
             ))}
           </div>
         </Surface>
+      </Section>
+
+      <Section heading="React Native">
+        <CodeBlock code={`import { View } from 'react-native';
+import { Tooltip } from '@compsych/mobile-ui';
+import { InfoIcon } from 'lucide-react-native';
+
+export default function Screen() {
+  return (
+    <View style={{ padding: 16, gap: 16 }}>
+      <Tooltip content="Sessions reset on your plan renewal date.">
+        <InfoIcon size={20} />
+      </Tooltip>
+
+      <Tooltip content="Your data is encrypted end-to-end." placement="bottom">
+        <InfoIcon size={20} />
+      </Tooltip>
+    </View>
+  );
+}`} language="tsx" />
       </Section>
     </FoundationPageShell>
   );

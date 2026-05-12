@@ -4,6 +4,7 @@ import type { ReactNode } from 'react';
 import { EmptyState } from '@/components/ds/mobile-empty-state/mobile-empty-state';
 import { MobilePlayground } from '@/components/mobile-playground/mobile-playground';
 import { FoundationPageShell } from '@/components/foundation-page-shell';
+import { CodeBlock } from '@/components/code-block/code-block';
 
 export default function MobileEmptyStatePage() {
   return (
@@ -46,6 +47,26 @@ export default function MobileEmptyStatePage() {
             </div>
           </div>
         </Surface>
+      </Section>
+
+      <Section heading="React Native">
+        <CodeBlock code={`import { View } from 'react-native';
+import { EmptyState } from '@compsych/mobile-ui';
+import { SearchX } from 'lucide-react-native';
+
+export default function Screen() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <EmptyState
+        icon={<SearchX size={40} />}
+        title="No results found"
+        description="Try adjusting your filters or search terms."
+        actionLabel="Clear filters"
+        onAction={() => {}}
+      />
+    </View>
+  );
+}`} language="tsx" />
       </Section>
     </FoundationPageShell>
   );

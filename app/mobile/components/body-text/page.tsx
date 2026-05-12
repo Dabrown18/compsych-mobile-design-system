@@ -4,6 +4,7 @@ import type { ReactNode } from 'react';
 import { BodyText, type BodyVariant, type TextColor } from '@/components/ds/mobile-text/mobile-text';
 import { MobilePlayground } from '@/components/mobile-playground/mobile-playground';
 import { FoundationPageShell } from '@/components/foundation-page-shell';
+import { CodeBlock } from '@/components/code-block/code-block';
 
 const BODY_VARIANTS: BodyVariant[] = ['large', 'medium', 'small'];
 const LABEL_VARIANTS: BodyVariant[] = ['labelLarge', 'labelMedium', 'labelSmall'];
@@ -112,6 +113,23 @@ export default function BodyTextPage() {
             ))}
           </div>
         </Surface>
+      </Section>
+
+      <Section heading="React Native">
+        <CodeBlock code={`import { View } from 'react-native';
+import { BodyText } from '@compsych/mobile-ui';
+
+export default function Screen() {
+  return (
+    <View style={{ padding: 16, gap: 8 }}>
+      <BodyText variant="large">Large body copy for reading.</BodyText>
+      <BodyText variant="medium">Standard paragraph text.</BodyText>
+      <BodyText variant="small">Fine print or captions.</BodyText>
+      <BodyText variant="labelLarge">Button label</BodyText>
+      <BodyText variant="labelMedium">Tag label</BodyText>
+    </View>
+  );
+}`} language="tsx" />
       </Section>
 
       <Section heading="Canonical sources">

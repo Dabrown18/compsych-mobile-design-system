@@ -4,6 +4,7 @@ import { useState, type ReactNode } from 'react';
 import { Snackbar, type SnackbarVariant } from '@/components/ds/mobile-snackbar/mobile-snackbar';
 import { MobilePlayground } from '@/components/mobile-playground/mobile-playground';
 import { FoundationPageShell } from '@/components/foundation-page-shell';
+import { CodeBlock } from '@/components/code-block/code-block';
 
 const VARIANTS: SnackbarVariant[] = ['filled', 'outlined'];
 
@@ -69,6 +70,28 @@ export default function MobileSnackbarPage() {
             ))}
           </div>
         </Surface>
+      </Section>
+
+      <Section heading="React Native">
+        <CodeBlock code={`import { useState } from 'react';
+import { View, Button } from 'react-native';
+import { Snackbar } from '@compsych/mobile-ui';
+
+export default function Screen() {
+  const [visible, setVisible] = useState(false);
+
+  return (
+    <View style={{ flex: 1 }}>
+      <Button title="Save changes" onPress={() => setVisible(true)} />
+      <Snackbar
+        message="Changes saved successfully"
+        visible={visible}
+        onDismiss={() => setVisible(false)}
+        action={{ label: 'Undo', onPress: () => {} }}
+      />
+    </View>
+  );
+}`} language="tsx" />
       </Section>
     </FoundationPageShell>
   );

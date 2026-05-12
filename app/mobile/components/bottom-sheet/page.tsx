@@ -7,6 +7,7 @@ import { MobileListItem } from '@/components/ds/mobile-list-item/mobile-list-ite
 import { PhoneFrame } from '@/components/phone-frame/phone-frame';
 import { MobilePlayground } from '@/components/mobile-playground/mobile-playground';
 import { FoundationPageShell } from '@/components/foundation-page-shell';
+import { CodeBlock } from '@/components/code-block/code-block';
 
 function SheetContent() {
   return (
@@ -123,6 +124,32 @@ export default function BottomSheetPage() {
             </div>
           ))}
         </div>
+      </Section>
+
+      <Section heading="React Native">
+        <CodeBlock code={`import { useState } from 'react';
+import { View, Button } from 'react-native';
+import { BottomSheet } from '@compsych/mobile-ui';
+
+export default function Screen() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <View style={{ flex: 1 }}>
+      <Button title="Show sheet" onPress={() => setOpen(true)} />
+      <BottomSheet
+        visible={open}
+        onClose={() => setOpen(false)}
+        title="Quick actions"
+        size="half"
+        showHandle
+        showOverlay
+      >
+        {/* sheet content */}
+      </BottomSheet>
+    </View>
+  );
+}`} language="tsx" />
       </Section>
 
       <Section heading="Canonical sources">

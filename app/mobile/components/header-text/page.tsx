@@ -4,6 +4,7 @@ import type { ReactNode } from 'react';
 import { HeaderText, type HeaderVariant, type TextColor } from '@/components/ds/mobile-text/mobile-text';
 import { MobilePlayground } from '@/components/mobile-playground/mobile-playground';
 import { FoundationPageShell } from '@/components/foundation-page-shell';
+import { CodeBlock } from '@/components/code-block/code-block';
 
 const DISPLAY_VARIANTS: HeaderVariant[] = ['large', 'medium', 'small'];
 const HEADLINE_VARIANTS: HeaderVariant[] = ['headlineLarge', 'headlineMedium', 'headlineSmall'];
@@ -127,6 +128,24 @@ export default function HeaderTextPage() {
           <LinkRow label="Specification" href="#" hint="specs/text.spec.md" />
           <LinkRow label="React Native reference" href="#" hint="reference/components/ds/mobile-text/" />
         </div>
+      </Section>
+
+      <Section heading="React Native">
+        <CodeBlock code={`import { View } from 'react-native';
+import { HeaderText } from '@compsych/mobile-ui';
+
+export default function Screen() {
+  return (
+    <View style={{ padding: 16, gap: 8 }}>
+      <HeaderText variant="headlineLarge">Headline Large</HeaderText>
+      <HeaderText variant="headlineMedium">Headline Medium</HeaderText>
+      <HeaderText variant="headlineSmall">Headline Small</HeaderText>
+      <HeaderText variant="titleLarge">Title Large</HeaderText>
+      <HeaderText variant="titleMedium">Title Medium</HeaderText>
+      <HeaderText variant="titleSmall">Title Small</HeaderText>
+    </View>
+  );
+}`} language="tsx" />
       </Section>
     </FoundationPageShell>
   );

@@ -4,6 +4,7 @@ import type { ReactNode } from 'react';
 import { Switch } from '@/components/ds/mobile-switch/mobile-switch';
 import { MobilePlayground } from '@/components/mobile-playground/mobile-playground';
 import { FoundationPageShell } from '@/components/foundation-page-shell';
+import { CodeBlock } from '@/components/code-block/code-block';
 
 export default function MobileSwitchPage() {
   return (
@@ -71,6 +72,33 @@ export default function MobileSwitchPage() {
             ))}
           </div>
         </Surface>
+      </Section>
+
+      <Section heading="React Native">
+        <CodeBlock code={`import { useState } from 'react';
+import { View } from 'react-native';
+import { Switch } from '@compsych/mobile-ui';
+
+export default function Screen() {
+  const [notifications, setNotifications] = useState(true);
+  const [darkMode, setDarkMode] = useState(false);
+
+  return (
+    <View style={{ padding: 16, gap: 16 }}>
+      <Switch
+        value={notifications}
+        onValueChange={setNotifications}
+        label="Push notifications"
+      />
+      <Switch
+        value={darkMode}
+        onValueChange={setDarkMode}
+        label="Dark mode"
+      />
+      <Switch value disabled label="Managed by admin" />
+    </View>
+  );
+}`} language="tsx" />
       </Section>
     </FoundationPageShell>
   );

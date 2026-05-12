@@ -4,6 +4,7 @@ import { useState, type ReactNode } from 'react';
 import { ActionSheet } from '@/components/ds/mobile-action-sheet/mobile-action-sheet';
 import { MobilePlayground } from '@/components/mobile-playground/mobile-playground';
 import { FoundationPageShell } from '@/components/foundation-page-shell';
+import { CodeBlock } from '@/components/code-block/code-block';
 import { PhoneFrame } from '@/components/phone-frame/phone-frame';
 
 export default function MobileActionSheetPage() {
@@ -42,6 +43,35 @@ export default function MobileActionSheetPage() {
             <div style={{ height: 48, borderRadius: 9999, border: '1px solid var(--sys-color-outline)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--sys-color-on-surface)', fontSize: 16 }}>Keep appointment</div>
           </div>
         </Surface>
+      </Section>
+      <Section heading="React Native">
+        <CodeBlock code={`import { useState } from 'react';
+import { View, Button } from 'react-native';
+import { ActionSheet } from '@compsych/mobile-ui';
+
+export default function Screen() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Button title="Show sheet" onPress={() => setOpen(true)} />
+      <ActionSheet
+        visible={open}
+        onClose={() => setOpen(false)}
+        title="Cancel appointment?"
+        primaryAction={{
+          label: 'Yes, cancel',
+          destructive: true,
+          onPress: () => setOpen(false),
+        }}
+        secondaryAction={{
+          label: 'Keep appointment',
+          onPress: () => setOpen(false),
+        }}
+      />
+    </View>
+  );
+}`} language="tsx" />
       </Section>
     </FoundationPageShell>
   );

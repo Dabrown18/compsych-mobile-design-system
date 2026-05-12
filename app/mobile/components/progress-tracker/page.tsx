@@ -4,6 +4,7 @@ import type { ReactNode } from 'react';
 import { ProgressBar, ProgressTracker, type ProgressTrackerSize } from '@/components/ds/mobile-progress-tracker/mobile-progress-tracker';
 import { MobilePlayground } from '@/components/mobile-playground/mobile-playground';
 import { FoundationPageShell } from '@/components/foundation-page-shell';
+import { CodeBlock } from '@/components/code-block/code-block';
 
 const SIZES: ProgressTrackerSize[] = ['sm', 'lg'];
 
@@ -76,6 +77,24 @@ export default function MobileProgressTrackerPage() {
             ))}
           </div>
         </Surface>
+      </Section>
+
+      <Section heading="React Native">
+        <CodeBlock code={`import { View } from 'react-native';
+import { ProgressTracker } from '@compsych/mobile-ui';
+
+export default function Screen() {
+  return (
+    <View style={{ padding: 16, gap: 24 }}>
+      <ProgressTracker
+        steps={4}
+        currentStep={1}
+        labels={['Intake', 'Match', 'Schedule', 'Session']}
+      />
+      <ProgressTracker steps={3} currentStep={2} />
+    </View>
+  );
+}`} language="tsx" />
       </Section>
     </FoundationPageShell>
   );

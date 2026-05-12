@@ -4,6 +4,7 @@ import type { ReactNode } from 'react';
 import { Card, type CardVariant, type CardSize } from '@/components/ds/mobile-card/mobile-card';
 import { MobilePlayground } from '@/components/mobile-playground/mobile-playground';
 import { FoundationPageShell } from '@/components/foundation-page-shell';
+import { CodeBlock } from '@/components/code-block/code-block';
 
 const VARIANTS: CardVariant[] = ['outlined', 'tonal', 'filled', 'doubled', 'image'];
 const SIZES: CardSize[] = ['sm', 'md', 'lg'];
@@ -73,6 +74,32 @@ export default function MobileCardPage() {
             ))}
           </div>
         </Surface>
+      </Section>
+
+      <Section heading="React Native">
+        <CodeBlock code={`import { View } from 'react-native';
+import { Card } from '@compsych/mobile-ui';
+import { Heart } from 'lucide-react-native';
+
+export default function Screen() {
+  return (
+    <View style={{ padding: 16, gap: 12 }}>
+      <Card
+        variant="outlined"
+        headline="Mental health resources"
+        subhead="EAP · Confidential"
+        supportingText="Access therapy sessions and wellness tools."
+        onPress={() => {}}
+      />
+      <Card
+        variant="tonal"
+        headline="Today's check-in"
+        icon={<Heart size={20} />}
+        onPress={() => {}}
+      />
+    </View>
+  );
+}`} language="tsx" />
       </Section>
     </FoundationPageShell>
   );

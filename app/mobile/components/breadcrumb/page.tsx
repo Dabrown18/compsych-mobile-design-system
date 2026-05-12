@@ -4,6 +4,7 @@ import type { ReactNode } from 'react';
 import { Breadcrumb, type BreadcrumbSize } from '@/components/ds/mobile-breadcrumb/mobile-breadcrumb';
 import { MobilePlayground } from '@/components/mobile-playground/mobile-playground';
 import { FoundationPageShell } from '@/components/foundation-page-shell';
+import { CodeBlock } from '@/components/code-block/code-block';
 
 const SIZES: BreadcrumbSize[] = ['sm', 'lg'];
 
@@ -54,6 +55,24 @@ export default function MobileBreadcrumbPage() {
             <Breadcrumb items={[...DEMO_ITEMS, { label: 'Session details' }]} />
           </div>
         </Surface>
+      </Section>
+      <Section heading="React Native">
+        <CodeBlock code={`import { View } from 'react-native';
+import { Breadcrumb } from '@compsych/mobile-ui';
+
+export default function Screen() {
+  return (
+    <View style={{ padding: 16 }}>
+      <Breadcrumb
+        items={[
+          { label: 'Home', onPress: () => {} },
+          { label: 'Benefits', onPress: () => {} },
+          { label: 'Mental Health' },
+        ]}
+      />
+    </View>
+  );
+}`} language="tsx" />
       </Section>
     </FoundationPageShell>
   );

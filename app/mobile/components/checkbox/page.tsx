@@ -4,6 +4,7 @@ import type { ReactNode } from 'react';
 import { Checkbox, type CheckboxSize } from '@/components/ds/mobile-checkbox/mobile-checkbox';
 import { MobilePlayground } from '@/components/mobile-playground/mobile-playground';
 import { FoundationPageShell } from '@/components/foundation-page-shell';
+import { CodeBlock } from '@/components/code-block/code-block';
 
 const SIZES: CheckboxSize[] = ['sm', 'md'];
 
@@ -63,6 +64,28 @@ export default function MobileCheckboxPage() {
             ))}
           </div>
         </Surface>
+      </Section>
+
+      <Section heading="React Native">
+        <CodeBlock code={`import { useState } from 'react';
+import { View } from 'react-native';
+import { Checkbox } from '@compsych/mobile-ui';
+
+export default function Screen() {
+  const [checked, setChecked] = useState(false);
+
+  return (
+    <View style={{ padding: 16, gap: 12 }}>
+      <Checkbox
+        checked={checked}
+        onValueChange={setChecked}
+        label="I agree to the terms"
+      />
+      <Checkbox checked label="Pre-selected option" />
+      <Checkbox checked={false} disabled label="Unavailable option" />
+    </View>
+  );
+}`} language="tsx" />
       </Section>
     </FoundationPageShell>
   );

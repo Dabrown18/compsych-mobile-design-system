@@ -4,6 +4,7 @@ import { useState, type ReactNode } from 'react';
 import { PlanCard } from '@/components/ds/mobile-plan-card/mobile-plan-card';
 import { MobilePlayground } from '@/components/mobile-playground/mobile-playground';
 import { FoundationPageShell } from '@/components/foundation-page-shell';
+import { CodeBlock } from '@/components/code-block/code-block';
 
 const HeartIcon = () => (
   <svg viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em">
@@ -69,6 +70,32 @@ export default function MobilePlanCardPage() {
             </div>
           </div>
         </Surface>
+      </Section>
+
+      <Section heading="React Native">
+        <CodeBlock code={`import { View } from 'react-native';
+import { PlanCard } from '@compsych/mobile-ui';
+
+export default function Screen() {
+  return (
+    <View style={{ padding: 16, gap: 12 }}>
+      <PlanCard
+        planName="Standard EAP"
+        sessions={8}
+        used={3}
+        renewalDate="Jan 1, 2027"
+        onPress={() => {}}
+      />
+      <PlanCard
+        planName="Premium Wellness"
+        sessions={12}
+        used={12}
+        renewalDate="Jan 1, 2027"
+        onPress={() => {}}
+      />
+    </View>
+  );
+}`} language="tsx" />
       </Section>
     </FoundationPageShell>
   );

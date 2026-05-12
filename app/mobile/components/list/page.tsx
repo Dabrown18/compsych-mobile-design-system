@@ -4,6 +4,7 @@ import type { ReactNode } from 'react';
 import { List, ListItem } from '@/components/ds/mobile-list/mobile-list';
 import { MobilePlayground } from '@/components/mobile-playground/mobile-playground';
 import { FoundationPageShell } from '@/components/foundation-page-shell';
+import { CodeBlock } from '@/components/code-block/code-block';
 
 const CalendarIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} width="1em" height="1em">
@@ -66,6 +67,34 @@ export default function MobileListPage() {
             ]} />
           </div>
         </Surface>
+      </Section>
+
+      <Section heading="React Native">
+        <CodeBlock code={`import { View } from 'react-native';
+import { List } from '@compsych/mobile-ui';
+
+const ITEMS = [
+  { id: '1', headline: 'Therapy sessions', subhead: 'Up to 8 per year' },
+  { id: '2', headline: 'Crisis support', subhead: '24/7 availability' },
+  { id: '3', headline: 'Financial coaching', subhead: '3 sessions included' },
+];
+
+export default function Screen() {
+  return (
+    <View style={{ padding: 16 }}>
+      <List
+        items={ITEMS}
+        keyExtractor={(item) => item.id}
+        renderItem={(item) => ({
+          headline: item.headline,
+          subhead: item.subhead,
+          showChevron: true,
+          onPress: () => {},
+        })}
+      />
+    </View>
+  );
+}`} language="tsx" />
       </Section>
     </FoundationPageShell>
   );

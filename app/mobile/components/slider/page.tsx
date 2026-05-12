@@ -4,6 +4,7 @@ import type { ReactNode } from 'react';
 import { Slider } from '@/components/ds/mobile-slider/mobile-slider';
 import { MobilePlayground } from '@/components/mobile-playground/mobile-playground';
 import { FoundationPageShell } from '@/components/foundation-page-shell';
+import { CodeBlock } from '@/components/code-block/code-block';
 
 export default function MobileSliderPage() {
   return (
@@ -44,6 +45,37 @@ export default function MobileSliderPage() {
             </div>
           </div>
         </Surface>
+      </Section>
+
+      <Section heading="React Native">
+        <CodeBlock code={`import { useState } from 'react';
+import { View } from 'react-native';
+import { Slider } from '@compsych/mobile-ui';
+
+export default function Screen() {
+  const [volume, setVolume] = useState(0.5);
+  const [rating, setRating] = useState(3);
+
+  return (
+    <View style={{ padding: 16, gap: 24 }}>
+      <Slider
+        value={volume}
+        onValueChange={setVolume}
+        min={0}
+        max={1}
+        step={0.01}
+      />
+      <Slider
+        value={rating}
+        onValueChange={setRating}
+        min={1}
+        max={5}
+        step={1}
+        showSteps
+      />
+    </View>
+  );
+}`} language="tsx" />
       </Section>
     </FoundationPageShell>
   );

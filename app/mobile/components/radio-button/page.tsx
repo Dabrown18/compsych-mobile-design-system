@@ -4,6 +4,7 @@ import type { ReactNode } from 'react';
 import { RadioButton, type RadioButtonSize } from '@/components/ds/mobile-radio-button/mobile-radio-button';
 import { MobilePlayground } from '@/components/mobile-playground/mobile-playground';
 import { FoundationPageShell } from '@/components/foundation-page-shell';
+import { CodeBlock } from '@/components/code-block/code-block';
 
 const SIZES: RadioButtonSize[] = ['sm', 'md'];
 
@@ -63,6 +64,31 @@ export default function MobileRadioButtonPage() {
             ))}
           </div>
         </Surface>
+      </Section>
+
+      <Section heading="React Native">
+        <CodeBlock code={`import { useState } from 'react';
+import { View } from 'react-native';
+import { RadioButton } from '@compsych/mobile-ui';
+
+const OPTIONS = ['Phone call', 'Video session', 'In person'];
+
+export default function Screen() {
+  const [selected, setSelected] = useState('Phone call');
+
+  return (
+    <View style={{ padding: 16, gap: 12 }}>
+      {OPTIONS.map((opt) => (
+        <RadioButton
+          key={opt}
+          label={opt}
+          selected={selected === opt}
+          onValueChange={() => setSelected(opt)}
+        />
+      ))}
+    </View>
+  );
+}`} language="tsx" />
       </Section>
     </FoundationPageShell>
   );

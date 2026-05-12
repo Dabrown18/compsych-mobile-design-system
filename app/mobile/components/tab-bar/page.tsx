@@ -4,6 +4,7 @@ import type { ReactNode } from 'react';
 import { MobileTabBar } from '@/components/ds/mobile-tab-bar/mobile-tab-bar';
 import { MobilePlayground } from '@/components/mobile-playground/mobile-playground';
 import { FoundationPageShell } from '@/components/foundation-page-shell';
+import { CodeBlock } from '@/components/code-block/code-block';
 
 const SECTION_CONTENT: Record<string, string> = {
   Overview: 'Summary information and key metrics for this section.',
@@ -77,6 +78,33 @@ export default function TabBarPage() {
           <LinkRow label="Specification" href="#" hint="specs/tab-bar.spec.md" />
           <LinkRow label="React Native reference" href="#" hint="reference/components/ds/mobile-tab-bar/" />
         </div>
+      </Section>
+
+      <Section heading="React Native">
+        <CodeBlock code={`import { useState } from 'react';
+import { View } from 'react-native';
+import { TabBar } from '@compsych/mobile-ui';
+import { Home, Search, Bell, User } from 'lucide-react-native';
+
+export default function Screen() {
+  const [activeTab, setActiveTab] = useState(0);
+
+  return (
+    <View style={{ flex: 1 }}>
+      {/* Screen content here */}
+      <TabBar
+        tabs={[
+          { label: 'Home', icon: <Home size={24} /> },
+          { label: 'Search', icon: <Search size={24} /> },
+          { label: 'Alerts', icon: <Bell size={24} />, badge: 3 },
+          { label: 'Profile', icon: <User size={24} /> },
+        ]}
+        activeTab={activeTab}
+        onTabChange={setActiveTab}
+      />
+    </View>
+  );
+}`} language="tsx" />
       </Section>
     </FoundationPageShell>
   );

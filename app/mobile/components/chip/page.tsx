@@ -4,6 +4,7 @@ import type { ReactNode } from 'react';
 import { Chip, type ChipUsage, type ChipSize } from '@/components/ds/mobile-chip/mobile-chip';
 import { MobilePlayground } from '@/components/mobile-playground/mobile-playground';
 import { FoundationPageShell } from '@/components/foundation-page-shell';
+import { CodeBlock } from '@/components/code-block/code-block';
 
 const USAGES: ChipUsage[] = ['neutral', 'informative', 'positive', 'danger', 'warning'];
 const SIZES: ChipSize[] = ['sm', 'md', 'lg', 'xl'];
@@ -72,6 +73,31 @@ export default function MobileChipPage() {
             <Chip label="Messages" badge="12" dismissible usage="informative" size="lg" />
           </div>
         </Surface>
+      </Section>
+
+      <Section heading="React Native">
+        <CodeBlock code={`import { useState } from 'react';
+import { ScrollView } from 'react-native';
+import { Chip } from '@compsych/mobile-ui';
+
+const FILTERS = ['All', 'Therapy', 'Coaching', 'Crisis'];
+
+export default function Screen() {
+  const [active, setActive] = useState('All');
+
+  return (
+    <ScrollView horizontal contentContainerStyle={{ gap: 8, padding: 16 }}>
+      {FILTERS.map((f) => (
+        <Chip
+          key={f}
+          label={f}
+          selected={active === f}
+          onPress={() => setActive(f)}
+        />
+      ))}
+    </ScrollView>
+  );
+}`} language="tsx" />
       </Section>
     </FoundationPageShell>
   );

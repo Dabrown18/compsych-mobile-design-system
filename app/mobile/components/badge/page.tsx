@@ -4,6 +4,7 @@ import type { ReactNode } from 'react';
 import { Badge, type BadgeSize, type BadgeStyle } from '@/components/ds/mobile-badge/mobile-badge';
 import { MobilePlayground } from '@/components/mobile-playground/mobile-playground';
 import { FoundationPageShell } from '@/components/foundation-page-shell';
+import { CodeBlock } from '@/components/code-block/code-block';
 
 const STYLES: BadgeStyle[] = ['filled', 'positive', 'danger', 'elevated', 'tonal', 'dot'];
 const SIZES: BadgeSize[] = ['sm', 'md', 'lg'];
@@ -68,6 +69,21 @@ export default function MobileBadgePage() {
             ))}
           </div>
         </Surface>
+      </Section>
+      <Section heading="React Native">
+        <CodeBlock code={`import { View } from 'react-native';
+import { Badge } from '@compsych/mobile-ui';
+
+export default function Screen() {
+  return (
+    <View style={{ flexDirection: 'row', gap: 8, padding: 16 }}>
+      <Badge label="New" badgeStyle="filled" />
+      <Badge label="3" badgeStyle="danger" size="sm" />
+      <Badge label="Active" badgeStyle="positive" />
+      <Badge badgeStyle="dot" />
+    </View>
+  );
+}`} language="tsx" />
       </Section>
     </FoundationPageShell>
   );

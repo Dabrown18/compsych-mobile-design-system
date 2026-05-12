@@ -4,6 +4,7 @@ import type { ReactNode } from 'react';
 import { Button, type ButtonVariant, type ButtonSize } from '@/components/ds/mobile-button/mobile-button';
 import { MobilePlayground } from '@/components/mobile-playground/mobile-playground';
 import { FoundationPageShell } from '@/components/foundation-page-shell';
+import { CodeBlock } from '@/components/code-block/code-block';
 
 const VARIANTS: ButtonVariant[] = ['filled', 'tonal', 'outlined', 'elevated', 'text', 'danger', 'danger-outlined'];
 const SIZES: ButtonSize[] = ['sm', 'md', 'lg', 'xl'];
@@ -73,6 +74,22 @@ export default function MobileButtonPage() {
             <Button label="Full Width" fullWidth style={{ maxWidth: 200 }} />
           </div>
         </Surface>
+      </Section>
+
+      <Section heading="React Native">
+        <CodeBlock code={`import { View } from 'react-native';
+import { Button } from '@compsych/mobile-ui';
+
+export default function Screen() {
+  return (
+    <View style={{ padding: 16, gap: 12 }}>
+      <Button label="Continue" variant="filled" onPress={() => {}} />
+      <Button label="Learn more" variant="outlined" onPress={() => {}} />
+      <Button label="Dismiss" variant="text" onPress={() => {}} />
+      <Button label="Save" variant="tonal" loading onPress={() => {}} />
+    </View>
+  );
+}`} language="tsx" />
       </Section>
     </FoundationPageShell>
   );

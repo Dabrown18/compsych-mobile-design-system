@@ -4,6 +4,7 @@ import { useState, type ReactNode } from 'react';
 import { SegmentedControl, type SegmentedControlOption } from '@/components/ds/mobile-segmented-control/mobile-segmented-control';
 import { MobilePlayground } from '@/components/mobile-playground/mobile-playground';
 import { FoundationPageShell } from '@/components/foundation-page-shell';
+import { CodeBlock } from '@/components/code-block/code-block';
 
 const OPTIONS: SegmentedControlOption[] = [
   { label: 'Day', value: 'day' },
@@ -57,6 +58,26 @@ export default function MobileSegmentedControlPage() {
             <SegmentedDemo options={[...OPTIONS, { label: 'Year', value: 'year' }]} fullWidth />
           </div>
         </Surface>
+      </Section>
+
+      <Section heading="React Native">
+        <CodeBlock code={`import { useState } from 'react';
+import { View } from 'react-native';
+import { SegmentedControl } from '@compsych/mobile-ui';
+
+export default function Screen() {
+  const [view, setView] = useState('Day');
+
+  return (
+    <View style={{ padding: 16, gap: 16 }}>
+      <SegmentedControl
+        options={['Day', 'Week', 'Month']}
+        value={view}
+        onValueChange={setView}
+      />
+    </View>
+  );
+}`} language="tsx" />
       </Section>
     </FoundationPageShell>
   );

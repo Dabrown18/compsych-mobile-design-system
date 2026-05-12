@@ -5,6 +5,7 @@ import { Bell, User, Settings, ChevronRight, Star, Heart } from 'lucide-react';
 import { MobileListItem } from '@/components/ds/mobile-list-item/mobile-list-item';
 import { MobilePlayground } from '@/components/mobile-playground/mobile-playground';
 import { FoundationPageShell } from '@/components/foundation-page-shell';
+import { CodeBlock } from '@/components/code-block/code-block';
 import { Switch as MobileSwitch } from '@/components/ds/mobile-switch/mobile-switch';
 import { Badge as MobileBadge } from '@/components/ds/mobile-badge/mobile-badge';
 
@@ -99,6 +100,32 @@ export default function MobileListItemPage() {
           <LinkRow label="Specification" href="#" hint="specs/list-item.spec.md" />
           <LinkRow label="React Native reference" href="#" hint="reference/components/ds/mobile-list-item/" />
         </div>
+      </Section>
+
+      <Section heading="React Native">
+        <CodeBlock code={`import { View } from 'react-native';
+import { ListItem } from '@compsych/mobile-ui';
+import { Bell, Settings } from 'lucide-react-native';
+
+export default function Screen() {
+  return (
+    <View style={{ padding: 16 }}>
+      <ListItem
+        headline="Notifications"
+        subhead="Manage alerts"
+        leadingContent={<Bell size={24} />}
+        showChevron
+        onPress={() => {}}
+      />
+      <ListItem
+        headline="Settings"
+        leadingContent={<Settings size={24} />}
+        showChevron
+        onPress={() => {}}
+      />
+    </View>
+  );
+}`} language="tsx" />
       </Section>
     </FoundationPageShell>
   );

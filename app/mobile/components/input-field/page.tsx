@@ -4,6 +4,7 @@ import type { ReactNode } from 'react';
 import { Input, type InputSize } from '@/components/ds/mobile-input/mobile-input';
 import { MobilePlayground } from '@/components/mobile-playground/mobile-playground';
 import { FoundationPageShell } from '@/components/foundation-page-shell';
+import { CodeBlock } from '@/components/code-block/code-block';
 
 const SIZES: InputSize[] = ['sm', 'md', 'lg'];
 
@@ -71,6 +72,36 @@ export default function MobileInputPage() {
             </div>
           </div>
         </Surface>
+      </Section>
+
+      <Section heading="React Native">
+        <CodeBlock code={`import { useState } from 'react';
+import { View } from 'react-native';
+import { Input } from '@compsych/mobile-ui';
+
+export default function Screen() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  return (
+    <View style={{ padding: 16, gap: 16 }}>
+      <Input
+        label="Email"
+        value={email}
+        onChangeText={setEmail}
+        keyboardType="email-address"
+        autoCapitalize="none"
+      />
+      <Input
+        label="Password"
+        value={password}
+        onChangeText={setPassword}
+        secureTextEntry
+        error="Must be at least 8 characters"
+      />
+    </View>
+  );
+}`} language="tsx" />
       </Section>
     </FoundationPageShell>
   );

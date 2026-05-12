@@ -4,6 +4,7 @@ import { useState, type ReactNode } from 'react';
 import { Pagination, type PaginationSize } from '@/components/ds/mobile-pagination/mobile-pagination';
 import { MobilePlayground } from '@/components/mobile-playground/mobile-playground';
 import { FoundationPageShell } from '@/components/foundation-page-shell';
+import { CodeBlock } from '@/components/code-block/code-block';
 
 const SIZES: PaginationSize[] = ['sm', 'lg'];
 
@@ -64,6 +65,37 @@ export default function MobilePaginationPage() {
             ))}
           </div>
         </Surface>
+      </Section>
+
+      <Section heading="React Native">
+        <CodeBlock code={`import { useState } from 'react';
+import { View } from 'react-native';
+import { Pagination } from '@compsych/mobile-ui';
+
+export default function Screen() {
+  const [page, setPage] = useState(1);
+
+  return (
+    <View style={{ padding: 16, alignItems: 'center', gap: 16 }}>
+      <Pagination
+        totalPages={10}
+        currentPage={page}
+        onPageChange={setPage}
+        siblingCount={1}
+        size="lg"
+      />
+
+      {/* Compact variant */}
+      <Pagination
+        totalPages={10}
+        currentPage={page}
+        onPageChange={setPage}
+        compact
+        size="sm"
+      />
+    </View>
+  );
+}`} language="tsx" />
       </Section>
     </FoundationPageShell>
   );

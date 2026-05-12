@@ -4,6 +4,7 @@ import type { ReactNode } from 'react';
 import { Divider } from '@/components/ds/mobile-divider/mobile-divider';
 import { MobilePlayground } from '@/components/mobile-playground/mobile-playground';
 import { FoundationPageShell } from '@/components/foundation-page-shell';
+import { CodeBlock } from '@/components/code-block/code-block';
 
 export default function MobileDividerPage() {
   return (
@@ -62,6 +63,28 @@ export default function MobileDividerPage() {
             </div>
           </div>
         </Surface>
+      </Section>
+
+      <Section heading="React Native">
+        <CodeBlock code={`import { View } from 'react-native';
+import { Divider } from '@compsych/mobile-ui';
+
+export default function Screen() {
+  return (
+    <View style={{ padding: 16, gap: 16 }}>
+      {/* Full-width */}
+      <Divider />
+
+      {/* Inset — indented from left */}
+      <Divider inset />
+
+      {/* Vertical inside a row */}
+      <View style={{ flexDirection: 'row', height: 24, alignItems: 'center', gap: 12 }}>
+        <Divider orientation="vertical" />
+      </View>
+    </View>
+  );
+}`} language="tsx" />
       </Section>
     </FoundationPageShell>
   );
