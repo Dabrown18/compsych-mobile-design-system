@@ -48,7 +48,7 @@ export default function MobileCardPage() {
                 title={values.title as string}
                 description={values.description as string}
                 icon={values.showIcon ? <HeartIcon /> : undefined}
-                button={values.showButton ? <ArrowButton variant={values.variant as CardVariant} /> : undefined}
+                buttonIcon={values.showButton ? <ArrowButton variant={values.variant as CardVariant} /> : undefined}
               />
             </div>
           )}
@@ -70,7 +70,7 @@ import { Heart, ArrowRight } from 'lucide-react-native';
   variant="tonal"
   headline="Today's check-in"
   icon={<Heart size={20} />}
-  button={<ArrowRight size={16} />}
+  buttonIcon={<ArrowRight size={16} />}
   onPress={() => {}}
 />`} language="tsx" />
       </Section>
@@ -86,7 +86,7 @@ import { Heart, ArrowRight } from 'lucide-react-native';
                   title="Upcoming Appointment"
                   description="Tuesday, June 3 · 2:00 PM"
                   icon={<HeartIcon />}
-                  button={<ArrowButton variant={v} />}
+                  buttonIcon={<ArrowButton variant={v} />}
                 />
               </div>
             ))}
@@ -100,7 +100,7 @@ import { Heart, ArrowRight } from 'lucide-react-native';
             {SIZES.map((s) => (
               <div key={s} className="flex flex-col gap-1">
                 <code className="ref-caption font-mono" style={{ color: 'var(--sys-color-on-surface-variant)' }}>{s}</code>
-                <Card size={s} title="Session with Dr. Patel" description="Tuesday · 2:00 PM" icon={<HeartIcon />} button={<ArrowButton variant="outlined" />} />
+                <Card size={s} title="Session with Dr. Patel" description="Tuesday · 2:00 PM" icon={<HeartIcon />} buttonIcon={<ArrowButton variant="outlined" />} />
               </div>
             ))}
           </div>
