@@ -41,16 +41,14 @@ export default function MobileCardPage() {
       <Section heading="Playground" lead="Adjust variant, size, and content to preview every combination.">
         <MobilePlayground
           render={(values) => (
-            <div style={{ padding: 24, width: '100%' }}>
-              <Card
-                variant={values.variant as CardVariant}
-                size={values.size as CardSize}
-                title={values.title as string}
-                description={values.description as string}
-                icon={values.showIcon ? <HeartIcon /> : undefined}
-                buttonIcon={values.showButton ? <ArrowButton variant={values.variant as CardVariant} /> : undefined}
-              />
-            </div>
+            <Card
+              variant={values.variant as CardVariant}
+              size={values.size as CardSize}
+              title={values.title as string}
+              description={values.description as string}
+              icon={values.showIcon ? <HeartIcon /> : undefined}
+              buttonIcon={values.showButton ? <ArrowButton variant={values.variant as CardVariant} /> : undefined}
+            />
           )}
           controls={[
             { name: 'variant', type: 'enum', label: 'Variant', options: VARIANTS, defaultValue: 'outlined' },
