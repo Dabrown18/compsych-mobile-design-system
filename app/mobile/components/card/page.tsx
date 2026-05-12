@@ -77,29 +77,15 @@ export default function MobileCardPage() {
       </Section>
 
       <Section heading="React Native">
-        <CodeBlock code={`import { View } from 'react-native';
-import { Card } from '@compsych/mobile-ui';
+        <CodeBlock code={`import { Card } from '@compsych/mobile-ui';
 import { Heart } from 'lucide-react-native';
 
-export default function Screen() {
-  return (
-    <View style={{ padding: 16, gap: 12 }}>
-      <Card
-        variant="outlined"
-        headline="Mental health resources"
-        subhead="EAP · Confidential"
-        supportingText="Access therapy sessions and wellness tools."
-        onPress={() => {}}
-      />
-      <Card
-        variant="tonal"
-        headline="Today's check-in"
-        icon={<Heart size={20} />}
-        onPress={() => {}}
-      />
-    </View>
-  );
-}`} language="tsx" />
+<Card
+  variant="tonal"
+  headline="Today's check-in"
+  icon={<Heart size={20} />}
+  onPress={() => {}}
+/>`} language="tsx" />
       </Section>
     </FoundationPageShell>
   );
