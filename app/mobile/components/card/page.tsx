@@ -58,7 +58,7 @@ export default function MobileCardPage() {
             { name: 'title', type: 'string', label: 'Title', defaultValue: 'Therapy Session', placeholder: 'Card title' },
             { name: 'description', type: 'string', label: 'Description', defaultValue: 'Tuesday, June 3 · 2:00 PM with Dr. Patel', placeholder: 'Card description' },
             { name: 'showIcon', type: 'boolean', label: 'Icon', defaultValue: false },
-            { name: 'showButton', type: 'boolean', label: 'Button', defaultValue: false },
+            { name: 'showButton', type: 'boolean', label: 'Button Icon', defaultValue: false },
           ]}
         />
       </Section>
