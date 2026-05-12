@@ -54,10 +54,10 @@ const VARIANT: Record<CardVariant, {
   },
 };
 
-const SIZE: Record<CardSize, { px: number; py: number; radius: number; layout: 'row' | 'column'; titleSize: number; descSize: number; gap: number }> = {
+const SIZE: Record<CardSize, { px: number; py: number; radius: number; layout: 'row' | 'column'; titleSize: number; descSize: number; gap: number; width?: number; height?: number }> = {
   sm: { px: 16, py: 16, radius: 16, layout: 'row',    titleSize: 16, descSize: 14, gap: 12 },
   md: { px: 24, py: 24, radius: 16, layout: 'column', titleSize: 20, descSize: 14, gap: 24 },
-  lg: { px: 24, py: 24, radius: 16, layout: 'column', titleSize: 20, descSize: 14, gap: 32 },
+  lg: { px: 24, py: 24, radius: 16, layout: 'column', titleSize: 20, descSize: 14, gap: 32, width: 684, height: 332 },
 };
 
 const SAMPLE_IMAGE = 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80';
@@ -97,7 +97,8 @@ export function Card({
     opacity: disabled ? 0.48 : 1,
     cursor: (interactive || onPress) && !disabled ? 'pointer' : 'default',
     overflow: variant === 'image' ? 'hidden' : undefined,
-    width: fullWidth ? '100%' : undefined,
+    width: fullWidth ? '100%' : s.width ? s.width : undefined,
+    height: s.height ?? undefined,
     ...style,
   };
 
