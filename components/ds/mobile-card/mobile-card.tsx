@@ -55,8 +55,8 @@ const VARIANT: Record<CardVariant, {
 };
 
 const SIZE: Record<CardSize, { px: number; py: number; radius: number; layout: 'row' | 'column'; titleSize: number; descSize: number; gap: number; width?: number; height?: number }> = {
-  sm: { px: 16, py: 12, radius: 12, layout: 'row',    titleSize: 15, descSize: 13, gap: 12 },
-  md: { px: 16, py: 16, radius: 16, layout: 'column', titleSize: 15, descSize: 13, gap: 16 },
+  sm: { px: 16, py: 12, radius: 12, layout: 'row',    titleSize: 15, descSize: 13, gap: 12, width: 480 },
+  md: { px: 16, py: 16, radius: 16, layout: 'column', titleSize: 15, descSize: 13, gap: 16, width: 480 },
   lg: { px: 24, py: 24, radius: 16, layout: 'column', titleSize: 20, descSize: 14, gap: 32, width: 480, height: 233 },
 };
 
