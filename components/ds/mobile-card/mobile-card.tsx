@@ -12,6 +12,7 @@ export interface CardProps extends HTMLAttributes<HTMLDivElement> {
   description?: string;
   icon?: ReactNode;
   image?: string;
+  button?: ReactNode;
   interactive?: boolean;
   disabled?: boolean;
   onPress?: () => void;
@@ -68,6 +69,7 @@ export function Card({
   description,
   icon,
   image,
+  button,
   interactive,
   disabled,
   onPress,
@@ -133,6 +135,11 @@ export function Card({
         )}
         {children}
       </div>
+      {button && !isRow && (
+        <div style={{ position: 'absolute', bottom: s.py, right: s.px, zIndex: 3 }}>
+          {button}
+        </div>
+      )}
     </>
   );
 

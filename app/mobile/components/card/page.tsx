@@ -15,6 +15,22 @@ const HeartIcon = () => (
   </svg>
 );
 
+const ArrowButton = ({ variant }: { variant: CardVariant }) => {
+  const filled = variant === 'outlined' || variant === 'doubled';
+  return (
+    <div style={{
+      width: 36, height: 36, borderRadius: '50%',
+      background: filled ? 'var(--sys-color-primary)' : '#ffffff',
+      display: 'flex', alignItems: 'center', justifyContent: 'center',
+      boxShadow: '0 1px 4px rgba(0,0,0,0.15)',
+    }}>
+      <svg viewBox="0 0 24 24" fill="none" stroke={filled ? '#ffffff' : '#1b1d22'} strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" width={16} height={16}>
+        <path d="M5 12h14M13 6l6 6-6 6" />
+      </svg>
+    </div>
+  );
+};
+
 export default function MobileCardPage() {
   return (
     <FoundationPageShell
@@ -32,6 +48,7 @@ export default function MobileCardPage() {
                 title={values.title as string}
                 description={values.description as string}
                 icon={values.showIcon ? <HeartIcon /> : undefined}
+                button={values.showButton ? <ArrowButton variant={values.variant as CardVariant} /> : undefined}
               />
             </div>
           )}
@@ -41,17 +58,19 @@ export default function MobileCardPage() {
             { name: 'title', type: 'string', label: 'Title', defaultValue: 'Therapy Session', placeholder: 'Card title' },
             { name: 'description', type: 'string', label: 'Description', defaultValue: 'Tuesday, June 3 · 2:00 PM with Dr. Patel', placeholder: 'Card description' },
             { name: 'showIcon', type: 'boolean', label: 'Icon', defaultValue: false },
+            { name: 'showButton', type: 'boolean', label: 'Button', defaultValue: false },
           ]}
         />
       </Section>
       <Section heading="Code Example">
         <CodeBlock code={`import { Card } from '@compsych/mobile-ui';
-import { Heart } from 'lucide-react-native';
+import { Heart, ArrowRight } from 'lucide-react-native';
 
 <Card
   variant="tonal"
   headline="Today's check-in"
   icon={<Heart size={20} />}
+  button={<ArrowRight size={16} />}
   onPress={() => {}}
 />`} language="tsx" />
       </Section>
@@ -67,6 +86,7 @@ import { Heart } from 'lucide-react-native';
                   title="Upcoming Appointment"
                   description="Tuesday, June 3 · 2:00 PM"
                   icon={<HeartIcon />}
+                  button={<ArrowButton variant={v} />}
                 />
               </div>
             ))}
@@ -80,7 +100,7 @@ import { Heart } from 'lucide-react-native';
             {SIZES.map((s) => (
               <div key={s} className="flex flex-col gap-1">
                 <code className="ref-caption font-mono" style={{ color: 'var(--sys-color-on-surface-variant)' }}>{s}</code>
-                <Card size={s} title="Session with Dr. Patel" description="Tuesday · 2:00 PM" icon={<HeartIcon />} />
+                <Card size={s} title="Session with Dr. Patel" description="Tuesday · 2:00 PM" icon={<HeartIcon />} button={<ArrowButton variant="outlined" />} />
               </div>
             ))}
           </div>
