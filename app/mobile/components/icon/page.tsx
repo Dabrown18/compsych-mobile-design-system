@@ -9,6 +9,9 @@ const SIZES: IconSize[] = ['xsmall', 'small', 'medium', 'large', 'xlarge'];
 const SIZE_PX: Record<IconSize, number> = { xsmall: 16, small: 20, medium: 24, large: 32, xlarge: 48 };
 const SIZE_STROKE: Record<IconSize, number> = { xsmall: 1, small: 1.5, medium: 2, large: 2, xlarge: 2 };
 
+const SizePreviewIcon = ALL_ICONS[0].Component;
+const ColorPreviewIcon = ALL_ICONS[2].Component;
+
 export default function MobileIconPage() {
   return (
     <FoundationPageShell
@@ -52,7 +55,7 @@ export default function MobileIconPage() {
                     <td style={{ padding: '12px 16px', borderBottom: '1px solid var(--sys-color-outline-variant)', color: 'var(--sys-color-on-surface-variant)' }}>{SIZE_PX[s]} × {SIZE_PX[s]} px</td>
                     <td style={{ padding: '12px 16px', borderBottom: '1px solid var(--sys-color-outline-variant)', color: 'var(--sys-color-on-surface-variant)' }}>{SIZE_STROKE[s]} px</td>
                     <td style={{ padding: '12px 0 12px 16px', borderBottom: '1px solid var(--sys-color-outline-variant)' }}>
-                      <ALL_ICONS[0].Component size={s} color="var(--sys-color-on-surface)" />
+                      <SizePreviewIcon size={s} color="var(--sys-color-on-surface)" />
                     </td>
                   </tr>
                 ))}
@@ -90,7 +93,7 @@ import { sys } from '@compsych/mobile-ui';
               { label: 'error', color: 'var(--sys-color-error)' },
             ].map(({ label, color }) => (
               <div key={label} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
-                <ALL_ICONS[2].Component size="large" color={color} />
+                <ColorPreviewIcon size="large" color={color} />
                 <code style={{ fontSize: 11, color: 'var(--sys-color-on-surface-variant)' }}>{label}</code>
               </div>
             ))}

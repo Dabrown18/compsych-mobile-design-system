@@ -2,18 +2,13 @@
 
 import type { ReactNode } from 'react';
 import { Card, type CardVariant, type CardSize } from '@/components/ds/mobile-card/mobile-card';
+import { HeartHandshakeIcon, HandshakeIcon } from '@/components/ds/mobile-icon/mobile-icon';
 import { MobilePlayground } from '@/components/mobile-playground/mobile-playground';
 import { FoundationPageShell } from '@/components/foundation-page-shell';
 import { CodeBlock } from '@/components/code-block/code-block';
 
 const VARIANTS: CardVariant[] = ['outlined', 'tonal', 'filled', 'doubled', 'image'];
 const SIZES: CardSize[] = ['sm', 'md', 'lg'];
-
-const HeartIcon = () => (
-  <svg viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em">
-    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-  </svg>
-);
 
 const ArrowButton = ({ variant }: { variant: CardVariant }) => {
   const filled = variant === 'outlined' || variant === 'doubled';
@@ -24,9 +19,7 @@ const ArrowButton = ({ variant }: { variant: CardVariant }) => {
       display: 'flex', alignItems: 'center', justifyContent: 'center',
       boxShadow: '0 1px 4px rgba(0,0,0,0.15)',
     }}>
-      <svg viewBox="0 0 24 24" fill="none" stroke={filled ? '#ffffff' : '#1b1d22'} strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" width={16} height={16}>
-        <path d="M5 12h14M13 6l6 6-6 6" />
-      </svg>
+      <HandshakeIcon size="xsmall" color={filled ? '#ffffff' : '#1b1d22'} />
     </div>
   );
 };
@@ -46,7 +39,7 @@ export default function MobileCardPage() {
               size={values.size as CardSize}
               title={values.title as string}
               description={values.description as string}
-              icon={values.showIcon ? <HeartIcon /> : undefined}
+              icon={values.showIcon ? <HeartHandshakeIcon size="small" color="currentColor" /> : undefined}
               buttonIcon={values.showButton ? <ArrowButton variant={values.variant as CardVariant} /> : undefined}
             />
           )}
@@ -61,14 +54,13 @@ export default function MobileCardPage() {
         />
       </Section>
       <Section heading="Code Example">
-        <CodeBlock code={`import { Card } from '@compsych/mobile-ui';
-import { Heart, ArrowRight } from 'lucide-react-native';
+        <CodeBlock code={`import { Card, HeartHandshakeIcon, HandshakeIcon } from '@compsych/mobile-ui';
 
 <Card
   variant="tonal"
-  headline="Today's check-in"
-  icon={<Heart size={20} />}
-  buttonIcon={<ArrowRight size={16} />}
+  title="Today's check-in"
+  icon={<HeartHandshakeIcon size="small" color="#fff" />}
+  buttonIcon={<HandshakeIcon size="xsmall" color="#fff" />}
   onPress={() => {}}
 />`} language="tsx" />
       </Section>
@@ -83,7 +75,7 @@ import { Heart, ArrowRight } from 'lucide-react-native';
                   variant={v}
                   title="Upcoming Appointment"
                   description="Tuesday, June 3 · 2:00 PM"
-                  icon={<HeartIcon />}
+                  icon={<HeartHandshakeIcon size="small" color="currentColor" />}
                   buttonIcon={<ArrowButton variant={v} />}
                 />
               </div>
@@ -98,7 +90,7 @@ import { Heart, ArrowRight } from 'lucide-react-native';
             {SIZES.map((s) => (
               <div key={s} className="flex flex-col gap-1">
                 <code className="ref-caption font-mono" style={{ color: 'var(--sys-color-on-surface-variant)' }}>{s}</code>
-                <Card size={s} title="Session with Dr. Patel" description="Tuesday · 2:00 PM" icon={<HeartIcon />} buttonIcon={<ArrowButton variant="outlined" />} />
+                <Card size={s} title="Session with Dr. Patel" description="Tuesday · 2:00 PM" icon={<HeartHandshakeIcon size="small" color="currentColor" />} buttonIcon={<ArrowButton variant="outlined" />} />
               </div>
             ))}
           </div>
