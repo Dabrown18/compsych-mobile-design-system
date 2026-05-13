@@ -2,12 +2,15 @@
 
 import type { ReactNode } from 'react';
 import { ALL_ICONS, type IconSize } from '@/components/ds/mobile-icon/mobile-icon';
+import { MobilePlayground } from '@/components/mobile-playground/mobile-playground';
 import { FoundationPageShell } from '@/components/foundation-page-shell';
 import { CodeBlock } from '@/components/code-block/code-block';
 
 const SIZES: IconSize[] = ['xsmall', 'small', 'medium', 'large', 'xlarge'];
 const SIZE_PX: Record<IconSize, number> = { xsmall: 16, small: 20, medium: 24, large: 32, xlarge: 48 };
 const SIZE_STROKE: Record<IconSize, number> = { xsmall: 1, small: 1.5, medium: 2, large: 2, xlarge: 2 };
+
+const ICON_NAMES = ALL_ICONS.map((i) => i.name);
 
 const SizePreviewIcon = ALL_ICONS[0].Component;
 const ColorPreviewIcon = ALL_ICONS[2].Component;
@@ -19,6 +22,32 @@ export default function MobileIconPage() {
       title="Icons"
       description="18 Lucide-sourced SVG icons exported as react-native-svg components. Each icon accepts a size (xsmall–xlarge) and color prop. All icons use a 0 0 48 48 viewBox with stroke-linecap and stroke-linejoin set to round."
     >
+      <Section heading="Playground" lead="Select an icon, size, and color to preview.">
+        <MobilePlayground
+          render={(values) => {
+            const entry = ALL_ICONS.find((i) => i.name === values.icon) ?? ALL_ICONS[0];
+            const Icon = entry.Component;
+            const colorMap: Record<string, string> = {
+              onSurface:      'var(--sys-color-on-surface)',
+              primary:        'var(--sys-color-primary)',
+              onPrimaryFixed: 'var(--sys-color-on-primary-fixed)',
+              error:          'var(--sys-color-error)',
+            };
+            const color = colorMap[values.color as string] ?? colorMap.onSurface;
+            return (
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 32 }}>
+                <Icon size={values.size as IconSize} color={color} />
+              </div>
+            );
+          }}
+          controls={[
+            { name: 'icon', type: 'enum', label: 'Icon', options: ICON_NAMES, defaultValue: ICON_NAMES[0] },
+            { name: 'size', type: 'enum', label: 'Size', options: SIZES, defaultValue: 'medium' },
+            { name: 'color', type: 'enum', label: 'Color', options: ['onSurface', 'primary', 'onPrimaryFixed', 'error'], defaultValue: 'onSurface' },
+          ]}
+        />
+      </Section>
+
       <Section heading="Gallery" lead="All 18 icons at medium size (24 × 24 px).">
         <Surface>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(96px, 1fr))', gap: 24, width: '100%' }}>
@@ -87,10 +116,10 @@ import { sys } from '@compsych/mobile-ui';
         <Surface>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 32, alignItems: 'center' }}>
             {[
-              { label: 'onSurface', color: 'var(--sys-color-on-surface)' },
-              { label: 'primary', color: 'var(--sys-color-primary)' },
+              { label: 'onSurface',      color: 'var(--sys-color-on-surface)' },
+              { label: 'primary',        color: 'var(--sys-color-primary)' },
               { label: 'onPrimaryFixed', color: 'var(--sys-color-on-primary-fixed)' },
-              { label: 'error', color: 'var(--sys-color-error)' },
+              { label: 'error',          color: 'var(--sys-color-error)' },
             ].map(({ label, color }) => (
               <div key={label} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
                 <ColorPreviewIcon size="large" color={color} />
