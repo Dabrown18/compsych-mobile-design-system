@@ -2,7 +2,7 @@
 
 import type { ReactNode } from 'react';
 import { Card, type CardVariant, type CardSize } from '@/components/ds/mobile-card/mobile-card';
-import { HeartHandshakeIcon, HandshakeIcon, type IconSize } from '@/components/ds/mobile-icon/mobile-icon';
+import { HeartHandshakeIcon, type IconSize } from '@/components/ds/mobile-icon/mobile-icon';
 
 const CARD_TO_ICON_SIZE: Record<CardSize, IconSize> = { sm: 'small', md: 'medium', lg: 'large' };
 import { MobilePlayground } from '@/components/mobile-playground/mobile-playground';
@@ -21,7 +21,9 @@ const ArrowButton = ({ variant }: { variant: CardVariant }) => {
       display: 'flex', alignItems: 'center', justifyContent: 'center',
       boxShadow: '0 1px 4px rgba(0,0,0,0.15)',
     }}>
-      <HandshakeIcon size="xsmall" color={filled ? '#ffffff' : '#1b1d22'} />
+      <svg viewBox="0 0 24 24" fill="none" stroke={filled ? '#ffffff' : '#1b1d22'} strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" width={16} height={16}>
+        <path d="M5 12h14M13 6l6 6-6 6" />
+      </svg>
     </div>
   );
 };
