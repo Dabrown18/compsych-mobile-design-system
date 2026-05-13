@@ -2,7 +2,9 @@
 
 import type { ReactNode } from 'react';
 import { Card, type CardVariant, type CardSize } from '@/components/ds/mobile-card/mobile-card';
-import { HeartHandshakeIcon, HandshakeIcon } from '@/components/ds/mobile-icon/mobile-icon';
+import { HeartHandshakeIcon, HandshakeIcon, type IconSize } from '@/components/ds/mobile-icon/mobile-icon';
+
+const CARD_TO_ICON_SIZE: Record<CardSize, IconSize> = { sm: 'small', md: 'medium', lg: 'large' };
 import { MobilePlayground } from '@/components/mobile-playground/mobile-playground';
 import { FoundationPageShell } from '@/components/foundation-page-shell';
 import { CodeBlock } from '@/components/code-block/code-block';
@@ -33,16 +35,20 @@ export default function MobileCardPage() {
     >
       <Section heading="Playground" lead="Adjust variant, size, and content to preview every combination.">
         <MobilePlayground
-          render={(values) => (
-            <Card
-              variant={values.variant as CardVariant}
-              size={values.size as CardSize}
-              title={values.title as string}
-              description={values.description as string}
-              icon={values.showIcon ? <HeartHandshakeIcon size="small" color="currentColor" /> : undefined}
-              buttonIcon={values.showButton ? <ArrowButton variant={values.variant as CardVariant} /> : undefined}
-            />
-          )}
+          render={(values) => {
+            const cardSize = values.size as CardSize;
+            const iconSize = CARD_TO_ICON_SIZE[cardSize];
+            return (
+              <Card
+                variant={values.variant as CardVariant}
+                size={cardSize}
+                title={values.title as string}
+                description={values.description as string}
+                icon={values.showIcon ? <HeartHandshakeIcon size={iconSize} color="currentColor" /> : undefined}
+                buttonIcon={values.showButton ? <ArrowButton variant={values.variant as CardVariant} /> : undefined}
+              />
+            );
+          }}
           controls={[
             { name: 'variant', type: 'enum', label: 'Variant', options: VARIANTS, defaultValue: 'outlined' },
             { name: 'size', type: 'enum', label: 'Size', options: SIZES, defaultValue: 'lg' },
