@@ -222,6 +222,32 @@
   outline-offset: 2px;
 }
 
+/* ----- Select dropdown ----- */
+
+.select {
+  width: 100%;
+  padding: 8px 32px 8px 12px;
+  background: var(--sys-color-surface-container-lowest, #ffffff);
+  border: 1px solid var(--sys-color-outline, #ebecf0);
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 13px;
+  line-height: 18px;
+  color: var(--sys-color-on-surface, #1b1d22);
+  outline: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23565f6c' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  cursor: pointer;
+  transition: border-color 120ms ease-out, box-shadow 120ms ease-out;
+}
+
+.select:focus {
+  border-color: var(--sys-color-primary, #075cba);
+  box-shadow: 0 0 0 3px var(--sys-color-transparent-primary-08, rgba(7, 92, 186, 0.08));
+}
+
 /* ----- Text input (string) ----- */
 
 .textInput {

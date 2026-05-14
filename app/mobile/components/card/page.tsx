@@ -43,37 +43,41 @@ export default function MobileCardPage() {
     >
       <Section heading="Playground" lead="Adjust variant, size, and content to preview every combination.">
         <MobilePlayground
-          render={(values) => (
-            <Card
-              variant={values.variant as CardVariant}
-              size={values.size as CardSize}
-              title={values.title as string}
-              description={values.description as string}
-              icon={values.showIcon ? values.icon as IconName : undefined}
-              buttonIcon={values.showButton ? <ArrowButton variant={values.variant as CardVariant} /> : undefined}
-            />
-          )}
+          render={(values) => {
+            const icon = values.icon as string;
+            return (
+              <Card
+                variant={values.variant as CardVariant}
+                size={values.size as CardSize}
+                title={values.title as string}
+                description={values.description as string}
+                icon={(icon || undefined) as IconName | undefined}
+                buttonIcon={values.showButton ? <ArrowButton variant={values.variant as CardVariant} /> : undefined}
+              />
+            );
+          }}
           controls={[
             { name: 'variant', type: 'enum', label: 'Variant', options: VARIANTS, defaultValue: 'outlined' },
             { name: 'size', type: 'enum', label: 'Size', options: SIZES, defaultValue: 'lg' },
             { name: 'title', type: 'string', label: 'Title', defaultValue: 'Therapy Session', placeholder: 'Card title' },
             { name: 'description', type: 'string', label: 'Description', defaultValue: 'Tuesday, June 3 · 2:00 PM with Dr. Patel', placeholder: 'Card description' },
-            { name: 'showIcon', type: 'boolean', label: 'Show Icon', defaultValue: false },
-            { name: 'icon', type: 'enum', label: 'Icon', options: ICON_OPTIONS, defaultValue: 'HeartHandshakeIcon' },
+            { name: 'icon', type: 'select', label: 'Icon', options: ICON_OPTIONS, defaultValue: '', placeholder: '— none —' },
             { name: 'showButton', type: 'boolean', label: 'Button Icon', defaultValue: false },
           ]}
         />
       </Section>
       <Section heading="Code Example">
-        <CodeBlock code={`import { Card } from '@compsych/mobile-ui';
+        <CodeBlock code={`import { Card, type IconName } from '@compsych/mobile-ui';
 
-<Card
-  variant="tonal"
-  size="lg"
-  title="Today's check-in"
-  icon="HeartHandshakeIcon"
-  onPress={() => {}}
-/>`} language="tsx" />
+// Pass any IconName string — the card renders the icon at the right size automatically.
+// sm card → small icon (20px), md → medium (24px), lg → large (32px)
+
+<Card variant="outlined" size="lg" title="Therapy Session" icon="StethoscopeIcon" />
+<Card variant="tonal"    size="md" title="Today's check-in" icon="HeartHandshakeIcon" />
+<Card variant="filled"   size="sm" title="Schedule"         icon="GraduationCapIcon" />
+
+// Omit icon to render the card without one
+<Card variant="outlined" size="lg" title="No icon" />`} language="tsx" />
       </Section>
 
       <Section heading="Variants" lead="Five visual styles: outlined (default + shadow), tonal (primary-fixed), filled (primary bg), doubled (nested card), image (photo background).">

@@ -36,10 +36,20 @@ export interface PlaygroundStringControl {
   label?: string;
 }
 
+export interface PlaygroundSelectControl {
+  name: string;
+  type: 'select';
+  options: readonly string[];
+  defaultValue: string;
+  label?: string;
+  placeholder?: string;
+}
+
 export type PlaygroundControl =
   | PlaygroundEnumControl
   | PlaygroundBooleanControl
-  | PlaygroundStringControl;
+  | PlaygroundStringControl
+  | PlaygroundSelectControl;
 
 // ---------------------------------------------------------------------------
 
@@ -147,6 +157,14 @@ function ControlRow({
             onChange={(v) => onChange(control.name, v)}
           />
         )}
+        {control.type === 'select' && (
+          <SelectControl
+            options={(control as PlaygroundSelectControl).options}
+            value={String(value ?? '')}
+            placeholder={(control as PlaygroundSelectControl).placeholder}
+            onChange={(v) => onChange(control.name, v)}
+          />
+        )}
       </div>
     </div>
   );
@@ -219,5 +237,30 @@ function TextInput({
       placeholder={placeholder}
       onChange={(event) => onChange(event.target.value)}
     />
+  );
+}
+
+function SelectControl({
+  options,
+  value,
+  placeholder,
+  onChange,
+}: {
+  options: readonly string[];
+  value: string;
+  placeholder?: string;
+  onChange: (v: string) => void;
+}) {
+  return (
+    <select
+      className={playgroundStyles.select}
+      value={value}
+      onChange={(e) => onChange(e.target.value)}
+    >
+      {placeholder && <option value="">{placeholder}</option>}
+      {options.map((opt) => (
+        <option key={opt} value={opt}>{opt}</option>
+      ))}
+    </select>
   );
 }
