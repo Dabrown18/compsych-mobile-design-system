@@ -1,6 +1,7 @@
 'use client';
 
 import type { HTMLAttributes, ReactNode } from 'react';
+import { ICON_MAP, type IconName, type IconSize } from '../mobile-icon/mobile-icon';
 
 export type CardVariant = 'outlined' | 'tonal' | 'filled' | 'doubled' | 'image';
 export type CardSize = 'sm' | 'md' | 'lg';
@@ -10,7 +11,7 @@ export interface CardProps extends HTMLAttributes<HTMLDivElement> {
   size?: CardSize;
   title?: string;
   description?: string;
-  icon?: ReactNode;
+  icon?: IconName;
   image?: string;
   buttonIcon?: ReactNode;
   interactive?: boolean;
@@ -60,6 +61,8 @@ const SIZE: Record<CardSize, { px: number; py: number; radius: number; layout: '
   lg: { px: 24, py: 24, radius: 16, layout: 'column', titleSize: 20, descSize: 14, gap: 32, width: 480, height: 233 },
 };
 
+const CARD_TO_ICON_SIZE: Record<CardSize, IconSize> = { sm: 'small', md: 'medium', lg: 'large' };
+
 const SAMPLE_IMAGE = 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80';
 
 export function Card({
@@ -82,6 +85,12 @@ export function Card({
   const s = SIZE[size];
   const isRow = s.layout === 'row';
   const imgSrc = variant === 'image' ? (image ?? SAMPLE_IMAGE) : undefined;
+
+  const IconComponent = icon ? ICON_MAP[icon] : null;
+  const iconColor = variant === 'doubled' ? 'var(--sys-color-on-primary)' : v.titleColor;
+  const renderedIcon = IconComponent
+    ? <IconComponent size={CARD_TO_ICON_SIZE[size]} color={iconColor} />
+    : null;
 
   const containerStyle: React.CSSProperties = {
     position: 'relative',
@@ -111,17 +120,17 @@ export function Card({
         <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,.30)', zIndex: 1 }} />
       )}
       <div style={{ position: 'relative', zIndex: 2, display: 'flex', flexDirection: isRow ? 'row' : 'column', alignItems: isRow ? 'center' : 'flex-start', gap: s.gap, width: '100%' }}>
-        {icon && variant === 'doubled' ? (
+        {renderedIcon && variant === 'doubled' ? (
           <div style={{
             width: 48, height: 48, borderRadius: '50%',
             background: 'var(--sys-color-primary)',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
-            color: 'var(--sys-color-on-primary)', fontSize: 20, flexShrink: 0,
+            flexShrink: 0,
           }}>
-            {icon}
+            {renderedIcon}
           </div>
-        ) : icon ? (
-          <span style={{ display: 'flex', alignItems: 'center', color: v.titleColor, fontSize: 24, flexShrink: 0 }}>{icon}</span>
+        ) : renderedIcon ? (
+          <span style={{ display: 'flex', alignItems: 'center', flexShrink: 0 }}>{renderedIcon}</span>
         ) : null}
         {(title || description) && (
           <div style={{ flex: isRow ? 1 : undefined }}>

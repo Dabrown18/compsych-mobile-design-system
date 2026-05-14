@@ -4,6 +4,26 @@ import React from 'react';
 
 export type IconSize = 'xsmall' | 'small' | 'medium' | 'large' | 'xlarge';
 
+export type IconName =
+  | 'UserRoundIcon'
+  | 'GlobeIcon'
+  | 'HandshakeIcon'
+  | 'HeartHandshakeIcon'
+  | 'AtomIcon'
+  | 'HazeIcon'
+  | 'HourglassIcon'
+  | 'GraduationCapIcon'
+  | 'HandHeartIcon'
+  | 'IdCardIcon'
+  | 'MessageCirclePlusIcon'
+  | 'StethoscopeIcon'
+  | 'BinocularsIcon'
+  | 'FlagIcon'
+  | 'MountainSnowIcon'
+  | 'SnowflakeIcon'
+  | 'FileChartColumnIncreasingIcon'
+  | 'WheatIcon';
+
 export interface IconProps {
   size?: IconSize;
   color?: string;
@@ -216,3 +236,24 @@ export const ALL_ICONS = [
   { name: 'FileChartColumnIncreasingIcon', label: 'file-chart-column-increasing', Component: FileChartColumnIncreasingIcon },
   { name: 'WheatIcon',                     label: 'wheat',                        Component: WheatIcon },
 ] as const;
+
+export const ICON_MAP: Record<IconName, (props: IconProps) => React.JSX.Element> = {
+  UserRoundIcon,
+  GlobeIcon,
+  HandshakeIcon,
+  HeartHandshakeIcon,
+  AtomIcon,
+  HazeIcon,
+  HourglassIcon,
+  GraduationCapIcon,
+  HandHeartIcon,
+  IdCardIcon,
+  MessageCirclePlusIcon,
+  StethoscopeIcon,
+  BinocularsIcon,
+  FlagIcon,
+  MountainSnowIcon,
+  SnowflakeIcon,
+  FileChartColumnIncreasingIcon,
+  WheatIcon,
+};

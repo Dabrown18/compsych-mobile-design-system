@@ -2,9 +2,15 @@
 
 import type { ReactNode } from 'react';
 import { Card, type CardVariant, type CardSize } from '@/components/ds/mobile-card/mobile-card';
-import { HeartHandshakeIcon, type IconSize } from '@/components/ds/mobile-icon/mobile-icon';
+import { type IconName } from '@/components/ds/mobile-icon/mobile-icon';
 
-const CARD_TO_ICON_SIZE: Record<CardSize, IconSize> = { sm: 'small', md: 'medium', lg: 'large' };
+const ICON_OPTIONS: IconName[] = [
+  'HeartHandshakeIcon', 'UserRoundIcon', 'GlobeIcon', 'HandshakeIcon',
+  'StethoscopeIcon', 'GraduationCapIcon', 'HandHeartIcon', 'AtomIcon',
+  'HourglassIcon', 'IdCardIcon', 'MessageCirclePlusIcon', 'BinocularsIcon',
+  'FlagIcon', 'MountainSnowIcon', 'SnowflakeIcon', 'HazeIcon',
+  'FileChartColumnIncreasingIcon', 'WheatIcon',
+];
 import { MobilePlayground } from '@/components/mobile-playground/mobile-playground';
 import { FoundationPageShell } from '@/components/foundation-page-shell';
 import { CodeBlock } from '@/components/code-block/code-block';
@@ -37,38 +43,35 @@ export default function MobileCardPage() {
     >
       <Section heading="Playground" lead="Adjust variant, size, and content to preview every combination.">
         <MobilePlayground
-          render={(values) => {
-            const cardSize = values.size as CardSize;
-            const iconSize = CARD_TO_ICON_SIZE[cardSize];
-            return (
-              <Card
-                variant={values.variant as CardVariant}
-                size={cardSize}
-                title={values.title as string}
-                description={values.description as string}
-                icon={values.showIcon ? <HeartHandshakeIcon size={iconSize} color="currentColor" /> : undefined}
-                buttonIcon={values.showButton ? <ArrowButton variant={values.variant as CardVariant} /> : undefined}
-              />
-            );
-          }}
+          render={(values) => (
+            <Card
+              variant={values.variant as CardVariant}
+              size={values.size as CardSize}
+              title={values.title as string}
+              description={values.description as string}
+              icon={values.showIcon ? values.icon as IconName : undefined}
+              buttonIcon={values.showButton ? <ArrowButton variant={values.variant as CardVariant} /> : undefined}
+            />
+          )}
           controls={[
             { name: 'variant', type: 'enum', label: 'Variant', options: VARIANTS, defaultValue: 'outlined' },
             { name: 'size', type: 'enum', label: 'Size', options: SIZES, defaultValue: 'lg' },
             { name: 'title', type: 'string', label: 'Title', defaultValue: 'Therapy Session', placeholder: 'Card title' },
             { name: 'description', type: 'string', label: 'Description', defaultValue: 'Tuesday, June 3 · 2:00 PM with Dr. Patel', placeholder: 'Card description' },
-            { name: 'showIcon', type: 'boolean', label: 'Icon', defaultValue: false },
+            { name: 'showIcon', type: 'boolean', label: 'Show Icon', defaultValue: false },
+            { name: 'icon', type: 'enum', label: 'Icon', options: ICON_OPTIONS, defaultValue: 'HeartHandshakeIcon' },
             { name: 'showButton', type: 'boolean', label: 'Button Icon', defaultValue: false },
           ]}
         />
       </Section>
       <Section heading="Code Example">
-        <CodeBlock code={`import { Card, HeartHandshakeIcon, HandshakeIcon } from '@compsych/mobile-ui';
+        <CodeBlock code={`import { Card } from '@compsych/mobile-ui';
 
 <Card
   variant="tonal"
+  size="lg"
   title="Today's check-in"
-  icon={<HeartHandshakeIcon size="small" color="#fff" />}
-  buttonIcon={<HandshakeIcon size="xsmall" color="#fff" />}
+  icon="HeartHandshakeIcon"
   onPress={() => {}}
 />`} language="tsx" />
       </Section>
@@ -83,7 +86,7 @@ export default function MobileCardPage() {
                   variant={v}
                   title="Upcoming Appointment"
                   description="Tuesday, June 3 · 2:00 PM"
-                  icon={<HeartHandshakeIcon size="small" color="currentColor" />}
+                  icon="HeartHandshakeIcon"
                   buttonIcon={<ArrowButton variant={v} />}
                 />
               </div>
@@ -98,7 +101,7 @@ export default function MobileCardPage() {
             {SIZES.map((s) => (
               <div key={s} className="flex flex-col gap-1">
                 <code className="ref-caption font-mono" style={{ color: 'var(--sys-color-on-surface-variant)' }}>{s}</code>
-                <Card size={s} title="Session with Dr. Patel" description="Tuesday · 2:00 PM" icon={<HeartHandshakeIcon size="small" color="currentColor" />} buttonIcon={<ArrowButton variant="outlined" />} />
+                <Card size={s} title="Session with Dr. Patel" description="Tuesday · 2:00 PM" icon="HeartHandshakeIcon" buttonIcon={<ArrowButton variant="outlined" />} />
               </div>
             ))}
           </div>
