@@ -82,7 +82,6 @@ const NAV_SECTIONS: NavSection[] = [
       { href: '/mobile/components/action-sheet', label: 'ActionSheet' },
       { href: '/mobile/components/card', label: 'ServiceCard' },
       { href: '/mobile/components/plan-card', label: 'PlanCard' },
-      { href: '/mobile/components/promotion-card', label: 'PromotionCard' },
       { href: '/mobile/components/selection-card', label: 'SelectionCard' },
       { href: '/mobile/components/tab-bar', label: 'Tab Bar' },
       { href: '/mobile/components/bottom-sheet', label: 'Bottom Sheet' },
