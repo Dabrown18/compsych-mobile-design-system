@@ -10,8 +10,10 @@ export type PromotionCardUsage =
   | 'danger'
   | 'warning'
   | 'image';
+export type PromotionCardSize = 'md' | 'lg';
 
 export interface PromotionCardProps extends Omit<HTMLAttributes<HTMLDivElement>, 'style'> {
+  size?: PromotionCardSize;
   variant?: PromotionCardVariant;
   usage?: PromotionCardUsage;
   title?: string;
@@ -177,12 +179,27 @@ const TOKENS: Record<PromotionCardVariant, Record<PromotionCardUsage, VariantTok
   },
 };
 
-const CARD_HEIGHT = 197;
-const RING_R = 14;
-const RING_C = 2 * Math.PI * RING_R;
-const BUTTON_SIZE = 32;
+function getLgTokens(usage: PromotionCardUsage): VariantTokens {
+  if (usage === 'neutral') return TOKENS.filled.neutral;
+  return TOKENS.tonal[usage];
+}
+
+const MD_HEIGHT = 197;
+const LG_HEIGHT = 363;
+const MD_WIDTH = 361;
+const LG_WIDTH = 424;
+const MD_BUTTON = 32;
+const LG_BUTTON = 48;
+const MD_RING_R = 14;
+const LG_RING_R = 21;
+const MD_RING_C = 2 * Math.PI * MD_RING_R;
+const LG_RING_C = 2 * Math.PI * LG_RING_R;
+const LG_DOT_SIZE = 6;
+const LG_DOT_GAP = 4;
+const LG_DOT_COUNT = 5;
 
 export function PromotionCard({
+  size = 'md',
   variant = 'filled',
   usage = 'neutral',
   title,
@@ -197,20 +214,27 @@ export function PromotionCard({
   style,
   ...rest
 }: PromotionCardProps) {
-  const t = TOKENS[variant][usage];
+  const isLg = size === 'lg';
+  const t = isLg ? getLgTokens(usage) : TOKENS[variant][usage];
   const isImage = usage === 'image';
   const p = Math.max(0, Math.min(1, progress));
-  const ringArc = RING_C * p;
+
+  const buttonSize = isLg ? LG_BUTTON : MD_BUTTON;
+  const ringR = isLg ? LG_RING_R : MD_RING_R;
+  const ringC = isLg ? LG_RING_C : MD_RING_C;
+  const ringArc = ringC * p;
+  const borderRadius = isLg ? 24 : 16;
+  const padding = isLg ? 32 : 16;
 
   const containerStyle: React.CSSProperties = {
     position: 'relative',
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'space-between',
-    width: 361,
-    height: CARD_HEIGHT,
-    borderRadius: 16,
-    padding: 16,
+    ...(isLg ? { gap: 24 } : { justifyContent: 'space-between' }),
+    width: isLg ? LG_WIDTH : MD_WIDTH,
+    height: isLg ? LG_HEIGHT : MD_HEIGHT,
+    borderRadius,
+    padding,
     overflow: 'hidden',
     backgroundColor: t.cardBg,
     cursor: onPress ? 'pointer' : 'default',
@@ -242,14 +266,14 @@ export function PromotionCard({
       {chipLabel && (
         <div style={{
           position: 'relative', zIndex: 2,
-          display: 'inline-flex', alignItems: 'center', gap: 4,
+          display: 'inline-flex', alignItems: 'center', gap: isLg ? 8 : 4,
           alignSelf: 'flex-start',
-          height: 24, borderRadius: 999,
-          paddingLeft: 12, paddingRight: 12,
+          height: isLg ? 32 : 24, borderRadius: 999,
+          paddingLeft: isLg ? 16 : 12, paddingRight: isLg ? 16 : 12,
           backgroundColor: t.chipBg,
         }}>
           {chipIcon && (
-            <span style={{ display: 'flex', width: 16, height: 16, alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+            <span style={{ display: 'flex', width: isLg ? 20 : 16, height: isLg ? 20 : 16, alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
               {chipIcon}
             </span>
           )}
@@ -260,48 +284,80 @@ export function PromotionCard({
       )}
 
       {/* Content */}
-      <div style={{ position: 'relative', zIndex: 2, display: 'flex', flexDirection: 'column', gap: 4, maxWidth: '78%' }}>
+      <div style={{
+        position: 'relative', zIndex: 2,
+        display: 'flex', flexDirection: 'column', gap: isLg ? 8 : 4,
+        ...(isLg ? { flex: 1 } : { maxWidth: '78%' }),
+      }}>
         {title && (
-          <p style={{ margin: 0, fontSize: 20, lineHeight: '28px', color: t.titleColor }}>
+          <p style={{ margin: 0, fontSize: isLg ? 28 : 20, lineHeight: isLg ? '36px' : '28px', color: t.titleColor }}>
             {title}
           </p>
         )}
         {description && (
-          <p style={{ margin: 0, fontSize: 14, lineHeight: '20px', color: t.descColor, opacity: t.descOpacity }}>
+          <p style={{ margin: 0, fontSize: isLg ? 16 : 14, lineHeight: isLg ? '24px' : '20px', color: t.descColor, opacity: t.descOpacity }}>
             {description}
           </p>
         )}
       </div>
 
       {/* Arrow button */}
-      <div style={{ position: 'absolute', bottom: 16, right: 16, width: BUTTON_SIZE, height: BUTTON_SIZE, zIndex: 2 }}>
+      <div style={{ position: 'absolute', bottom: padding, right: padding, width: buttonSize, height: buttonSize, zIndex: 2 }}>
         <div style={{
-          width: BUTTON_SIZE, height: BUTTON_SIZE, borderRadius: '50%',
+          width: buttonSize, height: buttonSize, borderRadius: '50%',
           backgroundColor: t.buttonBg,
           display: 'flex', alignItems: 'center', justifyContent: 'center',
           overflow: 'hidden',
         }}>
-          <svg width={16} height={16} viewBox="0 0 24 24" fill="none" stroke={t.buttonIconColor} strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+          <svg width={isLg ? 24 : 16} height={isLg ? 24 : 16} viewBox="0 0 24 24" fill="none" stroke={t.buttonIconColor} strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
             <path d="M5 12h14M13 6l6 6-6 6" />
           </svg>
         </div>
         {showRingTimer && (
-          <svg width={BUTTON_SIZE} height={BUTTON_SIZE} style={{ position: 'absolute', inset: 0 }} viewBox={`0 0 ${BUTTON_SIZE} ${BUTTON_SIZE}`}>
+          <svg width={buttonSize} height={buttonSize} style={{ position: 'absolute', inset: 0 }} viewBox={`0 0 ${buttonSize} ${buttonSize}`}>
             <circle
-              cx={BUTTON_SIZE / 2} cy={BUTTON_SIZE / 2} r={RING_R}
+              cx={buttonSize / 2} cy={buttonSize / 2} r={ringR}
               stroke={t.progressColor} strokeWidth={2} fill="none"
-              strokeDasharray={`${ringArc} ${RING_C - ringArc}`}
+              strokeDasharray={`${ringArc} ${ringC - ringArc}`}
               strokeLinecap="round"
-              transform={`rotate(-90 ${BUTTON_SIZE / 2} ${BUTTON_SIZE / 2})`}
+              transform={`rotate(-90 ${buttonSize / 2} ${buttonSize / 2})`}
             />
           </svg>
         )}
       </div>
 
+      {/* Pagination dots (lg only) */}
+      {isLg && (
+        <div style={{
+          position: 'absolute',
+          bottom: 53,
+          left: padding,
+          display: 'flex',
+          flexDirection: 'row',
+          alignItems: 'center',
+          gap: LG_DOT_GAP,
+          zIndex: 2,
+        }}>
+          {Array.from({ length: LG_DOT_COUNT }).map((_, i) => (
+            <div
+              key={i}
+              style={{
+                width: LG_DOT_SIZE,
+                height: LG_DOT_SIZE,
+                borderRadius: '50%',
+                backgroundColor: i === 0 ? t.progressColor : 'transparent',
+                border: i === 0 ? 'none' : `1.5px solid ${t.progressColor}`,
+                opacity: i === 0 ? 1 : 0.4,
+              }}
+            />
+          ))}
+        </div>
+      )}
+
       {/* Progress bar */}
       {showProgressBar && (
-        <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: 2, backgroundColor: 'rgba(0,0,0,0.08)', zIndex: 2 }}>
-          <div style={{ height: 2, width: `${p * 100}%`, backgroundColor: t.progressColor }} />
+        <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: isLg ? 4 : 2, backgroundColor: 'rgba(0,0,0,0.08)', zIndex: 2 }}>
+          <div style={{ height: isLg ? 4 : 2, width: `${p * 100}%`, backgroundColor: t.progressColor }} />
         </div>
       )}
     </div>
