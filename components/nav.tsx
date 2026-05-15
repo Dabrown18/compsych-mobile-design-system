@@ -23,7 +23,10 @@ type NavSection = {
 const NAV_SECTIONS: NavSection[] = [
   {
     heading: 'Mobile',
-    items: [{ href: '/mobile/about', label: 'About Mobile' }],
+    items: [
+      { href: '/mobile/about', label: 'About Mobile' },
+      { href: '/mobile/components/screen-container', label: 'ScreenContainer' },
+    ],
   },
   {
     heading: 'Atoms',

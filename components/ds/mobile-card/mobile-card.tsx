@@ -50,8 +50,8 @@ const VARIANT: Record<CardVariant, {
   },
   image: {
     bg: 'transparent',
-    titleColor: '#ffffff',
-    descColor: 'rgba(255,255,255,.80)',
+    titleColor: 'var(--sys-color-inverse-on-surface)',
+    descColor: 'var(--sys-color-transparent-white-80)',
   },
 };
 
