@@ -3,12 +3,12 @@
 import type { HTMLAttributes, ReactNode } from 'react';
 import { ICON_MAP, type IconName, type IconSize } from '../mobile-icon/mobile-icon';
 
-export type CardVariant = 'outlined' | 'tonal' | 'filled' | 'doubled' | 'image';
-export type CardSize = 'sm' | 'md' | 'lg';
+export type ServiceCardVariant = 'outlined' | 'tonal' | 'filled' | 'doubled' | 'image';
+export type ServiceCardSize = 'sm' | 'md' | 'lg';
 
-export interface CardProps extends HTMLAttributes<HTMLDivElement> {
-  variant?: CardVariant;
-  size?: CardSize;
+export interface ServiceCardProps extends HTMLAttributes<HTMLDivElement> {
+  variant?: ServiceCardVariant;
+  size?: ServiceCardSize;
   title?: string;
   description?: string;
   icon?: IconName;
@@ -21,7 +21,7 @@ export interface CardProps extends HTMLAttributes<HTMLDivElement> {
   fullWidth?: boolean;
 }
 
-const VARIANT: Record<CardVariant, {
+const VARIANT: Record<ServiceCardVariant, {
   bg: string; border?: string; titleColor: string; descColor: string; shadow?: string;
 }> = {
   outlined: {
@@ -54,17 +54,17 @@ const VARIANT: Record<CardVariant, {
   },
 };
 
-const SIZE: Record<CardSize, { px: number; py: number; radius: number; layout: 'row' | 'column'; titleSize: number; descSize: number; gap: number; width?: number; height?: number }> = {
+const SIZE: Record<ServiceCardSize, { px: number; py: number; radius: number; layout: 'row' | 'column'; titleSize: number; descSize: number; gap: number; width?: number; height?: number }> = {
   sm: { px: 16, py: 12, radius: 12, layout: 'row',    titleSize: 16, descSize: 14, gap: 12, width: 480 },
   md: { px: 16, py: 16, radius: 16, layout: 'column', titleSize: 16, descSize: 14, gap: 24, width: 480 },
   lg: { px: 16, py: 16, radius: 16, layout: 'column', titleSize: 20, descSize: 14, gap: 32, width: 480 },
 };
 
-const CARD_TO_ICON_SIZE: Record<CardSize, IconSize> = { sm: 'small', md: 'medium', lg: 'large' };
+const CARD_TO_ICON_SIZE: Record<ServiceCardSize, IconSize> = { sm: 'small', md: 'medium', lg: 'large' };
 
 const SAMPLE_IMAGE = 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80';
 
-export function Card({
+export function ServiceCard({
   variant = 'outlined',
   size = 'lg',
   title,
@@ -79,7 +79,7 @@ export function Card({
   fullWidth = false,
   style,
   ...rest
-}: CardProps) {
+}: ServiceCardProps) {
   const v = VARIANT[variant];
   const s = SIZE[size];
   const isRow = s.layout === 'row';

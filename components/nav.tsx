@@ -80,7 +80,7 @@ const NAV_SECTIONS: NavSection[] = [
     collapsible: true,
     items: [
       { href: '/mobile/components/action-sheet', label: 'ActionSheet' },
-      { href: '/mobile/components/card', label: 'Card' },
+      { href: '/mobile/components/card', label: 'ServiceCard' },
       { href: '/mobile/components/plan-card', label: 'PlanCard' },
       { href: '/mobile/components/selection-card', label: 'SelectionCard' },
       { href: '/mobile/components/tab-bar', label: 'Tab Bar' },

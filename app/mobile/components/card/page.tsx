@@ -1,7 +1,7 @@
 'use client';
 
 import type { ReactNode } from 'react';
-import { Card, type CardVariant, type CardSize } from '@/components/ds/mobile-card/mobile-card';
+import { ServiceCard, type ServiceCardVariant, type ServiceCardSize } from '@/components/ds/mobile-card/mobile-card';
 import { type IconName } from '@/components/ds/mobile-icon/mobile-icon';
 
 const ICON_OPTIONS: IconName[] = [
@@ -15,10 +15,10 @@ import { MobilePlayground } from '@/components/mobile-playground/mobile-playgrou
 import { FoundationPageShell } from '@/components/foundation-page-shell';
 import { CodeBlock } from '@/components/code-block/code-block';
 
-const VARIANTS: CardVariant[] = ['outlined', 'tonal', 'filled', 'doubled', 'image'];
-const SIZES: CardSize[] = ['sm', 'md', 'lg'];
+const VARIANTS: ServiceCardVariant[] = ['outlined', 'tonal', 'filled', 'doubled', 'image'];
+const SIZES: ServiceCardSize[] = ['sm', 'md', 'lg'];
 
-const ArrowButton = ({ variant }: { variant: CardVariant }) => {
+const ArrowButton = ({ variant }: { variant: ServiceCardVariant }) => {
   const filled = variant === 'outlined' || variant === 'doubled';
   return (
     <div style={{
@@ -38,7 +38,7 @@ export default function MobileCardPage() {
   return (
     <FoundationPageShell
       eyebrow="Mobile"
-      title="Card"
+      title="ServiceCard"
       description="Content surface with five visual variants and three layout sizes. Supports a title, description, icon, and image. The sm size uses a horizontal row layout; md/lg use a vertical column layout. Set interactive or onPress to make the card tappable."
     >
       <Section heading="Playground" lead="Adjust variant, size, and content to preview every combination.">
@@ -46,13 +46,13 @@ export default function MobileCardPage() {
           render={(values) => {
             const icon = values.icon as string;
             return (
-              <Card
-                variant={values.variant as CardVariant}
-                size={values.size as CardSize}
+              <ServiceCard
+                variant={values.variant as ServiceCardVariant}
+                size={values.size as ServiceCardSize}
                 title={values.title as string}
                 description={values.description as string}
                 icon={(icon || undefined) as IconName | undefined}
-                buttonIcon={values.showButton ? <ArrowButton variant={values.variant as CardVariant} /> : undefined}
+                buttonIcon={values.showButton ? <ArrowButton variant={values.variant as ServiceCardVariant} /> : undefined}
               />
             );
           }}
@@ -67,26 +67,26 @@ export default function MobileCardPage() {
         />
       </Section>
       <Section heading="Code Example">
-        <CodeBlock code={`import { Card, type IconName } from '@compsych/mobile-ui';
+        <CodeBlock code={`import { ServiceCard, type IconName } from '@compsych/mobile-ui';
 
 // Pass any IconName string — the card renders the icon at the right size automatically.
 // sm card → small icon (20px), md → medium (24px), lg → large (32px)
 
-<Card variant="outlined" size="lg" title="Therapy Session" icon="StethoscopeIcon" />
-<Card variant="tonal"    size="md" title="Today's check-in" icon="HeartHandshakeIcon" />
-<Card variant="filled"   size="sm" title="Schedule"         icon="GraduationCapIcon" />
+<ServiceCard variant="outlined" size="lg" title="Therapy Session" icon="StethoscopeIcon" />
+<ServiceCard variant="tonal"    size="md" title="Today's check-in" icon="HeartHandshakeIcon" />
+<ServiceCard variant="filled"   size="sm" title="Schedule"         icon="GraduationCapIcon" />
 
 // Omit icon to render the card without one
-<Card variant="outlined" size="lg" title="No icon" />`} language="tsx" />
+<ServiceCard variant="outlined" size="lg" title="No icon" />`} language="tsx" />
       </Section>
 
-      <Section heading="Variants" lead="Five visual styles: outlined (default + shadow), tonal (primary-fixed), filled (primary bg), doubled (nested card), image (photo background).">
+      <Section heading="Variants" lead="Five visual styles: outlined (default + shadow), tonal (primary-fixed), filled (primary-container bg), doubled (nested card), image (photo background).">
         <Surface>
           <div className="flex flex-col gap-4 w-full max-w-sm">
             {VARIANTS.map((v) => (
               <div key={v} className="flex flex-col gap-1">
                 <code className="ref-caption font-mono" style={{ color: 'var(--sys-color-on-surface-variant)' }}>{v}</code>
-                <Card
+                <ServiceCard
                   variant={v}
                   title="Upcoming Appointment"
                   description="Tuesday, June 3 · 2:00 PM"
@@ -105,7 +105,7 @@ export default function MobileCardPage() {
             {SIZES.map((s) => (
               <div key={s} className="flex flex-col gap-1">
                 <code className="ref-caption font-mono" style={{ color: 'var(--sys-color-on-surface-variant)' }}>{s}</code>
-                <Card size={s} title="Session with Dr. Patel" description="Tuesday · 2:00 PM" icon="HeartHandshakeIcon" buttonIcon={<ArrowButton variant="outlined" />} />
+                <ServiceCard size={s} title="Session with Dr. Patel" description="Tuesday · 2:00 PM" icon="HeartHandshakeIcon" buttonIcon={<ArrowButton variant="outlined" />} />
               </div>
             ))}
           </div>
