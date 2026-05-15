@@ -251,15 +251,11 @@ export function PromotionCard({
     >
       {isImage && (
         <>
-          {image ? (
-            <img
-              src={image}
-              alt=""
-              style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: 0 }}
-            />
-          ) : (
-            <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(135deg, #1b2a3b 0%, #2d4a6e 50%, #1a3a5c 100%)', zIndex: 0 }} />
-          )}
+          <img
+            src={image ?? 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80'}
+            alt=""
+            style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: 0 }}
+          />
           <div
             style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.12) 50%, rgba(0,0,0,0.4) 100%)', zIndex: 1 }}
           />
