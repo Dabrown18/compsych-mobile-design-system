@@ -35,6 +35,24 @@ export default function MobileProgressTrackerPage() {
         />
       </Section>
 
+      <Section heading="Code Example">
+        <CodeBlock code={`import { View } from 'react-native';
+import { ProgressTracker } from '@compsych/mobile-ui';
+
+export default function Screen() {
+  return (
+    <View style={{ padding: 16, gap: 24 }}>
+      <ProgressTracker
+        steps={4}
+        currentStep={1}
+        labels={['Intake', 'Match', 'Schedule', 'Session']}
+      />
+      <ProgressTracker steps={3} currentStep={2} />
+    </View>
+  );
+}`} language="tsx" />
+      </Section>
+
       <Section heading="ProgressBar — examples">
         <Surface>
           <div className="flex flex-col gap-6 w-full">
@@ -79,23 +97,6 @@ export default function MobileProgressTrackerPage() {
         </Surface>
       </Section>
 
-      <Section heading="Code Example">
-        <CodeBlock code={`import { View } from 'react-native';
-import { ProgressTracker } from '@compsych/mobile-ui';
-
-export default function Screen() {
-  return (
-    <View style={{ padding: 16, gap: 24 }}>
-      <ProgressTracker
-        steps={4}
-        currentStep={1}
-        labels={['Intake', 'Match', 'Schedule', 'Session']}
-      />
-      <ProgressTracker steps={3} currentStep={2} />
-    </View>
-  );
-}`} language="tsx" />
-      </Section>
     </FoundationPageShell>
   );
 }

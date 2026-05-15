@@ -48,6 +48,24 @@ export default function MobileIconPage() {
         />
       </Section>
 
+      <Section heading="Code Example">
+        <CodeBlock code={`import { UserRoundIcon, HandshakeIcon } from '@compsych/mobile-ui';
+import { sys } from '@compsych/mobile-ui';
+
+// Default size (medium, 24×24)
+<UserRoundIcon color={sys.colorRoles.surface.surface.sysOnSurface} />
+
+// Large with primary color
+<HandshakeIcon size="large" color={sys.colorRoles.accent.primary.sysPrimary} />
+
+// All available sizes
+<UserRoundIcon size="xsmall" color="#000" />
+<UserRoundIcon size="small"  color="#000" />
+<UserRoundIcon size="medium" color="#000" />
+<UserRoundIcon size="large"  color="#000" />
+<UserRoundIcon size="xlarge" color="#000" />`} language="tsx" />
+      </Section>
+
       <Section heading="Gallery" lead="All 18 icons at medium size (24 × 24 px).">
         <Surface>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(96px, 1fr))', gap: 24, width: '100%' }}>
@@ -92,24 +110,6 @@ export default function MobileIconPage() {
             </table>
           </div>
         </Surface>
-      </Section>
-
-      <Section heading="Code Example">
-        <CodeBlock code={`import { UserRoundIcon, HandshakeIcon } from '@compsych/mobile-ui';
-import { sys } from '@compsych/mobile-ui';
-
-// Default size (medium, 24×24)
-<UserRoundIcon color={sys.colorRoles.surface.surface.sysOnSurface} />
-
-// Large with primary color
-<HandshakeIcon size="large" color={sys.colorRoles.accent.primary.sysPrimary} />
-
-// All available sizes
-<UserRoundIcon size="xsmall" color="#000" />
-<UserRoundIcon size="small"  color="#000" />
-<UserRoundIcon size="medium" color="#000" />
-<UserRoundIcon size="large"  color="#000" />
-<UserRoundIcon size="xlarge" color="#000" />`} language="tsx" />
       </Section>
 
       <Section heading="Color" lead="Icons inherit no color automatically. Always pass an explicit color resolved from a sys.color.* token.">

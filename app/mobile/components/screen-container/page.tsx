@@ -46,6 +46,20 @@ export default function MobileScreenContainerPage() {
         </Surface>
       </Section>
 
+      <Section heading="Code Example">
+        <CodeBlock code={`import { ScreenContainer } from '@compsych/mobile-ui';
+
+export default function MyScreen() {
+  return (
+    <ScreenContainer>
+      {/* all screen content goes here */}
+      <Card title="Upcoming Appointment" icon="StethoscopeIcon" />
+      <Card title="Today's Check-in" icon="HeartHandshakeIcon" />
+    </ScreenContainer>
+  );
+}`} language="tsx" />
+      </Section>
+
       <Section heading="Spacing tokens">
         <Surface>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, width: '100%', maxWidth: 480 }}>
@@ -61,20 +75,6 @@ export default function MobileScreenContainerPage() {
             ))}
           </div>
         </Surface>
-      </Section>
-
-      <Section heading="Code Example">
-        <CodeBlock code={`import { ScreenContainer } from '@compsych/mobile-ui';
-
-export default function MyScreen() {
-  return (
-    <ScreenContainer>
-      {/* all screen content goes here */}
-      <Card title="Upcoming Appointment" icon="StethoscopeIcon" />
-      <Card title="Today's Check-in" icon="HeartHandshakeIcon" />
-    </ScreenContainer>
-  );
-}`} language="tsx" />
       </Section>
     </FoundationPageShell>
   );
