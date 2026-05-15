@@ -37,10 +37,9 @@ const VARIANT: Record<CardVariant, {
     descColor: 'var(--sys-color-on-primary-fixed)',
   },
   filled: {
-    bg: 'var(--sys-color-primary)',
+    bg: 'var(--sys-color-primary-container)',
     titleColor: 'var(--sys-color-on-primary)',
-    descColor: 'var(--sys-color-on-primary)',
-    shadow: '0 2px 8px rgba(0,0,0,.08)',
+    descColor: 'var(--sys-color-transparent-white-80)',
   },
   doubled: {
     bg: 'var(--sys-color-surface-container-lowest)',
@@ -56,9 +55,9 @@ const VARIANT: Record<CardVariant, {
 };
 
 const SIZE: Record<CardSize, { px: number; py: number; radius: number; layout: 'row' | 'column'; titleSize: number; descSize: number; gap: number; width?: number; height?: number }> = {
-  sm: { px: 16, py: 12, radius: 12, layout: 'row',    titleSize: 15, descSize: 13, gap: 12, width: 480 },
-  md: { px: 16, py: 16, radius: 16, layout: 'column', titleSize: 15, descSize: 13, gap: 16, width: 480 },
-  lg: { px: 24, py: 24, radius: 16, layout: 'column', titleSize: 20, descSize: 14, gap: 32, width: 480, height: 233 },
+  sm: { px: 16, py: 12, radius: 12, layout: 'row',    titleSize: 16, descSize: 14, gap: 12, width: 480 },
+  md: { px: 16, py: 16, radius: 16, layout: 'column', titleSize: 16, descSize: 14, gap: 24, width: 480 },
+  lg: { px: 16, py: 16, radius: 16, layout: 'column', titleSize: 20, descSize: 14, gap: 32, width: 480 },
 };
 
 const CARD_TO_ICON_SIZE: Record<CardSize, IconSize> = { sm: 'small', md: 'medium', lg: 'large' };
@@ -117,7 +116,7 @@ export function Card({
         <img src={imgSrc} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: 0 }} />
       )}
       {imgSrc && (
-        <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,.30)', zIndex: 1 }} />
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.12) 40%, rgba(0,0,0,0.12) 60%, rgba(0,0,0,0.4) 100%)', zIndex: 1 }} />
       )}
       <div style={{ position: 'relative', zIndex: 2, display: 'flex', flexDirection: isRow ? 'row' : 'column', alignItems: isRow ? 'center' : 'flex-start', gap: s.gap, width: '100%' }}>
         {renderedIcon && variant === 'doubled' ? (
