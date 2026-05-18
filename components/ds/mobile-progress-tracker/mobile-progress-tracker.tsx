@@ -47,10 +47,9 @@ export type StepState = 'completed' | 'active' | 'pending';
 export interface TrackerStep {
   label?: string;
   /**
-   * Visual state of this step:
-   * - `completed` — full green fill (100%)
-   * - `active`    — partial green fill (~25%), indicates in-progress
-   * - `pending`   — gray track only, no fill
+   * `completed` → full green bar
+   * `active`    → full green bar (current step — same as completed)
+   * `pending`   → gray track only
    */
   state: StepState;
 }
@@ -67,14 +66,6 @@ export interface ProgressTrackerProps extends HTMLAttributes<HTMLDivElement> {
 const FONT_SIZE: Record<ProgressTrackerSize, number> = { sm: 11, lg: 13 };
 const LABEL_GAP: Record<ProgressTrackerSize, number> = { sm: 8, lg: 16 };
 const STEP_GAP: Record<ProgressTrackerSize, number>  = { sm: 4, lg: 8 };
-
-function stepProgress(state: StepState): number {
-  switch (state) {
-    case 'completed': return 100;
-    case 'active':    return 25;
-    case 'pending':   return 0;
-  }
-}
 
 export function ProgressTracker({
   steps,
@@ -96,10 +87,10 @@ export function ProgressTracker({
       {...rest}
     >
       {steps.map((step, i) => {
-        const labelColor =
-          step.state !== 'pending'
-            ? 'var(--sys-color-on-surface)'
-            : 'var(--sys-color-on-surface-variant)';
+        const filled = step.state !== 'pending';
+        const labelColor = filled
+          ? 'var(--sys-color-on-surface)'
+          : 'var(--sys-color-on-surface-variant)';
 
         return (
           <div key={i} style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', gap: showLabels ? LABEL_GAP[size] : 0 }}>
@@ -115,7 +106,7 @@ export function ProgressTracker({
                 {step.label}
               </span>
             )}
-            <ProgressBar progress={stepProgress(step.state)} />
+            <ProgressBar progress={filled ? 100 : 0} />
           </div>
         );
       })}

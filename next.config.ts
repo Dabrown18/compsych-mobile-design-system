@@ -3,17 +3,10 @@ import path from 'node:path';
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
+  // Pin tracing to the reference app root. Without this, Next.js picks the
+  // monorepo root (where the root lockfile lives) and emits a "multiple
+  // lockfiles" warning. Our reference app is self-contained at this level.
   outputFileTracingRoot: path.resolve(__dirname),
-  transpilePackages: ['react-native-web', '@compsych/mobile-ui'],
-  webpack(config) {
-    config.resolve.alias = {
-      ...(config.resolve.alias ?? {}),
-      'react-native$': 'react-native-web',
-      '@expo/vector-icons': path.resolve(__dirname, 'stubs/expo-vector-icons.js'),
-      'expo-font': path.resolve(__dirname, 'stubs/expo-font.js'),
-    };
-    return config;
-  },
 };
 
 export default nextConfig;

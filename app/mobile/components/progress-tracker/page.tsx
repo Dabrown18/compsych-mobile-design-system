@@ -1,7 +1,7 @@
 'use client';
 
 import type { ReactNode } from 'react';
-import { ProgressBar, ProgressTracker, type ProgressTrackerSize } from '@compsych/mobile-ui/src/components/ProgressTracker';
+import { ProgressBar, ProgressTracker, type ProgressTrackerSize } from '@/components/ds/mobile-progress-tracker/mobile-progress-tracker';
 import { MobilePlayground } from '@/components/mobile-playground/mobile-playground';
 import { FoundationPageShell } from '@/components/foundation-page-shell';
 import { CodeBlock } from '@/components/code-block/code-block';
