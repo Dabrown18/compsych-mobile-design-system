@@ -19,21 +19,23 @@ export function ProgressBar({ progress, style, ...rest }: ProgressBarProps) {
       aria-valuemax={100}
       style={{
         width: '100%',
-        height: 8,
+        height: 4,
         borderRadius: 9999,
-        background: 'var(--sys-color-surface-container-high)',
+        background: 'var(--sys-color-surface-container-highest)',
         overflow: 'hidden',
         ...style,
       }}
       {...rest}
     >
-      <div style={{
-        width: `${clamped}%`,
-        height: '100%',
-        borderRadius: 9999,
-        background: 'var(--sys-color-primary)',
-        transition: 'width .3s ease',
-      }} />
+      {clamped > 0 && (
+        <div style={{
+          width: `${clamped}%`,
+          height: '100%',
+          borderRadius: 9999,
+          background: 'var(--sys-color-success)',
+          transition: 'width .3s ease',
+        }} />
+      )}
     </div>
   );
 }
@@ -46,9 +48,9 @@ export interface TrackerStep {
   label?: string;
   /**
    * Visual state of this step:
-   * - `completed` — full green fill (progress 100%)
+   * - `completed` — full green fill (100%)
    * - `active`    — partial green fill (~25%), indicates in-progress
-   * - `pending`   — gray track only, no fill (progress 0%)
+   * - `pending`   — gray track only, no fill
    */
   state: StepState;
 }
@@ -58,73 +60,65 @@ export type ProgressTrackerSize = 'sm' | 'lg';
 export interface ProgressTrackerProps extends HTMLAttributes<HTMLDivElement> {
   steps: TrackerStep[];
   size?: ProgressTrackerSize;
+  /** Render step labels above each bar. Default false. */
   showLabels?: boolean;
 }
 
-const SIZE: Record<ProgressTrackerSize, { dotSize: number; lineH: number; fontSize: number }> = {
-  sm: { dotSize: 8,  lineH: 2, fontSize: 11 },
-  lg: { dotSize: 12, lineH: 2, fontSize: 13 },
-};
+const FONT_SIZE: Record<ProgressTrackerSize, number> = { sm: 11, lg: 13 };
+const LABEL_GAP: Record<ProgressTrackerSize, number> = { sm: 8, lg: 16 };
+const STEP_GAP: Record<ProgressTrackerSize, number>  = { sm: 4, lg: 8 };
 
-export function ProgressTracker({ steps, size = 'lg', showLabels = true, style, ...rest }: ProgressTrackerProps) {
-  const s = SIZE[size];
+function stepProgress(state: StepState): number {
+  switch (state) {
+    case 'completed': return 100;
+    case 'active':    return 25;
+    case 'pending':   return 0;
+  }
+}
 
+export function ProgressTracker({
+  steps,
+  size = 'lg',
+  showLabels = false,
+  style,
+  ...rest
+}: ProgressTrackerProps) {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: showLabels ? 8 : 0, ...style }} {...rest}>
-      {/* Track row */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: 0 }}>
-        {steps.map((step, i) => {
-          const isLast = i === steps.length - 1;
-          const dotColor =
-            step.state === 'completed' ? 'var(--sys-color-primary)' :
-            step.state === 'active'    ? 'var(--sys-color-primary)' :
-                                          'var(--sys-color-outline-variant)';
-          const lineColor = step.state === 'completed' ? 'var(--sys-color-primary)' : 'var(--sys-color-outline-variant)';
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'row',
+        gap: STEP_GAP[size],
+        alignItems: 'flex-start',
+        width: '100%',
+        ...style,
+      }}
+      {...rest}
+    >
+      {steps.map((step, i) => {
+        const labelColor =
+          step.state !== 'pending'
+            ? 'var(--sys-color-on-surface)'
+            : 'var(--sys-color-on-surface-variant)';
 
-          return (
-            <span key={i} style={{ display: 'flex', alignItems: 'center', flex: isLast ? 0 : 1 }}>
+        return (
+          <div key={i} style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', gap: showLabels ? LABEL_GAP[size] : 0 }}>
+            {showLabels && step.label && (
               <span style={{
-                width: step.state === 'active' ? s.dotSize * 1.5 : s.dotSize,
-                height: step.state === 'active' ? s.dotSize * 1.5 : s.dotSize,
-                borderRadius: '50%',
-                background: dotColor,
-                display: 'block',
-                flexShrink: 0,
-                outline: step.state === 'active' ? `3px solid var(--sys-color-primary-container)` : undefined,
-                transition: 'all .2s',
-              }} />
-              {!isLast && (
-                <span style={{
-                  flex: 1,
-                  height: s.lineH,
-                  background: lineColor,
-                  display: 'block',
-                  marginInline: 4,
-                  minWidth: 12,
-                }} />
-              )}
-            </span>
-          );
-        })}
-      </div>
-
-      {/* Labels row */}
-      {showLabels && (
-        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-          {steps.map((step, i) => (
-            <span key={i} style={{
-              fontSize: s.fontSize,
-              color: step.state === 'pending' ? 'var(--sys-color-on-surface-variant)' : 'var(--sys-color-on-surface)',
-              fontWeight: step.state === 'active' ? 500 : 400,
-              lineHeight: 1.3,
-              flex: 1,
-              textAlign: i === 0 ? 'left' : i === steps.length - 1 ? 'right' : 'center',
-            }}>
-              {step.label}
-            </span>
-          ))}
-        </div>
-      )}
+                fontSize: FONT_SIZE[size],
+                color: labelColor,
+                lineHeight: 1.3,
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+                whiteSpace: 'nowrap',
+              }}>
+                {step.label}
+              </span>
+            )}
+            <ProgressBar progress={stepProgress(step.state)} />
+          </div>
+        );
+      })}
     </div>
   );
 }
