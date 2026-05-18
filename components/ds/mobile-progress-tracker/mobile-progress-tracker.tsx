@@ -44,6 +44,12 @@ export type StepState = 'completed' | 'active' | 'pending';
 
 export interface TrackerStep {
   label?: string;
+  /**
+   * Visual state of this step:
+   * - `completed` — full green fill (progress 100%)
+   * - `active`    — partial green fill (~25%), indicates in-progress
+   * - `pending`   — gray track only, no fill (progress 0%)
+   */
   state: StepState;
 }
 

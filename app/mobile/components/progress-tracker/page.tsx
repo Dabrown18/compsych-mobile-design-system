@@ -31,9 +31,9 @@ export default function MobileProgressTrackerPage() {
     <FoundationPageShell
       eyebrow="Mobile"
       title="ProgressTracker"
-      description="Two progress components: ProgressBar for continuous progress (0–100) and ProgressTracker for discrete step-based flows. On mobile the tracker renders solid colour bars — sysSuccess (dark green) for completed/active steps and sysSuccessContainer (light green) for pending steps. Labels are hidden by default."
+      description="Two progress components: ProgressBar for continuous progress (0–100) and ProgressTracker for discrete step-based flows. On mobile the tracker renders a ProgressBar per step — completed steps show a full green fill (100%), active steps show a partial green fill (~25%), and pending steps show a gray track with no fill. Labels are hidden by default."
     >
-      <Section heading="ProgressTracker" lead="Step-based indicator. Each step carries a state: completed, active, or pending. completed and active both render dark green; pending renders light green.">
+      <Section heading="ProgressTracker" lead="Step-based indicator. Each step carries a state: completed, active, or pending. completed renders a full green fill (100%); active renders a partial green fill (~25%); pending renders a gray track with no fill.">
         <MobilePlayground
           render={(values) => (
             <div style={{ padding: 24, width: '100%' }}>
