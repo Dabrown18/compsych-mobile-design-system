@@ -1,7 +1,7 @@
 'use client';
 
 import type { ReactNode } from 'react';
-import { ProgressBar, ProgressTracker, type ProgressTrackerSize } from '@/components/ds/mobile-progress-tracker/mobile-progress-tracker';
+import { ProgressBar, ProgressTracker, type ProgressTrackerSize } from '@compsych/mobile-ui/src/components/ProgressTracker';
 import { MobilePlayground } from '@/components/mobile-playground/mobile-playground';
 import { FoundationPageShell } from '@/components/foundation-page-shell';
 import { CodeBlock } from '@/components/code-block/code-block';
@@ -31,9 +31,9 @@ export default function MobileProgressTrackerPage() {
     <FoundationPageShell
       eyebrow="Mobile"
       title="ProgressTracker"
-      description="Two progress components: ProgressBar for continuous progress (0–100) and ProgressTracker for discrete step-based flows. On mobile the tracker renders a ProgressBar per step — completed steps show a full green fill (100%), active steps show a partial green fill (~25%), and pending steps show a gray track with no fill. Labels are hidden by default."
+      description="Two progress components: ProgressBar for continuous progress (0–100) and ProgressTracker for discrete step-based flows. The tracker renders one bar per step — completed and active steps show a full green bar, pending steps show a gray track. Labels are hidden by default."
     >
-      <Section heading="ProgressTracker" lead="Step-based indicator. Each step carries a state: completed, active, or pending. completed renders a full green fill (100%); active renders a partial green fill (~25%); pending renders a gray track with no fill.">
+      <Section heading="ProgressTracker" lead="Step-based indicator. Each step carries a state: completed, active, or pending. Both completed and active render a full green bar; pending renders a gray track.">
         <MobilePlayground
           render={(values) => (
             <div style={{ padding: 24, width: '100%' }}>
