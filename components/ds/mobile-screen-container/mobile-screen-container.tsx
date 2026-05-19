@@ -12,7 +12,7 @@ export function ScreenContainer({ children, style, ...rest }: ScreenContainerPro
       style={{
         flex: 1,
         overflowY: 'auto',
-        backgroundColor: 'var(--sys-color-surface-container-lowest)',
+        backgroundColor: '#F3F4F6',
         paddingLeft: 16,
         paddingRight: 16,
         paddingTop: 8,
