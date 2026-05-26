@@ -2,7 +2,7 @@
 
 import type { ButtonHTMLAttributes, ReactNode } from 'react';
 
-export type ButtonVariant = 'filled' | 'tonal' | 'outlined' | 'elevated' | 'text' | 'danger' | 'danger-outlined';
+export type ButtonVariant = 'filled' | 'tonal' | 'outlined' | 'elevated' | 'text' | 'danger' | 'danger-outlined' | 'warning';
 export type ButtonSize = 'sm' | 'md' | 'lg' | 'xl';
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -31,6 +31,7 @@ const VARIANT: Record<ButtonVariant, { bg: string; color: string; border?: strin
   'text':            { bg: 'transparent', color: 'var(--sys-color-on-surface)' },
   'danger':          { bg: 'var(--sys-color-error)', color: 'var(--sys-color-on-error)' },
   'danger-outlined': { bg: 'transparent', color: 'var(--sys-color-error)', border: '1px solid var(--sys-color-error-container)' },
+  'warning':         { bg: 'var(--sys-color-warning)', color: 'var(--sys-color-on-warning)' },
 };
 
 export function Button({

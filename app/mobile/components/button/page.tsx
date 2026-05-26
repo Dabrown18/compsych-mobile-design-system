@@ -6,7 +6,7 @@ import { MobilePlayground } from '@/components/mobile-playground/mobile-playgrou
 import { FoundationPageShell } from '@/components/foundation-page-shell';
 import { CodeBlock } from '@/components/code-block/code-block';
 
-const VARIANTS: ButtonVariant[] = ['filled', 'tonal', 'outlined', 'elevated', 'text', 'danger', 'danger-outlined'];
+const VARIANTS: ButtonVariant[] = ['filled', 'tonal', 'outlined', 'elevated', 'text', 'danger', 'danger-outlined', 'warning'];
 const SIZES: ButtonSize[] = ['sm', 'md', 'lg', 'xl'];
 
 export default function MobileButtonPage() {
@@ -14,7 +14,7 @@ export default function MobileButtonPage() {
     <FoundationPageShell
       eyebrow="Mobile"
       title="Button"
-      description="Primary interactive element for mobile surfaces. Seven visual variants cover every emphasis level. All four sizes meet the 48 dp minimum tap target at lg/xl. Supports loading state, icon-only mode, and full-width layout."
+      description="Primary interactive element for mobile surfaces. Eight visual variants cover every emphasis level. All four sizes meet the 48 dp minimum tap target at lg/xl. Supports loading state, icon-only mode, and full-width layout."
     >
       <Section heading="Playground" lead="Adjust any control to see the component update in the phone frame.">
         <MobilePlayground
@@ -54,7 +54,7 @@ export default function Screen() {
 }`} language="tsx" />
       </Section>
 
-      <Section heading="Variants" lead="Seven variants spanning filled → text and danger tones.">
+      <Section heading="Variants" lead="Eight variants spanning filled → text, danger, and warning tones.">
         <Surface>
           <div className="flex flex-col gap-4 w-full max-w-xs">
             {VARIANTS.map((v) => (
