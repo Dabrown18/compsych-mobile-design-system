@@ -9,28 +9,56 @@ import { CodeBlock } from '@/components/code-block/code-block';
 const VARIANTS: SnackbarVariant[] = ['filled', 'outlined'];
 
 function SnackbarDemo({ message, variant, actionLabel }: { message: string; variant: SnackbarVariant; actionLabel?: string }) {
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(true);
   return (
-    <div style={{ padding: 24, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 16, position: 'relative' }}>
+    <div style={{
+      width: 375,
+      maxWidth: '100%',
+      position: 'relative',
+      minHeight: 180,
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+      gap: 16,
+      padding: '24px 0',
+    }}>
       <button
         type="button"
-        onClick={() => setVisible(true)}
+        onClick={() => setVisible((v) => !v)}
         style={{
-          height: 44, paddingInline: 24, borderRadius: 9999,
-          border: 'none', background: 'var(--sys-color-primary)',
-          color: 'var(--sys-color-on-primary)', fontSize: 15, fontWeight: 600, cursor: 'pointer',
+          height: 44,
+          paddingInline: 24,
+          borderRadius: 9999,
+          border: 'none',
+          background: 'var(--sys-color-primary)',
+          color: 'var(--sys-color-on-primary)',
+          fontSize: 15,
+          fontWeight: 600,
+          cursor: 'pointer',
         }}
       >
-        Show snackbar
+        {visible ? 'Hide snackbar' : 'Show snackbar'}
       </button>
-      <Snackbar
-        visible={visible}
-        message={message}
-        variant={variant}
-        actionLabel={actionLabel}
-        onAction={() => setVisible(false)}
-        onClose={() => setVisible(false)}
-      />
+      <div style={{
+        position: 'absolute',
+        bottom: 16,
+        left: 16,
+        right: 16,
+        opacity: visible ? 1 : 0,
+        transform: visible ? 'translateY(0)' : 'translateY(12px)',
+        transition: 'opacity 200ms ease, transform 200ms ease',
+        pointerEvents: visible ? 'auto' : 'none',
+      }}>
+        <Snackbar
+          visible
+          message={message}
+          variant={variant}
+          actionLabel={actionLabel}
+          onAction={() => setVisible(false)}
+          onClose={() => setVisible(false)}
+        />
+      </div>
     </div>
   );
 }
@@ -40,7 +68,7 @@ export default function MobileSnackbarPage() {
     <FoundationPageShell
       eyebrow="Mobile"
       title="Snackbar"
-      description="A transient notification that appears at the bottom of the screen. Two variants: filled (dark inverse surface) and outlined (surface container with border). Optional action button provides a single recovery path. Controlled by visible — dismiss with onClose."
+      description="A transient notification that appears at the bottom of the screen. Two variants: filled (dark primary-container surface) and outlined (white surface with outline-variant border and shadow). Optional action button provides a single recovery path. Controlled by visible — dismiss with onClose."
     >
       <Section heading="Playground" lead="Tap 'Show snackbar' inside the phone frame to preview.">
         <MobilePlayground
