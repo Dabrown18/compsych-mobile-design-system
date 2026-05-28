@@ -86,7 +86,7 @@ export default function Screen() {
             <Button label="Default" />
             <Button label="Loading" loading />
             <Button label="Disabled" disabled />
-            <Button label="Full Width" fullWidth style={{ maxWidth: 200 }} />
+            <div style={{ maxWidth: 200, width: '100%' }}><Button label="Full Width" fullWidth /></div>
           </div>
         </Surface>
       </Section>

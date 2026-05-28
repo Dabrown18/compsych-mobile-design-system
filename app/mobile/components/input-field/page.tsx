@@ -26,7 +26,7 @@ export default function MobileInputPage() {
                 helperText={values.helperText as string || undefined}
                 errorText={values.errorText as string || undefined}
                 invalid={values.invalid as boolean}
-                disabled={values.disabled as boolean}
+                editable={!values.disabled as boolean}
               />
             </div>
           )}
@@ -97,7 +97,7 @@ export default function Screen() {
             </div>
             <div className="flex flex-col gap-1">
               <code className="ref-caption font-mono" style={{ color: 'var(--sys-color-on-surface-variant)' }}>disabled</code>
-              <Input label="Email" placeholder="you@compsych.com" disabled />
+              <Input label="Email" placeholder="you@compsych.com" editable={false} />
             </div>
           </div>
         </Surface>
