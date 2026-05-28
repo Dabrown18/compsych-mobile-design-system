@@ -1,7 +1,7 @@
 'use client';
 
 import type { HTMLAttributes } from 'react';
-import { ICON_MAP, type IconName } from '../mobile-icon/mobile-icon';
+import { resolveIcon, SIZE_MAP, type IconName } from '../mobile-icon/mobile-icon';
 
 export type SelectionCardSize = 'sm' | 'md';
 
@@ -28,7 +28,8 @@ export function SelectionCard({
   style,
   ...rest
 }: SelectionCardProps) {
-  const IconComponent = icon ? ICON_MAP[icon] : null;
+  const LucideIcon = icon ? resolveIcon(icon) : null;
+  const { px: iconPx, strokeWidth: iconSW } = SIZE_MAP['small'];
 
   const borderColor = selected ? 'var(--sys-color-primary)' : 'var(--sys-color-outline)';
   const checkboxColor = selected ? 'var(--sys-color-primary)' : 'var(--sys-color-outline)';
@@ -66,9 +67,9 @@ export function SelectionCard({
         }}
         {...rest}
       >
-        {IconComponent && (
+        {LucideIcon && (
           <div style={{ width: 24, height: 24, flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <IconComponent size="small" color={iconColor} />
+            <LucideIcon size={iconPx} color={iconColor} strokeWidth={iconSW} />
           </div>
         )}
         <span style={{
@@ -122,17 +123,17 @@ export function SelectionCard({
     >
       {multiSelect ? (
         <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'space-between', width: '100%' }}>
-          {IconComponent && (
+          {LucideIcon && (
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 12, borderRadius: 999, backgroundColor: iconBg, overflow: 'hidden' }}>
-              <IconComponent size="small" color={iconColor} />
+              <LucideIcon size={iconPx} color={iconColor} strokeWidth={iconSW} />
             </div>
           )}
           <Checkbox checked={selected} color={checkboxColor} />
         </div>
       ) : (
-        IconComponent && (
+        LucideIcon && (
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 12, borderRadius: 999, backgroundColor: iconBg, overflow: 'hidden' }}>
-            <IconComponent size="small" color={iconColor} />
+            <LucideIcon size={iconPx} color={iconColor} strokeWidth={iconSW} />
           </div>
         )
       )}

@@ -20,7 +20,7 @@ export default function MobileIconPage() {
     <FoundationPageShell
       eyebrow="Mobile"
       title="Icons"
-      description="18 Lucide-sourced SVG icons exported as react-native-svg components. Each icon accepts a size (xsmall–xlarge) and color prop. All icons use a 0 0 48 48 viewBox with stroke-linecap and stroke-linejoin set to round."
+      description="Icons are resolved from lucide-react-native at runtime — any icon on lucide.dev is available. Pass the PascalCase component name with an optional trailing 'Icon' suffix (e.g. 'StethoscopeIcon' or 'Stethoscope') to any icon prop. Five size tiers map to pixel sizes with matching stroke widths."
     >
       <Section heading="Playground" lead="Select an icon, size, and color to preview.">
         <MobilePlayground
@@ -41,7 +41,7 @@ export default function MobileIconPage() {
             );
           }}
           controls={[
-            { name: 'icon', type: 'enum', label: 'Icon', options: ICON_NAMES, defaultValue: ICON_NAMES[0] },
+            { name: 'icon', type: 'select', label: 'Icon', options: ICON_NAMES, defaultValue: ICON_NAMES[0] },
             { name: 'size', type: 'enum', label: 'Size', options: SIZES, defaultValue: 'medium' },
             { name: 'color', type: 'enum', label: 'Color', options: ['onSurface', 'primary', 'onPrimaryFixed', 'error'], defaultValue: 'onSurface' },
           ]}
@@ -49,24 +49,24 @@ export default function MobileIconPage() {
       </Section>
 
       <Section heading="Code Example">
-        <CodeBlock code={`import { UserRoundIcon, HandshakeIcon } from '@compsych/mobile-ui';
-import { sys } from '@compsych/mobile-ui';
+        <CodeBlock code={`import { resolveIcon } from '@compsych/mobile-ui';
 
-// Default size (medium, 24×24)
-<UserRoundIcon color={sys.colorRoles.surface.surface.sysOnSurface} />
+// Resolve any Lucide icon by name (trailing "Icon" suffix optional)
+const Stethoscope = resolveIcon('StethoscopeIcon');
+const Heart       = resolveIcon('Heart');
 
-// Large with primary color
-<HandshakeIcon size="large" color={sys.colorRoles.accent.primary.sysPrimary} />
+// Render with numeric size and strokeWidth
+<Stethoscope size={24} color="#000" strokeWidth={2} />
+<Heart       size={32} color="red"  strokeWidth={2} />
 
-// All available sizes
-<UserRoundIcon size="xsmall" color="#000" />
-<UserRoundIcon size="small"  color="#000" />
-<UserRoundIcon size="medium" color="#000" />
-<UserRoundIcon size="large"  color="#000" />
-<UserRoundIcon size="xlarge" color="#000" />`} language="tsx" />
+// Use the icon prop in design-system components — same string name
+<ServiceCard   icon="StethoscopeIcon" title="Therapy Session" />
+<SelectionCard icon="HeartIcon"       title="Wellness" />
+
+// Any icon from https://lucide.dev/icons works — just use its PascalCase name`} language="tsx" />
       </Section>
 
-      <Section heading="Gallery" lead="All 18 icons at medium size (24 × 24 px).">
+      <Section heading="Gallery" lead="All design-system icons at medium size (24 × 24 px). Any additional icon from lucide.dev can be used the same way.">
         <Surface>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(96px, 1fr))', gap: 24, width: '100%' }}>
             {ALL_ICONS.map(({ name, label, Component }) => (

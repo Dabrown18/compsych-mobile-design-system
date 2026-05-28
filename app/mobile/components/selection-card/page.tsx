@@ -11,11 +11,16 @@ import { CodeBlock } from '@/components/code-block/code-block';
 const SIZES: SelectionCardSize[] = ['md', 'sm'];
 
 const ICON_OPTIONS: IconName[] = [
-  'HeartHandshakeIcon', 'UserRoundIcon', 'GlobeIcon', 'HandshakeIcon',
-  'StethoscopeIcon', 'GraduationCapIcon', 'HandHeartIcon', 'AtomIcon',
-  'HourglassIcon', 'IdCardIcon', 'MessageCirclePlusIcon', 'BinocularsIcon',
-  'FlagIcon', 'MountainSnowIcon', 'SnowflakeIcon', 'HazeIcon',
-  'FileChartColumnIncreasingIcon', 'WheatIcon',
+  'ActivityIcon', 'AtomIcon', 'AwardIcon', 'BinocularsIcon', 'BookOpenTextIcon',
+  'BriefcaseBusinessIcon', 'CalendarDaysIcon', 'ChartPieIcon', 'CircleCheckBigIcon',
+  'CompassIcon', 'DogIcon', 'FlagIcon', 'GlobeIcon', 'GraduationCapIcon',
+  'HandHeartIcon', 'HandshakeIcon', 'HazeIcon', 'HeartIcon', 'HeartHandshakeIcon',
+  'HospitalIcon', 'HourglassIcon', 'IdCardIcon', 'LayersIcon', 'LockIcon',
+  'MapIcon', 'MegaphoneIcon', 'MessageCirclePlusIcon', 'MicIcon', 'MoonIcon',
+  'MountainSnowIcon', 'PhoneIcon', 'PodcastIcon', 'RotateCcwIcon', 'ScanFaceIcon',
+  'ScanHeartIcon', 'SendIcon', 'SettingsIcon', 'ShieldUserIcon', 'SmartphoneIcon',
+  'SmileIcon', 'SnowflakeIcon', 'StarIcon', 'StethoscopeIcon', 'ThumbsUpIcon',
+  'TrashIcon', 'TrendingUpIcon', 'UserRoundIcon', 'UsersIcon', 'WheatIcon',
 ];
 
 export default function SelectionCardPage() {

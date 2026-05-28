@@ -1,7 +1,7 @@
 'use client';
 
 import type { HTMLAttributes, ReactNode } from 'react';
-import { ICON_MAP, type IconName, type IconSize } from '../mobile-icon/mobile-icon';
+import { resolveIcon, SIZE_MAP, type IconName, type IconSize } from '../mobile-icon/mobile-icon';
 
 export type ServiceCardVariant = 'outlined' | 'tonal' | 'filled' | 'doubled' | 'image';
 export type ServiceCardSize = 'sm' | 'md' | 'lg';
@@ -85,10 +85,12 @@ export function ServiceCard({
   const isRow = s.layout === 'row';
   const imgSrc = variant === 'image' ? (image ?? SAMPLE_IMAGE) : undefined;
 
-  const IconComponent = icon ? ICON_MAP[icon] : null;
+  const LucideIcon = icon ? resolveIcon(icon) : null;
+  const ChevronRight = resolveIcon('ChevronRight');
   const iconColor = variant === 'doubled' ? 'var(--sys-color-on-primary)' : v.titleColor;
-  const renderedIcon = IconComponent
-    ? <IconComponent size={CARD_TO_ICON_SIZE[size]} color={iconColor} />
+  const { px: iconPx, strokeWidth: iconSW } = SIZE_MAP[CARD_TO_ICON_SIZE[size]];
+  const renderedIcon = LucideIcon
+    ? <LucideIcon size={iconPx} color={iconColor} strokeWidth={iconSW} />
     : null;
 
   const containerStyle: React.CSSProperties = {
@@ -137,10 +139,8 @@ export function ServiceCard({
             {description && !isRow && <p style={{ margin: '4px 0 0', color: v.descColor, fontSize: s.descSize }}>{description}</p>}
           </div>
         )}
-        {isRow && (
-          <svg width={20} height={20} viewBox="0 0 24 24" fill="none" stroke={v.titleColor} strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" style={{ marginLeft: 'auto', flexShrink: 0, opacity: 0.5 }}>
-            <path d="m9 18 6-6-6-6" />
-          </svg>
+        {isRow && ChevronRight && (
+          <ChevronRight size={20} color={variant === 'image' ? '#ffffff' : v.titleColor} strokeWidth={1.5} style={{ marginLeft: 'auto', flexShrink: 0, opacity: 0.5 }} />
         )}
         {children}
       </div>

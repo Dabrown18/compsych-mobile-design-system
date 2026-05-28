@@ -1,29 +1,12 @@
 'use client';
-/* eslint-disable react/jsx-key */
 
 import React from 'react';
 
-export type IconSize = 'xsmall' | 'small' | 'medium' | 'large' | 'xlarge';
+import type { LucideIcon } from 'lucide-react';
+import * as LucideIcons from 'lucide-react';
 
-export type IconName =
-  | 'UserRoundIcon'
-  | 'GlobeIcon'
-  | 'HandshakeIcon'
-  | 'HeartHandshakeIcon'
-  | 'AtomIcon'
-  | 'HazeIcon'
-  | 'HourglassIcon'
-  | 'GraduationCapIcon'
-  | 'HandHeartIcon'
-  | 'IdCardIcon'
-  | 'MessageCirclePlusIcon'
-  | 'StethoscopeIcon'
-  | 'BinocularsIcon'
-  | 'FlagIcon'
-  | 'MountainSnowIcon'
-  | 'SnowflakeIcon'
-  | 'FileChartColumnIncreasingIcon'
-  | 'WheatIcon';
+export type IconSize = 'xsmall' | 'small' | 'medium' | 'large' | 'xlarge';
+export type IconName = string;
 
 export interface IconProps {
   size?: IconSize;
@@ -31,230 +14,162 @@ export interface IconProps {
   'aria-label'?: string;
 }
 
-const SIZE_MAP: Record<IconSize, { px: number; strokeWidth: number }> = {
+export const SIZE_MAP: Record<IconSize, { px: number; strokeWidth: number }> = {
   xsmall: { px: 16, strokeWidth: 1 },
-  small:  { px: 20, strokeWidth: 1.5 },
-  medium: { px: 24, strokeWidth: 2 },
-  large:  { px: 32, strokeWidth: 2 },
-  xlarge: { px: 48, strokeWidth: 2 },
+  small:  { px: 20, strokeWidth: 1 },
+  medium: { px: 24, strokeWidth: 1.5 },
+  large:  { px: 32, strokeWidth: 1.5 },
+  xlarge: { px: 48, strokeWidth: 1.5 },
 };
 
-function wrap(paths: React.ReactElement[], size: IconSize, color: string, label?: string) {
-  const { px, strokeWidth } = SIZE_MAP[size];
-  const pathProps = { stroke: color, strokeWidth, fill: 'none', strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const };
-  return (
-    <svg width={px} height={px} viewBox="0 0 48 48" fill="none" aria-hidden={label ? undefined : true} aria-label={label} style={{ display: 'block', flexShrink: 0 }}>
-      {paths.map((p, i) => React.cloneElement(p, { key: i, ...pathProps }))}
-    </svg>
-  );
+/** Strip trailing "Icon" suffix and look up the matching lucide-react component. */
+export function resolveIcon(name: string): LucideIcon | undefined {
+  const componentName = name.endsWith('Icon') ? name.slice(0, -4) : name;
+  return (LucideIcons as Record<string, unknown>)[componentName] as LucideIcon | undefined;
 }
 
-export function UserRoundIcon({ size = 'medium', color = 'currentColor', 'aria-label': label }: IconProps) {
-  return wrap([
-    <path d="M24 26C29.5228 26 34 21.5228 34 16C34 10.4772 29.5228 6 24 6C18.4772 6 14 10.4772 14 16C14 21.5228 18.4772 26 24 26Z" />,
-    <path d="M40 42C40 37.7565 38.3143 33.6869 35.3137 30.6863C32.3131 27.6857 28.2435 26 24 26C19.7565 26 15.6869 27.6857 12.6863 30.6863C9.68571 33.6869 8 37.7565 8 42" />,
-  ], size, color, label);
+function makeIconComponent(lucideComponent: LucideIcon) {
+  return function Icon({ size = 'medium', color = 'currentColor', 'aria-label': label }: IconProps) {
+    const { px, strokeWidth } = SIZE_MAP[size];
+    const C = lucideComponent as React.FC<{ size: number; color: string; strokeWidth: number; 'aria-hidden'?: boolean; 'aria-label'?: string; style?: React.CSSProperties }>;
+    return (
+      <C
+        size={px}
+        color={color}
+        strokeWidth={strokeWidth}
+        aria-hidden={!label}
+        aria-label={label}
+        style={{ display: 'block', flexShrink: 0 }}
+      />
+    );
+  };
 }
 
-export function GlobeIcon({ size = 'medium', color = 'currentColor', 'aria-label': label }: IconProps) {
-  return wrap([
-    <path d="M44 24C44 35.0457 35.0457 44 24 44M44 24C44 12.9543 35.0457 4 24 4M44 24H4M24 44C12.9543 44 4 35.0457 4 24M24 44C18.8645 38.6077 16 31.4465 16 24C16 16.5535 18.8645 9.39231 24 4M24 44C29.1355 38.6077 32 31.4465 32 24C32 16.5535 29.1355 9.39231 24 4M4 24C4 12.9543 12.9543 4 24 4" />,
-  ], size, color, label);
-}
+/** Canonical icon list matching the Figma design-system spec. */
+const ICON_ENTRIES: Array<{ name: string; label: string }> = [
+  { name: 'ActivityIcon',                  label: 'activity' },
+  { name: 'ArrowLeftIcon',                 label: 'arrow-left' },
+  { name: 'AtomIcon',                      label: 'atom' },
+  { name: 'AwardIcon',                     label: 'award' },
+  { name: 'BabyIcon',                      label: 'baby' },
+  { name: 'BinocularsIcon',               label: 'binoculars' },
+  { name: 'BlendIcon',                     label: 'blend' },
+  { name: 'BookCheckIcon',                 label: 'book-check' },
+  { name: 'BookMarkedIcon',                label: 'book-marked' },
+  { name: 'BookOpenTextIcon',              label: 'book-open-text' },
+  { name: 'BookUserIcon',                  label: 'book-user' },
+  { name: 'BoxIcon',                       label: 'box' },
+  { name: 'BriefcaseBusinessIcon',         label: 'briefcase-business' },
+  { name: 'BuildingIcon',                  label: 'building' },
+  { name: 'CalculatorIcon',                label: 'calculator' },
+  { name: 'CalendarDaysIcon',              label: 'calendar-days' },
+  { name: 'CannabisIcon',                  label: 'cannabis' },
+  { name: 'CaptionsIcon',                  label: 'captions' },
+  { name: 'ChartColumnBigIcon',            label: 'chart-column-big' },
+  { name: 'ChartPieIcon',                  label: 'chart-pie' },
+  { name: 'CheckCheckIcon',                label: 'check-check' },
+  { name: 'CigaretteIcon',                 label: 'cigarette' },
+  { name: 'CircleCheckBigIcon',            label: 'circle-check-big' },
+  { name: 'CirclePlusIcon',                label: 'circle-plus' },
+  { name: 'ClipboardCheckIcon',            label: 'clipboard-check' },
+  { name: 'CloudCheckIcon',                label: 'cloud-check' },
+  { name: 'CompassIcon',                   label: 'compass' },
+  { name: 'DogIcon',                       label: 'dog' },
+  { name: 'DownloadIcon',                  label: 'download' },
+  { name: 'EllipsisIcon',                  label: 'ellipsis' },
+  { name: 'FileChartColumnIncreasingIcon', label: 'file-chart-column-increasing' },
+  { name: 'FileQuestionIcon',              label: 'file-question' },
+  { name: 'FlagIcon',                      label: 'flag' },
+  { name: 'FrownIcon',                     label: 'frown' },
+  { name: 'GlobeIcon',                     label: 'globe' },
+  { name: 'GraduationCapIcon',             label: 'graduation-cap' },
+  { name: 'HandHeartIcon',                 label: 'hand-heart' },
+  { name: 'HandshakeIcon',                 label: 'handshake' },
+  { name: 'HazeIcon',                      label: 'haze' },
+  { name: 'HeartIcon',                     label: 'heart' },
+  { name: 'HeartHandshakeIcon',            label: 'heart-handshake' },
+  { name: 'HeartPlusIcon',                 label: 'heart-plus' },
+  { name: 'HospitalIcon',                  label: 'hospital' },
+  { name: 'HouseHeartIcon',               label: 'house-heart' },
+  { name: 'HouseWifiIcon',                 label: 'house-wifi' },
+  { name: 'HourglassIcon',                 label: 'hourglass' },
+  { name: 'IdCardIcon',                    label: 'id-card' },
+  { name: 'ImagePlayIcon',                 label: 'image-play' },
+  { name: 'InboxIcon',                     label: 'inbox' },
+  { name: 'LandPlotIcon',                  label: 'land-plot' },
+  { name: 'LassoIcon',                     label: 'lasso' },
+  { name: 'LayersIcon',                    label: 'layers' },
+  { name: 'ListTodoIcon',                  label: 'list-todo' },
+  { name: 'LockIcon',                      label: 'lock' },
+  { name: 'LockKeyholeIcon',               label: 'lock-keyhole' },
+  { name: 'LockOpenIcon',                  label: 'lock-open' },
+  { name: 'MapIcon',                       label: 'map' },
+  { name: 'MapPinPlusIcon',                label: 'map-pin-plus' },
+  { name: 'MapPinnedIcon',                 label: 'map-pinned' },
+  { name: 'MaximizeIcon',                  label: 'maximize' },
+  { name: 'MegaphoneIcon',                 label: 'megaphone' },
+  { name: 'MessageCircleMoreIcon',         label: 'message-circle-more' },
+  { name: 'MessageCirclePlusIcon',         label: 'message-circle-plus' },
+  { name: 'MicIcon',                       label: 'mic' },
+  { name: 'MicOffIcon',                    label: 'mic-off' },
+  { name: 'MinimizeIcon',                  label: 'minimize' },
+  { name: 'MonitorPlayIcon',               label: 'monitor-play' },
+  { name: 'MoonIcon',                      label: 'moon' },
+  { name: 'MountainSnowIcon',              label: 'mountain-snow' },
+  { name: 'PanelsTopLeftIcon',             label: 'panels-top-left' },
+  { name: 'PenLineIcon',                   label: 'pen-line' },
+  { name: 'PhoneIcon',                     label: 'phone' },
+  { name: 'PhoneOffIcon',                  label: 'phone-off' },
+  { name: 'PodcastIcon',                   label: 'podcast' },
+  { name: 'PresentationIcon',              label: 'presentation' },
+  { name: 'RotateCcwIcon',                 label: 'rotate-ccw' },
+  { name: 'ScanFaceIcon',                  label: 'scan-face' },
+  { name: 'ScanHeartIcon',                 label: 'scan-heart' },
+  { name: 'ScanSearchIcon',                label: 'scan-search' },
+  { name: 'ScrollTextIcon',                label: 'scroll-text' },
+  { name: 'SendIcon',                      label: 'send' },
+  { name: 'SendHorizontalIcon',            label: 'send-horizontal' },
+  { name: 'SettingsIcon',                  label: 'settings' },
+  { name: 'ShieldUserIcon',                label: 'shield-user' },
+  { name: 'SkipBackIcon',                  label: 'skip-back' },
+  { name: 'SkipForwardIcon',               label: 'skip-forward' },
+  { name: 'SmartphoneIcon',                label: 'smartphone' },
+  { name: 'SmileIcon',                     label: 'smile' },
+  { name: 'SnowflakeIcon',                 label: 'snowflake' },
+  { name: 'SquareArrowOutUpRightIcon',     label: 'square-arrow-out-up-right' },
+  { name: 'SquaresExcludeIcon',            label: 'squares-exclude' },
+  { name: 'StarIcon',                      label: 'star' },
+  { name: 'StethoscopeIcon',               label: 'stethoscope' },
+  { name: 'StickyNoteIcon',                label: 'sticky-note' },
+  { name: 'TabletSmartphoneIcon',          label: 'tablet-smartphone' },
+  { name: 'TextIcon',                      label: 'text' },
+  { name: 'ThumbsDownIcon',                label: 'thumbs-down' },
+  { name: 'ThumbsUpIcon',                  label: 'thumbs-up' },
+  { name: 'TicketsPlaneIcon',              label: 'tickets-plane' },
+  { name: 'TrashIcon',                     label: 'trash' },
+  { name: 'TrendingUpIcon',                label: 'trending-up' },
+  { name: 'TvMinimalIcon',                 label: 'tv-minimal' },
+  { name: 'TvMinimalPlayIcon',             label: 'tv-minimal-play' },
+  { name: 'UserRoundIcon',                 label: 'user-round' },
+  { name: 'UserRoundCheckIcon',            label: 'user-round-check' },
+  { name: 'UsersIcon',                     label: 'users' },
+  { name: 'UsersRoundIcon',                label: 'users-round' },
+  { name: 'VideoOffIcon',                  label: 'video-off' },
+  { name: 'VolumeIcon',                    label: 'volume' },
+  { name: 'Volume1Icon',                   label: 'volume-1' },
+  { name: 'Volume2Icon',                   label: 'volume-2' },
+  { name: 'VolumeOffIcon',                 label: 'volume-off' },
+  { name: 'VolumeXIcon',                   label: 'volume-x' },
+  { name: 'WarehouseIcon',                 label: 'warehouse' },
+  { name: 'WheatIcon',                     label: 'wheat' },
+];
 
-export function HandshakeIcon({ size = 'medium', color = 'currentColor', 'aria-label': label }: IconProps) {
-  return wrap([
-    <path d="M22 34L26 38C26.394 38.394 26.8617 38.7065 27.3764 38.9197C27.8912 39.1329 28.4428 39.2426 29 39.2426C29.5572 39.2426 30.1088 39.1329 30.6236 38.9197C31.1383 38.7065 31.606 38.394 32 38C32.394 37.606 32.7065 37.1383 32.9197 36.6236C33.1329 36.1088 33.2426 35.5572 33.2426 35C33.2426 34.4428 33.1329 33.8912 32.9197 33.3764C32.7065 32.8617 32.394 32.394 32 32" />,
-    <path d="M28 28L33 33C33.7957 33.7957 34.8748 34.2427 36 34.2427C37.1252 34.2427 38.2044 33.7957 39 33C39.7957 32.2044 40.2427 31.1252 40.2427 30C40.2427 28.8748 39.7957 27.7957 39 27L31.24 19.24C30.115 18.1164 28.59 17.4853 27 17.4853C25.41 17.4853 23.885 18.1164 22.76 19.24L21 21C20.2044 21.7957 19.1252 22.2427 18 22.2427C16.8748 22.2427 15.7957 21.7957 15 21C14.2044 20.2044 13.7574 19.1252 13.7574 18C13.7574 16.8748 14.2044 15.7957 15 15L20.62 9.38003C22.4445 7.56032 24.8238 6.40113 27.3813 6.08598C29.9388 5.77082 32.5284 6.31769 34.74 7.64003L35.68 8.20003C36.5316 8.714 37.5441 8.89226 38.52 8.70003L42 8.00003" />,
-    <path d="M42 6L44 28H40" />,
-    <path d="M6 6L4 28L17 41C17.7956 41.7956 18.8748 42.2426 20 42.2426C21.1252 42.2426 22.2044 41.7956 23 41C23.7956 40.2044 24.2426 39.1252 24.2426 38C24.2426 36.8748 23.7956 35.7956 23 35" />,
-    <path d="M6 8H22" />,
-  ], size, color, label);
-}
+type IconEntry = { name: string; label: string; Component: ReturnType<typeof makeIconComponent> };
 
-export function HeartHandshakeIcon({ size = 'medium', color = 'currentColor', 'aria-label': label }: IconProps) {
-  return wrap([
-    <path d="M24.818 11.648L19.172 17.172C18.4221 17.9222 18.0009 18.9394 18.0009 20C18.0009 21.0607 18.4221 22.0779 19.172 22.828C19.9221 23.5779 20.9393 23.9992 22 23.9992C23.0607 23.9992 24.0779 23.5779 24.828 22.828L28.248 19.408C28.6956 18.9602 29.2271 18.605 29.812 18.3627C30.3969 18.1203 31.0239 17.9956 31.657 17.9956C32.2901 17.9956 32.9171 18.1203 33.502 18.3627C34.0869 18.605 34.6184 18.9602 35.066 19.408L38.828 23.172C39.5779 23.9222 39.9991 24.9394 39.9991 26C39.9991 27.0607 39.5779 28.0779 38.828 28.828C42 25.656 44 23 44 19C44 16.7744 43.3248 14.6012 42.0637 12.7674C40.8027 10.9335 39.015 9.52536 36.9368 8.72884C34.8586 7.93232 32.5877 7.78493 30.424 8.30613C28.2603 8.82733 26.3056 9.9926 24.818 11.648ZM38.828 28.828C38.4335 29.2226 37.9652 29.5355 37.4498 29.749C36.9343 29.9626 36.3819 30.0725 35.824 30.0725C35.2661 30.0725 34.7137 29.9626 34.1982 29.749C33.6828 29.5355 33.2145 29.2226 32.82 28.828C33.2471 29.2142 33.5912 29.6833 33.8315 30.2066C34.0717 30.7299 34.203 31.2966 34.2175 31.8722C34.232 32.4478 34.1292 33.0204 33.9156 33.5551C33.7019 34.0898 33.3818 34.5755 32.9746 34.9827C32.5675 35.3898 32.0818 35.71 31.5471 35.9236C31.0123 36.1373 30.4398 36.24 29.8641 36.2255C29.2885 36.2111 28.7218 36.0797 28.1985 35.8395C27.6752 35.5993 27.2062 35.2551 26.82 34.828C27.2148 35.2213 27.5282 35.6885 27.7423 36.203C27.9564 36.7175 28.067 37.2691 28.0677 37.8264C28.0685 38.3836 27.9594 38.9356 27.7466 39.4506C27.5339 39.9657 27.2218 40.4337 26.828 40.828C26.448 41.2082 25.9952 41.5079 25.4967 41.7091C24.9983 41.9104 24.4644 42.0091 23.9269 41.9994C23.3894 41.9897 22.8594 41.8718 22.3686 41.6526C21.8777 41.4335 21.4361 41.1177 21.07 40.724L10 30C7 27 4 23.6 4 19C4.00045 16.7746 4.67588 14.6017 5.93712 12.7681C7.19835 10.9346 8.98605 9.52675 11.0642 8.73048C13.1422 7.93422 15.413 7.78699 17.5765 8.30825C19.74 8.82951 21.6946 9.99473 23.182 11.65C23.4044 11.8567 23.6968 11.9714 24.0004 11.971C24.304 11.9707 24.5961 11.8553 24.818 11.648" />,
-  ], size, color, label);
-}
+export const ALL_ICONS: IconEntry[] = ICON_ENTRIES.reduce<IconEntry[]>((acc, { name, label }) => {
+  const lucide = resolveIcon(name);
+  if (lucide) acc.push({ name, label, Component: makeIconComponent(lucide) });
+  return acc;
+}, []);
 
-export function AtomIcon({ size = 'medium', color = 'currentColor', 'aria-label': label }: IconProps) {
-  return wrap([
-    <path d="M24 26C25.1046 26 26 25.1046 26 24C26 22.8954 25.1046 22 24 22C22.8954 22 22 22.8954 22 24C22 25.1046 22.8954 26 24 26Z" />,
-    <path d="M40.4 40.4C44.48 36.34 40.44 25.68 31.4 16.6C22.32 7.56002 11.66 3.52002 7.60002 7.60002C3.52002 11.66 7.56002 22.32 16.6 31.4C25.68 40.44 36.34 44.48 40.4 40.4Z" />,
-    <path d="M31.4 31.4C40.44 22.32 44.48 11.66 40.4 7.60002C36.34 3.52002 25.68 7.56002 16.6 16.6C7.56002 25.68 3.52002 36.34 7.60002 40.4C11.66 44.48 22.32 40.44 31.4 31.4Z" />,
-  ], size, color, label);
-}
-
-export function HazeIcon({ size = 'medium', color = 'currentColor', 'aria-label': label }: IconProps) {
-  return wrap([
-    <path d="M10.4 12.4L13.2 15.2" />,
-    <path d="M4 26H8" />,
-    <path d="M40 26H44" />,
-    <path d="M34.8 15.2L37.6 12.4" />,
-    <path d="M44 34H4" />,
-    <path d="M44 42H4" />,
-    <path d="M32 26C32 23.8783 31.1571 21.8434 29.6569 20.3431C28.1566 18.8429 26.1217 18 24 18C21.8783 18 19.8434 18.8429 18.3431 20.3431C16.8429 21.8434 16 23.8783 16 26" />,
-    <path d="M24 10V5" />,
-  ], size, color, label);
-}
-
-export function HourglassIcon({ size = 'medium', color = 'currentColor', 'aria-label': label }: IconProps) {
-  return wrap([
-    <path d="M10 44H38" />,
-    <path d="M10 4H38" />,
-    <path d="M34 44V35.656C33.9998 34.5952 33.5782 33.578 32.828 32.828L24 24L15.172 32.828C14.4218 33.578 14.0002 34.5952 14 35.656V44" />,
-    <path d="M14 4V12.344C14.0002 13.4048 14.4218 14.422 15.172 15.172L24 24L32.828 15.172C33.5782 14.422 33.9998 13.4048 34 12.344V4" />,
-  ], size, color, label);
-}
-
-export function GraduationCapIcon({ size = 'medium', color = 'currentColor', 'aria-label': label }: IconProps) {
-  return wrap([
-    <path d="M42.84 21.844C43.1981 21.686 43.5019 21.4265 43.7139 21.0976C43.9259 20.7687 44.0367 20.3848 44.0327 19.9935C44.0286 19.6022 43.9099 19.2206 43.6911 18.8961C43.4724 18.5717 43.1632 18.3185 42.802 18.168L25.66 10.36C25.1389 10.1223 24.5728 9.99927 24 9.99927C23.4272 9.99927 22.8611 10.1223 22.34 10.36L5.20002 18.16C4.84396 18.3159 4.54106 18.5723 4.32836 18.8976C4.11566 19.223 4.00238 19.6033 4.00238 19.992C4.00238 20.3807 4.11566 20.761 4.32836 21.0864C4.54106 21.4117 4.84396 21.668 5.20002 21.824L22.34 29.64C22.8611 29.8777 23.4272 30.0007 24 30.0007C24.5728 30.0007 25.1389 29.8777 25.66 29.64L42.84 21.844Z" />,
-    <path d="M44 20V32" />,
-    <path d="M12 25V32C12 33.5913 13.2643 35.1174 15.5147 36.2426C17.7652 37.3679 20.8174 38 24 38C27.1826 38 30.2348 37.3679 32.4853 36.2426C34.7357 35.1174 36 33.5913 36 32V25" />,
-  ], size, color, label);
-}
-
-export function HandHeartIcon({ size = 'medium', color = 'currentColor', 'aria-label': label }: IconProps) {
-  return wrap([
-    <path d="M22 28H26C27.0609 28 28.0783 27.5786 28.8284 26.8284C29.5786 26.0783 30 25.0609 30 24C30 22.9391 29.5786 21.9217 28.8284 21.1716C28.0783 20.4214 27.0609 20 26 20H20C18.8 20 17.8 20.4 17.2 21.2L6 32" />,
-    <path d="M28.9 26.7793L39 17.3913C40.392 15.9993 42 13.6993 42 11.4993C42.0003 10.386 41.6626 9.29883 41.0318 8.38151C40.401 7.4642 39.5066 6.75992 38.4669 6.36178C37.4273 5.96364 36.2912 5.89039 35.209 6.1517C34.1268 6.41301 33.1494 6.99659 32.406 7.82529C32.3543 7.88141 32.2915 7.9262 32.2217 7.95684C32.1518 7.98748 32.0763 8.0033 32 8.0033C31.9237 8.0033 31.8482 7.98748 31.7783 7.95684C31.7085 7.9262 31.6457 7.88141 31.594 7.82529C30.8506 6.99659 29.8732 6.41301 28.791 6.1517C27.7088 5.89039 26.5727 5.96364 25.5331 6.36178C24.4934 6.75992 23.599 7.4642 22.9682 8.38151C22.3374 9.29883 21.9997 10.386 22 11.4993C22 13.8993 23.604 15.9953 25 17.3913L32 23.8993" />,
-    <path d="M4 30L16 42" />,
-    <path d="M14 40.0005L17.2 37.2005C17.8 36.4005 18.8 36.0005 20 36.0005H28C30.2 36.0005 32.2 35.2005 33.6 33.6005L42.8 24.8005C43.5718 24.0712 44.0222 23.0651 44.0522 22.0037C44.0822 20.9422 43.6893 19.9123 42.96 19.1405C42.2307 18.3688 41.2246 17.9183 40.1631 17.8883C39.1017 17.8583 38.0718 18.2512 37.3 18.9805" />,
-  ], size, color, label);
-}
-
-export function IdCardIcon({ size = 'medium', color = 'currentColor', 'aria-label': label }: IconProps) {
-  return wrap([
-    <path d="M32 20H36" />,
-    <path d="M32 28H36" />,
-    <path d="M12.34 30C12.7522 28.828 13.5182 27.8129 14.532 27.0948C15.5458 26.3768 16.7576 25.9911 18 25.9911C19.2423 25.9911 20.4541 26.3768 21.4679 27.0948C22.4818 27.8129 23.2477 28.828 23.66 30" />,
-    <path d="M18 26C20.2091 26 22 24.2091 22 22C22 19.7909 20.2091 18 18 18C15.7909 18 14 19.7909 14 22C14 24.2091 15.7909 26 18 26Z" />,
-    <path d="M40 10H8C5.79086 10 4 11.7909 4 14V34C4 36.2091 5.79086 38 8 38H40C42.2091 38 44 36.2091 44 34V14C44 11.7909 42.2091 10 40 10Z" />,
-  ], size, color, label);
-}
-
-export function MessageCirclePlusIcon({ size = 'medium', color = 'currentColor', 'aria-label': label }: IconProps) {
-  return wrap([
-    <path d="M5.98399 32.684C6.27807 33.4258 6.34354 34.2387 6.17199 35.018L4.04199 41.598C3.97336 41.9317 3.99111 42.2774 4.09354 42.6023C4.19598 42.9272 4.37972 43.2206 4.62733 43.4545C4.87494 43.6885 5.17821 43.8554 5.50839 43.9393C5.83857 44.0232 6.18471 44.0214 6.51399 43.934L13.34 41.938C14.0754 41.7921 14.837 41.8559 15.538 42.122C19.8088 44.1164 24.6467 44.5384 29.1983 43.3134C33.7499 42.0885 37.7225 39.2953 40.4154 35.4267C43.1082 31.5582 44.3482 26.8628 43.9166 22.1691C43.4849 17.4754 41.4094 13.0849 38.0561 9.77239C34.7029 6.45984 30.2874 4.43808 25.5888 4.06379C20.8901 3.68951 16.2103 4.98676 12.3749 7.72668C8.53949 10.4666 5.79505 14.4731 4.62578 19.0393C3.4565 23.6055 3.93753 28.4379 5.98399 32.684Z" />,
-    <path d="M16 24H32" />,
-    <path d="M24 16V32" />,
-  ], size, color, label);
-}
-
-export function StethoscopeIcon({ size = 'medium', color = 'currentColor', 'aria-label': label }: IconProps) {
-  return wrap([
-    <path d="M22 4V8" />,
-    <path d="M10 4V8" />,
-    <path d="M10 6H8C6.93913 6 5.92172 6.42143 5.17157 7.17157C4.42143 7.92172 4 8.93913 4 10V18C4 21.1826 5.26428 24.2348 7.51472 26.4853C9.76516 28.7357 12.8174 30 16 30C19.1826 30 22.2348 28.7357 24.4853 26.4853C26.7357 24.2348 28 21.1826 28 18V10C28 8.93913 27.5786 7.92172 26.8284 7.17157C26.0783 6.42143 25.0609 6 24 6H22" />,
-    <path d="M16 30C16 33.1826 17.2643 36.2348 19.5147 38.4853C21.7652 40.7357 24.8174 42 28 42C31.1826 42 34.2348 40.7357 36.4853 38.4853C38.7357 36.2348 40 33.1826 40 30V24" />,
-    <path d="M40 24C42.2091 24 44 22.2091 44 20C44 17.7909 42.2091 16 40 16C37.7909 16 36 17.7909 36 20C36 22.2091 37.7909 24 40 24Z" />,
-  ], size, color, label);
-}
-
-export function BinocularsIcon({ size = 'medium', color = 'currentColor', 'aria-label': label }: IconProps) {
-  return wrap([
-    <path d="M20 20H28" />,
-    <path d="M38 14V8C38 7.46957 37.7893 6.96086 37.4142 6.58579C37.0391 6.21071 36.5304 6 36 6H32C31.4696 6 30.9609 6.21071 30.5858 6.58579C30.2107 6.96086 30 7.46957 30 8V14" />,
-    <path d="M40 42C41.0609 42 42.0783 41.5786 42.8284 40.8284C43.5786 40.0783 44 39.0609 44 38V30.298C44 27.518 40 24.374 40 20.64V16C40 15.4696 39.7893 14.9609 39.4142 14.5858C39.0391 14.2107 38.5304 14 38 14H30C29.4696 14 28.9609 14.2107 28.5858 14.5858C28.2107 14.9609 28 15.4696 28 16V38C28 39.0609 28.4214 40.0783 29.1716 40.8284C29.9217 41.5786 30.9391 42 32 42H40Z" />,
-    <path d="M44 32H4" />,
-    <path d="M8 42C6.93913 42 5.92172 41.5786 5.17157 40.8284C4.42143 40.0783 4 39.0609 4 38V30.298C4 27.518 8 24.374 8 20.64V16C8 15.4696 8.21071 14.9609 8.58579 14.5858C8.96086 14.2107 9.46957 14 10 14H18C18.5304 14 19.0391 14.2107 19.4142 14.5858C19.7893 14.9609 20 15.4696 20 16V38C20 39.0609 19.5786 40.0783 18.8284 40.8284C18.0783 41.5786 17.0609 42 16 42H8Z" />,
-    <path d="M18 14V8C18 7.46957 17.7893 6.96086 17.4142 6.58579C17.0391 6.21071 16.5304 6 16 6H12C11.4696 6 10.9609 6.21071 10.5858 6.58579C10.2107 6.96086 10 7.46957 10 8V14" />,
-  ], size, color, label);
-}
-
-export function FlagIcon({ size = 'medium', color = 'currentColor', 'aria-label': label }: IconProps) {
-  return wrap([
-    <path d="M8 44V8C8 7.68951 8.07229 7.38328 8.21115 7.10557C8.35 6.82786 8.55161 6.58629 8.8 6.4C10.8772 4.84213 13.4036 4 16 4C22 4 26 8 30.666 8C33.3327 8 35.3773 7.46667 36.8 6.4C37.0971 6.17715 37.4505 6.04144 37.8204 6.00808C38.1903 5.97473 38.5622 6.04504 38.8944 6.21115C39.2266 6.37725 39.506 6.63259 39.7013 6.94854C39.8966 7.26449 40 7.62858 40 8V28C40 28.3105 39.9277 28.6167 39.7889 28.8944C39.65 29.1721 39.4484 29.4137 39.2 29.6C37.1228 31.1579 34.5964 32 32 32C26 32 22 28 16 28C13.0482 28.0001 10.2 29.0881 8 31.056" />,
-  ], size, color, label);
-}
-
-export function MountainSnowIcon({ size = 'medium', color = 'currentColor', 'aria-label': label }: IconProps) {
-  return wrap([
-    <path d="M16 6L24 22L34 12L44 42H4L16 6Z" />,
-    <path d="M8.28003 30.16C13.52 27.02 18.76 27.3 24 31C29.48 34.88 34.98 35 40.46 31.38" />,
-  ], size, color, label);
-}
-
-export function SnowflakeIcon({ size = 'medium', color = 'currentColor', 'aria-label': label }: IconProps) {
-  return wrap([
-    <path d="M20 40L17.5 35L12 36" />,
-    <path d="M20 8L17.5 13L12 12" />,
-    <path d="M28 40L30.5 35L36 36" />,
-    <path d="M28 8L30.5 13L36 12" />,
-    <path d="M34 42L28 30H20" />,
-    <path d="M34 6L28 18L31 24" />,
-    <path d="M4 24H17L20 18" />,
-    <path d="M40 20L37 24L40 28" />,
-    <path d="M44 24H31L28 30" />,
-    <path d="M8 20L11 24L8 28" />,
-    <path d="M14 42L20 30L17 24" />,
-    <path d="M14 6L20 18H28" />,
-  ], size, color, label);
-}
-
-export function FileChartColumnIncreasingIcon({ size = 'medium', color = 'currentColor', 'aria-label': label }: IconProps) {
-  return wrap([
-    <path d="M12 44C10.9391 44 9.92172 43.5786 9.17157 42.8284C8.42143 42.0783 8 41.0609 8 40V8.00001C8 6.93914 8.42143 5.92172 9.17157 5.17158C9.92172 4.42143 10.9391 4.00001 12 4.00001H28C28.6331 3.99898 29.2602 4.12321 29.8451 4.36554C30.43 4.60788 30.9611 4.96353 31.408 5.41201L38.584 12.588C39.0337 13.035 39.3903 13.5667 39.6334 14.1523C39.8764 14.738 40.001 15.3659 40 16V40C40 41.0609 39.5786 42.0783 38.8284 42.8284C38.0783 43.5786 37.0609 44 36 44H12Z" />,
-    <path d="M28 4V14C28 14.5304 28.2107 15.0391 28.5858 15.4142C28.9609 15.7893 29.4696 16 30 16H40" />,
-    <path d="M16 36V32" />,
-    <path d="M24 36V28" />,
-    <path d="M32 36V24" />,
-  ], size, color, label);
-}
-
-export function WheatIcon({ size = 'medium', color = 'currentColor', 'aria-label': label }: IconProps) {
-  return wrap([
-    <path d="M4 44L32 16" />,
-    <path d="M6.94006 25.06L10.0001 22L13.0601 25.06C14.3669 26.372 15.1006 28.1483 15.1006 30C15.1006 31.8517 14.3669 33.628 13.0601 34.94L10.0001 38L6.94006 34.94C5.63326 33.628 4.89954 31.8517 4.89954 30C4.89954 28.1483 5.63326 26.372 6.94006 25.06Z" />,
-    <path d="M14.9401 17.06L18.0001 14L21.0601 17.06C22.3669 18.372 23.1006 20.1483 23.1006 22C23.1006 23.8517 22.3669 25.628 21.0601 26.94L18.0001 30L14.9401 26.94C13.6333 25.628 12.8995 23.8517 12.8995 22C12.8995 20.1483 13.6333 18.372 14.9401 17.06Z" />,
-    <path d="M22.9399 9.06L25.9999 6L29.0599 9.06C30.3667 10.372 31.1005 12.1483 31.1005 14C31.1005 15.8517 30.3667 17.628 29.0599 18.94L25.9999 22L22.9399 18.94C21.6331 17.628 20.8994 15.8517 20.8994 14C20.8994 12.1483 21.6331 10.372 22.9399 9.06Z" />,
-    <path d="M40 4H44V8C44 10.1217 43.1571 12.1566 41.6569 13.6569C40.1566 15.1571 38.1217 16 36 16H32V12C32 9.87827 32.8429 7.84344 34.3431 6.34315C35.8434 4.84285 37.8783 4 40 4Z" />,
-    <path d="M22.94 34.9399L26 37.9999L22.94 41.0599C21.628 42.3667 19.8517 43.1005 18 43.1005C16.1483 43.1005 14.372 42.3667 13.06 41.0599L10 37.9999L13.06 34.9399C14.372 33.6331 16.1483 32.8994 18 32.8994C19.8517 32.8994 21.628 33.6331 22.94 34.9399Z" />,
-    <path d="M30.94 26.9399L34 29.9999L30.94 33.0599C29.628 34.3667 27.8517 35.1005 26 35.1005C24.1483 35.1005 22.372 34.3667 21.06 33.0599L18 29.9999L21.06 26.9399C22.372 25.6331 24.1483 24.8994 26 24.8994C27.8517 24.8994 29.628 25.6331 30.94 26.9399Z" />,
-    <path d="M38.94 18.9399L42 21.9999L38.94 25.0599C37.628 26.3667 35.8517 27.1005 34 27.1005C32.1483 27.1005 30.372 26.3667 29.06 25.0599L26 21.9999L29.06 18.9399C30.372 17.6331 32.1483 16.8994 34 16.8994C35.8517 16.8994 37.628 17.6331 38.94 18.9399Z" />,
-  ], size, color, label);
-}
-
-export const ALL_ICONS = [
-  { name: 'UserRoundIcon',                 label: 'user-round',                   Component: UserRoundIcon },
-  { name: 'GlobeIcon',                     label: 'globe',                        Component: GlobeIcon },
-  { name: 'HandshakeIcon',                 label: 'handshake',                    Component: HandshakeIcon },
-  { name: 'HeartHandshakeIcon',            label: 'heart-handshake',              Component: HeartHandshakeIcon },
-  { name: 'AtomIcon',                      label: 'atom',                         Component: AtomIcon },
-  { name: 'HazeIcon',                      label: 'haze',                         Component: HazeIcon },
-  { name: 'HourglassIcon',                 label: 'hourglass',                    Component: HourglassIcon },
-  { name: 'GraduationCapIcon',             label: 'graduation-cap',               Component: GraduationCapIcon },
-  { name: 'HandHeartIcon',                 label: 'hand-heart',                   Component: HandHeartIcon },
-  { name: 'IdCardIcon',                    label: 'id-card',                      Component: IdCardIcon },
-  { name: 'MessageCirclePlusIcon',         label: 'message-circle-plus',          Component: MessageCirclePlusIcon },
-  { name: 'StethoscopeIcon',               label: 'stethoscope',                  Component: StethoscopeIcon },
-  { name: 'BinocularsIcon',                label: 'binoculars',                   Component: BinocularsIcon },
-  { name: 'FlagIcon',                      label: 'flag',                         Component: FlagIcon },
-  { name: 'MountainSnowIcon',              label: 'mountain-snow',                Component: MountainSnowIcon },
-  { name: 'SnowflakeIcon',                 label: 'snowflake',                    Component: SnowflakeIcon },
-  { name: 'FileChartColumnIncreasingIcon', label: 'file-chart-column-increasing', Component: FileChartColumnIncreasingIcon },
-  { name: 'WheatIcon',                     label: 'wheat',                        Component: WheatIcon },
-] as const;
-
-export const ICON_MAP: Record<IconName, (props: IconProps) => React.JSX.Element> = {
-  UserRoundIcon,
-  GlobeIcon,
-  HandshakeIcon,
-  HeartHandshakeIcon,
-  AtomIcon,
-  HazeIcon,
-  HourglassIcon,
-  GraduationCapIcon,
-  HandHeartIcon,
-  IdCardIcon,
-  MessageCirclePlusIcon,
-  StethoscopeIcon,
-  BinocularsIcon,
-  FlagIcon,
-  MountainSnowIcon,
-  SnowflakeIcon,
-  FileChartColumnIncreasingIcon,
-  WheatIcon,
-};
+export const ICON_NAMES = ALL_ICONS.map((i) => i.name);

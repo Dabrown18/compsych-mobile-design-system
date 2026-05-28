@@ -5,11 +5,29 @@ import { ServiceCard, type ServiceCardVariant, type ServiceCardSize } from '@/co
 import { type IconName } from '@/components/ds/mobile-icon/mobile-icon';
 
 const ICON_OPTIONS: IconName[] = [
-  'HeartHandshakeIcon', 'UserRoundIcon', 'GlobeIcon', 'HandshakeIcon',
-  'StethoscopeIcon', 'GraduationCapIcon', 'HandHeartIcon', 'AtomIcon',
-  'HourglassIcon', 'IdCardIcon', 'MessageCirclePlusIcon', 'BinocularsIcon',
-  'FlagIcon', 'MountainSnowIcon', 'SnowflakeIcon', 'HazeIcon',
-  'FileChartColumnIncreasingIcon', 'WheatIcon',
+  'ActivityIcon', 'ArrowLeftIcon', 'AtomIcon', 'AwardIcon', 'BabyIcon',
+  'BinocularsIcon', 'BlendIcon', 'BookCheckIcon', 'BookMarkedIcon', 'BookOpenTextIcon',
+  'BookUserIcon', 'BoxIcon', 'BriefcaseBusinessIcon', 'BuildingIcon', 'CalculatorIcon',
+  'CalendarDaysIcon', 'CannabisIcon', 'CaptionsIcon', 'ChartColumnBigIcon', 'ChartPieIcon',
+  'CheckCheckIcon', 'CigaretteIcon', 'CircleCheckBigIcon', 'CirclePlusIcon', 'ClipboardCheckIcon',
+  'CloudCheckIcon', 'CompassIcon', 'DogIcon', 'DownloadIcon', 'EllipsisIcon',
+  'FileChartColumnIncreasingIcon', 'FileQuestionIcon', 'FlagIcon', 'FrownIcon', 'GlobeIcon',
+  'GraduationCapIcon', 'HandHeartIcon', 'HandshakeIcon', 'HazeIcon', 'HeartIcon',
+  'HeartHandshakeIcon', 'HeartPlusIcon', 'HospitalIcon', 'HouseHeartIcon', 'HouseWifiIcon',
+  'HourglassIcon', 'IdCardIcon', 'ImagePlayIcon', 'InboxIcon', 'LandPlotIcon',
+  'LassoIcon', 'LayersIcon', 'ListTodoIcon', 'LockIcon', 'LockKeyholeIcon',
+  'LockOpenIcon', 'MapIcon', 'MapPinPlusIcon', 'MapPinnedIcon', 'MaximizeIcon',
+  'MegaphoneIcon', 'MessageCircleMoreIcon', 'MessageCirclePlusIcon', 'MicIcon', 'MicOffIcon',
+  'MinimizeIcon', 'MonitorPlayIcon', 'MoonIcon', 'MountainSnowIcon', 'PanelsTopLeftIcon',
+  'PenLineIcon', 'PhoneIcon', 'PhoneOffIcon', 'PodcastIcon', 'PresentationIcon',
+  'RotateCcwIcon', 'ScanFaceIcon', 'ScanHeartIcon', 'ScanSearchIcon', 'ScrollTextIcon',
+  'SendIcon', 'SendHorizontalIcon', 'SettingsIcon', 'ShieldUserIcon', 'SkipBackIcon',
+  'SkipForwardIcon', 'SmartphoneIcon', 'SmileIcon', 'SnowflakeIcon', 'SquareArrowOutUpRightIcon',
+  'SquaresExcludeIcon', 'StarIcon', 'StethoscopeIcon', 'StickyNoteIcon', 'TabletSmartphoneIcon',
+  'TextIcon', 'ThumbsDownIcon', 'ThumbsUpIcon', 'TicketsPlaneIcon', 'TrashIcon',
+  'TrendingUpIcon', 'TvMinimalIcon', 'TvMinimalPlayIcon', 'UserRoundIcon', 'UserRoundCheckIcon',
+  'UsersIcon', 'UsersRoundIcon', 'VideoOffIcon', 'VolumeIcon', 'Volume1Icon',
+  'Volume2Icon', 'VolumeOffIcon', 'VolumeXIcon', 'WarehouseIcon', 'WheatIcon',
 ];
 import { MobilePlayground } from '@/components/mobile-playground/mobile-playground';
 import { FoundationPageShell } from '@/components/foundation-page-shell';
