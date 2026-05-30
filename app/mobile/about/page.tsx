@@ -54,7 +54,7 @@ export default function MobileAboutPage() {
             <ComponentGroup
               heading="Mobile Organisms"
               items={[
-                { name: 'Card', href: '/mobile/components/card', description: 'Content surface with elevation, image, and action slots.' },
+                { name: 'ServiceCard', href: '/mobile/components/service-card', description: 'Content surface with elevation, image, and action slots.' },
                 { name: 'Bottom Navigation', href: '/mobile/components/bottom-nav', description: 'Primary destination switcher anchored to the screen bottom.' },
                 { name: 'Tab Bar', href: '/mobile/components/tab-bar', description: 'Secondary navigation within a screen section.' },
                 { name: 'Bottom Sheet', href: '/mobile/components/bottom-sheet', description: 'Supplemental surface that slides up from the screen bottom.' },

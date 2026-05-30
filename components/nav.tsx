@@ -82,7 +82,7 @@ const NAV_SECTIONS: NavSection[] = [
       { href: '/mobile/components/action-sheet', label: 'ActionSheet' },
       { href: '/mobile/components/chat-bubble', label: 'ChatBubble' },
       { href: '/mobile/components/chat-input', label: 'ChatInput' },
-      { href: '/mobile/components/card', label: 'ServiceCard' },
+      { href: '/mobile/components/service-card', label: 'ServiceCard' },
       { href: '/mobile/components/plan-card', label: 'PlanCard' },
       { href: '/mobile/components/selection-card', label: 'SelectionCard' },
       { href: '/mobile/components/tab-bar', label: 'Tab Bar' },

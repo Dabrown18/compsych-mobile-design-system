@@ -12,7 +12,7 @@ export default function MobileChatInputPage() {
     <FoundationPageShell
       eyebrow="Organisms"
       title="ChatInput"
-      description="A chat message composer with an optional attachment button on the left, a text field in the center, and a send button on the right. The send button activates (turns orange) when text is present. Supports disabled state."
+      description="A chat message composer with an optional attachment button on the left, a multiline auto-expanding text field in the center, and a send button on the right. The text field grows line-by-line as the user types (max 120 px) and shrinks when text is deleted. The send button activates (turns orange) when text is present. Supports disabled state."
     >
       <Section
         heading="Playground"
@@ -74,7 +74,7 @@ export default function ChatScreen() {
 
       <Section
         heading="States"
-        lead="empty: send button is inactive (gray). has-text: send button activates (orange). disabled: 48% opacity throughout."
+        lead="empty: send button inactive (gray). has-text: send button activates (orange) and field grows as lines are added. disabled: 48% opacity throughout."
       >
         <Surface>
           <div className="flex flex-col gap-4 w-full max-w-sm">

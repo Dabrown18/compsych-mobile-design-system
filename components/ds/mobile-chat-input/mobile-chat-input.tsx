@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, type HTMLAttributes } from 'react';
+import { useRef, useState, type HTMLAttributes } from 'react';
 
 export interface ChatInputProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> {
   value?: string;
@@ -22,6 +22,8 @@ export function ChatInput({
   ...rest
 }: ChatInputProps) {
   const [internalValue, setInternalValue] = useState('');
+  const [textareaHeight, setTextareaHeight] = useState(24);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
   const value = controlledValue ?? internalValue;
   const hasText = value.trim().length > 0;
   const canSend = hasText && !disabled;
@@ -81,13 +83,20 @@ export function ChatInput({
         </button>
       )}
 
-      <input
-        type="text"
+      <textarea
+        ref={textareaRef}
         value={value}
-        onChange={(e) => handleChange(e.target.value)}
+        onChange={(e) => {
+          handleChange(e.target.value);
+          e.target.style.height = 'auto';
+          const natural = Math.max(24, Math.min(120, e.target.scrollHeight));
+          e.target.style.height = `${natural}px`;
+          setTextareaHeight(natural);
+        }}
         onKeyDown={(e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleSend(); } }}
         placeholder={placeholder}
         disabled={disabled}
+        rows={1}
         style={{
           flex: 1,
           border: 'none',
@@ -99,6 +108,9 @@ export function ChatInput({
           fontFamily: "'GoogleSans_400Regular', sans-serif",
           padding: '4px 0',
           minWidth: 0,
+          resize: 'none',
+          overflowY: textareaHeight >= 120 ? 'auto' : 'hidden',
+          height: textareaHeight,
           cursor: disabled ? 'not-allowed' : 'text',
         }}
       />

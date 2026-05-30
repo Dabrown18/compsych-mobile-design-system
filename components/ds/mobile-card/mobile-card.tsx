@@ -19,6 +19,7 @@ export interface ServiceCardProps extends HTMLAttributes<HTMLDivElement> {
   onPress?: () => void;
   children?: ReactNode;
   fullWidth?: boolean;
+  gradient?: readonly [string, string, ...string[]];
 }
 
 const VARIANT: Record<ServiceCardVariant, {
@@ -77,6 +78,7 @@ export function ServiceCard({
   onPress,
   children,
   fullWidth = false,
+  gradient,
   style,
   ...rest
 }: ServiceCardProps) {
@@ -93,13 +95,18 @@ export function ServiceCard({
     ? <LucideIcon size={iconPx} color={iconColor} strokeWidth={iconSW} />
     : null;
 
+  // gradient or solid tonal for doubled inner card
+  const doubledInnerBg = gradient
+    ? `linear-gradient(180deg, ${gradient.join(', ')})`
+    : 'color-mix(in srgb, var(--sys-color-primary) 8%, transparent)';
+
   const containerStyle: React.CSSProperties = {
     position: 'relative',
     display: 'flex',
-    flexDirection: isRow ? 'row' : 'column',
+    flexDirection: variant === 'doubled' ? 'column' : (isRow ? 'row' : 'column'),
     alignItems: isRow ? 'center' : 'flex-start',
-    gap: s.gap,
-    padding: `${s.py}px ${s.px}px`,
+    gap: variant === 'doubled' ? 0 : s.gap,
+    padding: variant === 'doubled' ? 8 : `${s.py}px ${s.px}px`,
     borderRadius: variant === 'doubled' ? 20 : s.radius,
     border: v.border,
     background: v.bg,
@@ -112,7 +119,38 @@ export function ServiceCard({
     ...style,
   };
 
-  const content = (
+  const innerCardContent = (
+    <div style={{ position: 'relative', zIndex: 2, display: 'flex', flexDirection: isRow ? 'row' : 'column', alignItems: isRow ? 'center' : 'flex-start', gap: s.gap, width: '100%' }}>
+      {renderedIcon && variant === 'doubled' ? (
+        <div style={{ width: 48, height: 48, borderRadius: '50%', background: 'var(--sys-color-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+          {renderedIcon}
+        </div>
+      ) : renderedIcon ? (
+        <span style={{ display: 'flex', alignItems: 'center', flexShrink: 0 }}>{renderedIcon}</span>
+      ) : null}
+      {(title || description) && (
+        <div style={{ flex: isRow ? 1 : undefined }}>
+          {title && <p style={{ margin: 0, color: v.titleColor, fontSize: s.titleSize, fontWeight: 500 }}>{title}</p>}
+          {description && !isRow && <p style={{ margin: '4px 0 0', color: v.descColor, fontSize: s.descSize }}>{description}</p>}
+        </div>
+      )}
+      {isRow && ChevronRight && (
+        <ChevronRight size={20} color={variant === 'image' ? '#ffffff' : v.titleColor} strokeWidth={1.5} style={{ marginLeft: 'auto', flexShrink: 0, opacity: 0.5 }} />
+      )}
+      {children}
+    </div>
+  );
+
+  const content = variant === 'doubled' ? (
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: s.gap, padding: `${s.py}px ${s.px}px`, borderRadius: s.radius, background: doubledInnerBg, width: '100%' }}>
+      {innerCardContent}
+      {buttonIcon && (
+        <div style={{ position: 'absolute', bottom: s.py + 8, right: s.px + 8, zIndex: 3 }}>
+          {buttonIcon}
+        </div>
+      )}
+    </div>
+  ) : (
     <>
       {imgSrc && (
         <img src={imgSrc} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: 0 }} />
@@ -120,30 +158,7 @@ export function ServiceCard({
       {imgSrc && (
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.12) 40%, rgba(0,0,0,0.12) 60%, rgba(0,0,0,0.4) 100%)', zIndex: 1 }} />
       )}
-      <div style={{ position: 'relative', zIndex: 2, display: 'flex', flexDirection: isRow ? 'row' : 'column', alignItems: isRow ? 'center' : 'flex-start', gap: s.gap, width: '100%' }}>
-        {renderedIcon && variant === 'doubled' ? (
-          <div style={{
-            width: 48, height: 48, borderRadius: '50%',
-            background: 'var(--sys-color-primary)',
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            flexShrink: 0,
-          }}>
-            {renderedIcon}
-          </div>
-        ) : renderedIcon ? (
-          <span style={{ display: 'flex', alignItems: 'center', flexShrink: 0 }}>{renderedIcon}</span>
-        ) : null}
-        {(title || description) && (
-          <div style={{ flex: isRow ? 1 : undefined }}>
-            {title && <p style={{ margin: 0, color: v.titleColor, fontSize: s.titleSize, fontWeight: 500 }}>{title}</p>}
-            {description && !isRow && <p style={{ margin: '4px 0 0', color: v.descColor, fontSize: s.descSize }}>{description}</p>}
-          </div>
-        )}
-        {isRow && ChevronRight && (
-          <ChevronRight size={20} color={variant === 'image' ? '#ffffff' : v.titleColor} strokeWidth={1.5} style={{ marginLeft: 'auto', flexShrink: 0, opacity: 0.5 }} />
-        )}
-        {children}
-      </div>
+      {innerCardContent}
       {buttonIcon && !isRow && (
         <div style={{ position: 'absolute', bottom: s.py, right: s.px, zIndex: 3 }}>
           {buttonIcon}
