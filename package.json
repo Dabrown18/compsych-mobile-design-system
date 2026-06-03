@@ -1,6 +1,6 @@
 {
   "name": "@compsych/mobile-ui-reference",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "description": "Live visual reference for the ComPsych Mobile Design System.",
   "scripts": {

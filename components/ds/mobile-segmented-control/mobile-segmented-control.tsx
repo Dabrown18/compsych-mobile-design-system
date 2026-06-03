@@ -12,21 +12,20 @@ export interface SegmentedControlProps extends Omit<HTMLAttributes<HTMLDivElemen
   options: SegmentedControlOption[];
   value: string;
   onChange: (value: string) => void;
-  fullWidth?: boolean;
 }
 
-export function SegmentedControl({ options, value, onChange, fullWidth = false, style, ...rest }: SegmentedControlProps) {
+export function SegmentedControl({ options, value, onChange, style, ...rest }: SegmentedControlProps) {
   return (
     <div
       role="tablist"
       style={{
-        display: 'inline-flex',
+        display: 'flex',
         alignItems: 'center',
         gap: 4,
-        padding: 4,
-        borderRadius: 10,
-        background: 'var(--sys-color-surface-container-high)',
-        width: fullWidth ? '100%' : undefined,
+        width: '100%',
+        overflowX: 'auto',
+        scrollbarWidth: 'none',
+        paddingBlock: 2,
         ...style,
       }}
       {...rest}
@@ -41,21 +40,23 @@ export function SegmentedControl({ options, value, onChange, fullWidth = false, 
             aria-selected={isActive}
             onClick={() => onChange(opt.value)}
             style={{
-              flex: fullWidth ? 1 : undefined,
+              flexShrink: 0,
               display: 'inline-flex',
               alignItems: 'center',
               justifyContent: 'center',
               gap: 6,
               height: 36,
               paddingInline: 16,
-              borderRadius: 8,
+              borderRadius: 999,
               border: 'none',
-              background: isActive ? 'var(--sys-color-surface-container-lowest)' : 'transparent',
-              color: isActive ? 'var(--sys-color-on-surface)' : 'var(--sys-color-on-surface-variant)',
+              background: isActive
+                ? 'var(--sys-color-primary)'
+                : 'var(--sys-color-surface-container-high)',
+              color: isActive ? 'var(--sys-color-on-primary)' : 'var(--sys-color-on-surface-variant)',
               fontSize: 14,
               fontWeight: isActive ? 600 : 400,
               cursor: 'pointer',
-              boxShadow: isActive ? '0 1px 4px rgba(0,0,0,.10)' : undefined,
+              whiteSpace: 'nowrap',
               transition: 'background .15s, color .15s',
             }}
           >
