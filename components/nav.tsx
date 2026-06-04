@@ -34,6 +34,7 @@ const NAV_SECTIONS: NavSection[] = [
     items: [
       { href: '/mobile/components/badge', label: 'Badge' },
       { href: '/mobile/components/chip', label: 'Chip' },
+      { href: '/mobile/components/status-chip', label: 'StatusChip' },
       { href: '/mobile/components/divider', label: 'Divider' },
       { href: '/mobile/components/icon', label: 'Icon' },
     ],

@@ -32,24 +32,25 @@ export function ChatBubble({
         flexDirection: 'row',
         justifyContent: isOutgoing ? 'flex-end' : 'flex-start',
         width: '100%',
+        paddingLeft: isOutgoing ? 32 : 0,
+        paddingRight: isOutgoing ? 0 : 64,
+        boxSizing: 'border-box',
         ...style,
       }}
       {...rest}
     >
-      <div style={{ maxWidth: '80%' }}>
+      <div>
         {/* Bubble */}
         <div
           style={{
-            padding: '8px 12px',
-            borderRadius: 12,
-            borderBottomLeftRadius: isOutgoing ? 12 : 4,
-            borderBottomRightRadius: isOutgoing ? 4 : 12,
+            padding: '12px 16px',
+            borderTopLeftRadius: 24,
+            borderTopRightRadius: isOutgoing ? 24 : 16,
+            borderBottomLeftRadius: isOutgoing ? 24 : 4,
+            borderBottomRightRadius: isOutgoing ? 4 : 4,
             background: isOutgoing
               ? 'var(--sys-color-primary, #075cba)'
-              : 'var(--sys-color-surface-container-lowest, #fff)',
-            border: isOutgoing
-              ? 'none'
-              : '1px solid var(--sys-color-outline-variant, #d7dbe0)',
+              : 'var(--sys-color-surface-container, #f3f4f6)',
           }}
         >
           <p
