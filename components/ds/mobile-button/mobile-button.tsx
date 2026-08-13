@@ -26,7 +26,7 @@ const SIZE: Record<ButtonSize, { h: number; px: number; fontSize: number; iconSi
 const VARIANT: Record<ButtonVariant, { bg: string; color: string; border?: string; shadow?: string }> = {
   'filled':          { bg: 'var(--sys-color-primary)', color: 'var(--sys-color-on-primary)' },
   'tonal':           { bg: 'var(--sys-color-primary-fixed-dim)', color: 'var(--sys-color-on-primary-fixed)' },
-  'outlined':        { bg: 'transparent', color: 'var(--sys-color-on-surface)', border: '1px solid var(--sys-color-outline)' },
+  'outlined':        { bg: 'transparent', color: 'var(--sys-color-on-surface)', border: '1px solid var(--sys-color-outline-fixed)' },
   'elevated':        { bg: 'var(--sys-color-surface-container-lowest)', color: 'var(--sys-color-on-surface)', shadow: '0 2px 8px rgba(0,0,0,.08)' },
   'text':            { bg: 'transparent', color: 'var(--sys-color-on-surface)' },
   'danger':          { bg: 'var(--sys-color-error)', color: 'var(--sys-color-on-error)' },

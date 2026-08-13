@@ -12,7 +12,7 @@ export default function MobileChatBubblePage() {
     <FoundationPageShell
       eyebrow="Mobile"
       title="ChatBubble"
-      description="A single message bubble in a chat thread. Two variants: incoming (white surface, left-aligned, optional thumbs-up/down reactions) and outgoing (primary-blue surface, right-aligned). Displays an optional timestamp below the bubble."
+      description="A single message bubble in a chat thread. Two variants: incoming (white surface, left-aligned, optional thumbs-up/down reactions) and outgoing (primary-blue surface, right-aligned). Displays an optional timestamp below the bubble. Pass markdownStyles to render the message as Markdown (links, bold, lists) via react-native-markdown-display instead of plain text."
     >
       <Section
         heading="Playground"
@@ -25,7 +25,9 @@ export default function MobileChatBubblePage() {
                 variant={values.variant as 'incoming' | 'outgoing'}
                 message={values.message as string}
                 timestamp={values.timestamp as string}
-                showReactions={values.showReactions as boolean}
+                markdownStyles={(values.markdown as boolean) ? {} : undefined}
+                onThumbsUp={(values.showReactions as boolean) ? () => {} : undefined}
+                onThumbsDown={(values.showReactions as boolean) ? () => {} : undefined}
               />
             </div>
           )}
@@ -57,6 +59,12 @@ export default function MobileChatBubblePage() {
               label: 'Reactions',
               defaultValue: true,
             },
+            {
+              name: 'markdown',
+              type: 'boolean',
+              label: 'Render as Markdown',
+              defaultValue: false,
+            },
           ]}
         />
       </Section>
@@ -79,6 +87,14 @@ export default function MobileChatBubblePage() {
   variant="outgoing"
   message="hey how are you"
   timestamp="11:30 AM"
+/>
+
+// Markdown message (links, bold, lists)
+<ChatBubble
+  variant="incoming"
+  message="Here's a [helpful link](https://example.com) and **bold** text."
+  markdownStyles={{ body: { color: '#1b1d22' } }}
+  onLinkPress={(url) => { Linking.openURL(url); return false; }}
 />`}
           language="tsx"
         />
@@ -94,7 +110,8 @@ export default function MobileChatBubblePage() {
               variant="incoming"
               message="Thank you for using GuidanceResources Chat. We'll be with you shortly."
               timestamp="11:30 AM"
-              showReactions
+              onThumbsUp={() => {}}
+              onThumbsDown={() => {}}
             />
             <ChatBubble
               variant="outgoing"
@@ -105,7 +122,8 @@ export default function MobileChatBubblePage() {
               variant="incoming"
               message="I'm doing well, thank you! How can I help you today?"
               timestamp="11:31 AM"
-              showReactions
+              onThumbsUp={() => {}}
+              onThumbsDown={() => {}}
             />
           </div>
         </Surface>
@@ -124,7 +142,8 @@ export default function MobileChatBubblePage() {
                   variant={v}
                   message={v === 'incoming' ? "Thank you for using GuidanceResources Chat. We'll be with you shortly." : 'hey how are you'}
                   timestamp="11:30 AM"
-                  showReactions={v === 'incoming'}
+                  onThumbsUp={v === 'incoming' ? () => {} : undefined}
+                  onThumbsDown={v === 'incoming' ? () => {} : undefined}
                 />
               </div>
             ))}

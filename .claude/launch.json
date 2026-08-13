@@ -5,6 +5,7 @@
       "name": "mobile-ui",
       "runtimeExecutable": "npm",
       "runtimeArgs": ["run", "dev"],
+      "cwd": "../compsych-mobile-design-system",
       "port": 3000
     }
   ]

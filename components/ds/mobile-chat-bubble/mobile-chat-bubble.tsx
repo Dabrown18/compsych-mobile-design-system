@@ -4,22 +4,46 @@ import type { HTMLAttributes } from 'react';
 
 export type ChatBubbleVariant = 'incoming' | 'outgoing';
 
+export interface ChatBubbleMarkdownStyles {
+  body?: object;
+  paragraph?: object;
+  text?: object;
+}
+
 export interface ChatBubbleProps extends HTMLAttributes<HTMLDivElement> {
   variant: ChatBubbleVariant;
   message: string;
   timestamp?: string;
-  showReactions?: boolean;
+  isStreaming?: boolean;
   onThumbsUp?: () => void;
   onThumbsDown?: () => void;
+  /** Renders `message` as Markdown when provided; falls back to plain text otherwise. */
+  markdownStyles?: ChatBubbleMarkdownStyles;
+  onLinkPress?: (url: string) => boolean;
+}
+
+// Minimal **bold** / _italic_ renderer for the gallery preview only — the real
+// component uses react-native-markdown-display for full Markdown support.
+function renderMarkdownPreview(message: string) {
+  const parts = message.split(/(\*\*[^*]+\*\*|_[^_]+_)/g).filter(Boolean);
+  return parts.map((part, i) => {
+    if (part.startsWith('**') && part.endsWith('**')) {
+      return <strong key={i}>{part.slice(2, -2)}</strong>;
+    }
+    if (part.startsWith('_') && part.endsWith('_')) {
+      return <em key={i}>{part.slice(1, -1)}</em>;
+    }
+    return <span key={i}>{part}</span>;
+  });
 }
 
 export function ChatBubble({
   variant,
   message,
   timestamp,
-  showReactions,
   onThumbsUp,
   onThumbsDown,
+  markdownStyles,
   style,
   ...rest
 }: ChatBubbleProps) {
@@ -63,7 +87,7 @@ export function ChatBubble({
               fontFamily: "'GoogleSans_400Regular', sans-serif",
             }}
           >
-            {message}
+            {markdownStyles ? renderMarkdownPreview(message) : message}
           </p>
         </div>
 
@@ -94,7 +118,7 @@ export function ChatBubble({
             </span>
           )}
 
-          {!isOutgoing && showReactions && (
+          {!isOutgoing && (onThumbsUp || onThumbsDown) && (
             <>
               <button
                 type="button"

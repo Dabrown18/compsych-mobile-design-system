@@ -12,18 +12,21 @@ export default function MobileChatInputPage() {
     <FoundationPageShell
       eyebrow="Organisms"
       title="ChatInput"
-      description="A chat message composer with an optional attachment button on the left, a multiline auto-expanding text field in the center, and a send button on the right. The text field grows line-by-line as the user types (max 120 px) and shrinks when text is deleted. The send button activates (turns orange) when text is present. Supports disabled state."
+      description="A chat message composer: a multiline text field that switches from a pill shape to a rounded rectangle once the message spans multiple lines, and a circular send button to the right that activates (turns orange) once there's text to send. isLocked and isDisabled both stop typing and sending (e.g. an escalation flow taking over, or a lost connection); isSendDisabled blocks sending only (e.g. a previous message still in flight). Setting sessionStatus to 'ended' clears and dims the field."
     >
       <Section
         heading="Playground"
-        lead="Type a message to activate the send button."
+        lead="Type a message to activate the send button. Try a long message to see the field switch from pill to rounded-rect."
       >
         <MobilePlayground
           render={(values) => (
             <div style={{ width: 340, maxWidth: '100%', padding: '16px 0' }}>
               <ChatInput
                 placeholder={values.placeholder as string}
-                showAttachButton={values.showAttachButton as boolean}
+                isLocked={values.isLocked as boolean}
+                isSendDisabled={values.isSendDisabled as boolean}
+                isDisabled={values.isDisabled as boolean}
+                sessionStatus={values.sessionStatus as 'active' | 'warning' | 'ended'}
               />
             </div>
           )}
@@ -32,14 +35,33 @@ export default function MobileChatInputPage() {
               name: 'placeholder',
               type: 'string',
               label: 'Placeholder',
-              defaultValue: 'Ask Sol Anything...',
+              defaultValue: 'Type a message...',
               placeholder: 'Placeholder text',
             },
             {
-              name: 'showAttachButton',
+              name: 'sessionStatus',
+              type: 'enum',
+              label: 'Session status',
+              options: ['active', 'warning', 'ended'],
+              defaultValue: 'active',
+            },
+            {
+              name: 'isLocked',
               type: 'boolean',
-              label: 'Attach button',
-              defaultValue: true,
+              label: 'Locked',
+              defaultValue: false,
+            },
+            {
+              name: 'isSendDisabled',
+              type: 'boolean',
+              label: 'Send disabled',
+              defaultValue: false,
+            },
+            {
+              name: 'isDisabled',
+              type: 'boolean',
+              label: 'Fully disabled',
+              defaultValue: false,
             },
           ]}
         />
@@ -57,14 +79,13 @@ export default function ChatScreen() {
     <ChatInput
       value={text}
       onChangeText={setText}
-      placeholder="Ask Sol Anything..."
+      placeholder="Type a message..."
       onSend={() => {
         console.log('send:', text);
         setText('');
       }}
-      onAttach={() => {
-        // open image picker
-      }}
+      isSendDisabled={isMessageInFlight}
+      sessionStatus={isSessionEnded ? 'ended' : 'active'}
     />
   );
 }`}
@@ -74,18 +95,19 @@ export default function ChatScreen() {
 
       <Section
         heading="States"
-        lead="empty: send button inactive (gray). has-text: send button activates (orange) and field grows as lines are added. disabled: 48% opacity throughout."
+        lead="empty: send button inactive (gray). has-text: send button activates (orange). multi-line: the field switches to a rounded rectangle. ended: field dims and clears itself."
       >
         <Surface>
           <div className="flex flex-col gap-4 w-full max-w-sm">
             {[
-              { label: 'empty', value: '', disabled: false },
-              { label: 'has-text', value: "I'm feeling overwhelmed with work and personal life. Any advice?", disabled: false },
-              { label: 'disabled', value: '', disabled: true },
-            ].map(({ label, value, disabled }) => (
+              { label: 'empty', value: '' },
+              { label: 'has-text', value: "I'm feeling overwhelmed" },
+              { label: 'multi-line', value: "I'm feeling overwhelmed with work and personal life. Any advice?" },
+              { label: 'ended', value: '', sessionStatus: 'ended' as const },
+            ].map(({ label, value, sessionStatus }) => (
               <div key={label} className="flex flex-col gap-1">
                 <code className="ref-caption font-mono" style={{ color: 'var(--sys-color-on-surface-variant)' }}>{label}</code>
-                <ChatInput value={value} placeholder="Ask Sol Anything..." disabled={disabled} />
+                <ChatInput value={value} placeholder="Type a message..." sessionStatus={sessionStatus} />
               </div>
             ))}
           </div>

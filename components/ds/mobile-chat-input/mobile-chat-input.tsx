@@ -1,32 +1,46 @@
 'use client';
 
-import { useRef, useState, type HTMLAttributes } from 'react';
+import { useEffect, useState, type HTMLAttributes } from 'react';
+
+export type ChatInputSessionStatus = 'active' | 'warning' | 'ended';
 
 export interface ChatInputProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> {
   value?: string;
   onChange?: (value: string) => void;
   onSend?: (value: string) => void;
   placeholder?: string;
-  showAttachButton?: boolean;
-  disabled?: boolean;
+  isLocked?: boolean;
+  isSendDisabled?: boolean;
+  isDisabled?: boolean;
+  sessionStatus?: ChatInputSessionStatus;
 }
 
 export function ChatInput({
   value: controlledValue,
   onChange,
   onSend,
-  placeholder = 'Ask Sol Anything...',
-  showAttachButton = true,
-  disabled = false,
+  placeholder = 'Type a message...',
+  isLocked = false,
+  isSendDisabled = false,
+  isDisabled = false,
+  sessionStatus = 'active',
   style,
   ...rest
 }: ChatInputProps) {
   const [internalValue, setInternalValue] = useState('');
-  const [textareaHeight, setTextareaHeight] = useState(24);
-  const textareaRef = useRef<HTMLTextAreaElement>(null);
   const value = controlledValue ?? internalValue;
-  const hasText = value.trim().length > 0;
-  const canSend = hasText && !disabled;
+  const isEnded = sessionStatus === 'ended';
+  const canSend = !isLocked && !isSendDisabled && !isDisabled && !isEnded && value.trim().length > 0;
+  const hasMultipleLines = value.includes('\n') || value.length > 40;
+  const borderRadius = hasMultipleLines ? 16 : 999;
+
+  useEffect(() => {
+    if (isEnded && value.length > 0) {
+      setInternalValue('');
+      onChange?.('');
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isEnded]);
 
   function handleChange(v: string) {
     setInternalValue(v);
@@ -39,79 +53,56 @@ export function ChatInput({
     setInternalValue('');
   }
 
+  const isEditable = !isEnded && !isLocked && !isDisabled;
+
   return (
     <div
       style={{
         display: 'flex',
         flexDirection: 'row',
-        alignItems: 'flex-end',
+        alignItems: 'center',
+        justifyContent: 'space-between',
         gap: 8,
-        padding: '8px 12px',
-        borderRadius: 16,
-        border: '1px solid var(--sys-color-outline-variant, #d7dbe0)',
+        padding: '2px 12px',
         backgroundColor: 'var(--sys-color-surface-container-lowest, #fff)',
-        opacity: disabled ? 0.48 : 1,
         boxSizing: 'border-box',
         width: '100%',
         ...style,
       }}
       {...rest}
     >
-      {showAttachButton && (
-        <button
-          type="button"
-          aria-label="Add attachment"
-          disabled={disabled}
-          style={{
-            width: 32,
-            height: 32,
-            borderRadius: 9999,
-            background: 'none',
-            border: 'none',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            cursor: disabled ? 'not-allowed' : 'pointer',
-            flexShrink: 0,
-            padding: 0,
-            color: 'var(--sys-color-on-surface, #1b1d22)',
-          }}
-        >
-          <svg viewBox="0 0 24 24" width={20} height={20} fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-            <path d="M12 5v14M5 12h14" />
-          </svg>
-        </button>
-      )}
-
       <textarea
-        ref={textareaRef}
         value={value}
-        onChange={(e) => {
-          handleChange(e.target.value);
-          e.target.style.height = 'auto';
-          const natural = Math.max(24, Math.min(120, e.target.scrollHeight));
-          e.target.style.height = `${natural}px`;
-          setTextareaHeight(natural);
+        onChange={(e) => handleChange(e.target.value)}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            handleSend();
+          }
         }}
-        onKeyDown={(e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleSend(); } }}
         placeholder={placeholder}
-        disabled={disabled}
+        disabled={!isEditable}
         rows={1}
         style={{
           flex: 1,
-          border: 'none',
-          background: 'transparent',
+          minHeight: 48,
+          maxHeight: 96,
+          border: '1px solid var(--sys-color-outline-variant, #d7dbe0)',
+          borderRadius,
+          backgroundColor: isEnded
+            ? 'var(--sys-color-surface, #f3f4f6)'
+            : 'var(--sys-color-surface-container-lowest, #fff)',
           outline: 'none',
           fontSize: 16,
-          lineHeight: '24px',
+          lineHeight: '20px',
           color: 'var(--sys-color-on-surface, #1b1d22)',
           fontFamily: "'GoogleSans_400Regular', sans-serif",
-          padding: '4px 0',
+          padding: hasMultipleLines ? '12px' : '14px 16px',
           minWidth: 0,
           resize: 'none',
-          overflowY: textareaHeight >= 120 ? 'auto' : 'hidden',
-          height: textareaHeight,
-          cursor: disabled ? 'not-allowed' : 'text',
+          opacity: isEnded ? 0.6 : 1,
+          cursor: isEditable ? 'text' : 'not-allowed',
+          boxSizing: 'border-box',
         }}
       />
 
@@ -121,9 +112,9 @@ export function ChatInput({
         disabled={!canSend}
         aria-label="Send"
         style={{
-          width: 32,
-          height: 32,
-          borderRadius: 9999,
+          width: 48,
+          height: 48,
+          borderRadius: 24,
           border: 'none',
           background: canSend
             ? 'var(--sys-color-warning, #d67d00)'
@@ -134,15 +125,16 @@ export function ChatInput({
           cursor: canSend ? 'pointer' : 'not-allowed',
           flexShrink: 0,
           padding: 0,
+          opacity: canSend ? 1 : 0.3,
           transition: 'background 150ms ease',
         }}
       >
         <svg
           viewBox="0 0 24 24"
-          width={16}
-          height={16}
+          width={20}
+          height={20}
           fill="none"
-          stroke={canSend ? '#ffffff' : 'var(--sys-color-on-surface-variant, #565f6c)'}
+          stroke={canSend ? 'var(--sys-color-on-warning, #ffffff)' : 'var(--sys-color-on-surface-variant, #565f6c)'}
           strokeWidth={2.5}
           strokeLinecap="round"
           strokeLinejoin="round"
