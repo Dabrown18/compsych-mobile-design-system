@@ -46,4 +46,4 @@ public/
 | Form | Checkbox, FormFields, Input, IntakeFields, PrimaryBenefitHolderFields, RadioButton, SegmentedControl, Slider, Switch |
 | Content | Alert, Avatar, Breadcrumb, BodyText, EmptyState, FormStepHeader, HeaderText, List, ListItem, Pagination, ProgressTracker, Tooltip |
 | Actions | Button, Snackbar |
-| Organisms | ActionSheet, InfoActionSheet, AppointmentConfirmationSheet, Calendar, Card, FormNavBar, GlobalLoader, PlanCard, ResourceCard, Tab Bar, Bottom Sheet, WebViewModal |
+| Organisms | ActionSheet, InfoActionSheet, Dialog, AppointmentConfirmationSheet, Calendar, Card, FormNavBar, GlobalLoader, PlanCard, ResourceCard, Tab Bar, Bottom Sheet, WebViewModal |

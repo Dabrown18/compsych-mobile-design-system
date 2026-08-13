@@ -1,20 +1,31 @@
 'use client';
 
-import type { ReactNode } from 'react';
+import { useState, type ReactNode } from 'react';
 import { Chip, type ChipUsage, type ChipSize } from '@/components/ds/mobile-chip/mobile-chip';
+import { resolveIcon } from '@/components/ds/mobile-icon/mobile-icon';
 import { MobilePlayground } from '@/components/mobile-playground/mobile-playground';
 import { FoundationPageShell } from '@/components/foundation-page-shell';
 import { CodeBlock } from '@/components/code-block/code-block';
 
-const USAGES: ChipUsage[] = ['neutral', 'informative', 'positive', 'danger', 'warning'];
+const USAGES: ChipUsage[] = [
+  'neutral',
+  'informative',
+  'positive',
+  'danger',
+  'warning',
+  'positiveContainer',
+  'informativeContainer',
+];
 const SIZES: ChipSize[] = ['sm', 'md', 'lg', 'xl'];
+const FILTERS = ['All', 'Therapy', 'Coaching', 'Crisis'];
+const ChevronDown = resolveIcon('ChevronDown');
 
 export default function MobileChipPage() {
   return (
     <FoundationPageShell
       eyebrow="Mobile"
       title="Chip"
-      description="Compact pill for filters, tags, and status labels. Five semantic usages, four sizes. Supports leading icons, count badges, and a dismiss button. All colours resolve through sys.* tokens."
+      description="Compact pill for filters, tags, and status labels. Seven semantic usages (including muted positiveContainer/informativeContainer tiers), four sizes. Supports leading icons, count badges, and a dismiss button. All colours resolve through sys.* tokens."
     >
       <Section heading="Playground" lead="Adjust usage, size, and text to preview every combination.">
         <MobilePlayground
@@ -63,7 +74,7 @@ export default function Screen() {
 }`} language="tsx" />
       </Section>
 
-      <Section heading="Usage" lead="Five semantic usages mapping to different sys.* color roles.">
+      <Section heading="Usage" lead="Seven semantic usages mapping to different sys.* color roles — including a muted 'container' tier for lower-emphasis positive/informative status.">
         <Surface>
           <div className="flex flex-wrap gap-4 items-center justify-center">
             {USAGES.map((u) => (
@@ -99,7 +110,47 @@ export default function Screen() {
         </Surface>
       </Section>
 
+      <Section heading="Selectable filter chips" lead="onPress + selected turn a Chip into a tappable, single-select filter — try clicking one below. Unselected chips use the muted sysOnSurfaceVariant text color, not full-emphasis text.">
+        <Surface>
+          <SelectableFilterChipsDemo />
+        </Surface>
+      </Section>
+
+      <Section heading="With trailing icon" lead="trailingIcon renders after the label/badge, before the dismiss button — e.g. a disclosure chevron.">
+        <Surface>
+          <div className="flex gap-4 items-center flex-wrap justify-center">
+            <Chip
+              label="More filters"
+              trailingIcon={ChevronDown && <ChevronDown size={14} />}
+            />
+          </div>
+        </Surface>
+      </Section>
+
+      <Section heading="With textColor override" lead="textColor overrides the label color independently of usage/selected — for cases like AssessMe's band-tinted score chips, which recolor per a custom theme no usage value models.">
+        <Surface>
+          <div
+            className="flex gap-4 items-center justify-center"
+            style={{ background: 'var(--sys-color-primary-container)', padding: 16, borderRadius: 12 }}
+          >
+            <Chip label="GOOD" usage="neutral" textColor="var(--sys-color-on-primary-container)" />
+            <Chip label="NEEDS WORK" usage="neutral" textColor="#b9dcff" />
+          </div>
+        </Surface>
+      </Section>
+
     </FoundationPageShell>
+  );
+}
+
+function SelectableFilterChipsDemo() {
+  const [active, setActive] = useState('All');
+  return (
+    <div className="flex gap-3 items-center flex-wrap justify-center">
+      {FILTERS.map((f) => (
+        <Chip key={f} label={f} selected={active === f} onPress={() => setActive(f)} />
+      ))}
+    </div>
   );
 }
 

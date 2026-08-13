@@ -38,7 +38,7 @@ export default function MobilePlanCardPage() {
     <FoundationPageShell
       eyebrow="Mobile"
       title="PlanCard"
-      description="Expandable card for displaying EAP plan details. Shows a header row with icon, title, and optional tag. Tapping the header toggles an expanded section that renders item rows or custom children. Controlled by expanded and onToggle."
+      description="Expandable card for displaying EAP plan details. Shows a header row with icon, title, and optional tag. Tapping the header toggles an expanded section that renders item rows or custom children. Controlled by expanded and onToggle. Supports completed, hideIcon, emphasizeTitleWhenOpen, and an accessibilityLabel override for the toggle (native builds also support testID/toggleTestID)."
     >
       <Section heading="Playground" lead="Tap the card inside the phone frame to toggle expansion.">
         <MobilePlayground
@@ -92,6 +92,25 @@ export default function Screen() {
             <div className="flex flex-col gap-1">
               <code className="ref-caption font-mono" style={{ color: 'var(--sys-color-on-surface-variant)' }}>expanded</code>
               <PlanCard title="My EAP Plan" tag="Active" icon={<HeartIcon />} items={PLAN_ITEMS} expanded />
+            </div>
+          </div>
+        </Surface>
+      </Section>
+
+      <Section heading="completed, hideIcon, emphasizeTitleWhenOpen" lead="completed renders a plain success-check icon in the header (no circle background); hideIcon removes the leading icon entirely; emphasizeTitleWhenOpen bolds the title only while expanded.">
+        <Surface>
+          <div className="flex flex-col gap-4 w-full max-w-sm">
+            <div className="flex flex-col gap-1">
+              <code className="ref-caption font-mono" style={{ color: 'var(--sys-color-on-surface-variant)' }}>completed</code>
+              <PlanCard title="Reviewed with Consultant" tag="Complete" icon={<HeartIcon />} items={PLAN_ITEMS} completed />
+            </div>
+            <div className="flex flex-col gap-1">
+              <code className="ref-caption font-mono" style={{ color: 'var(--sys-color-on-surface-variant)' }}>hideIcon</code>
+              <PlanCard title="My EAP Plan" tag="Active" items={PLAN_ITEMS} hideIcon />
+            </div>
+            <div className="flex flex-col gap-1">
+              <code className="ref-caption font-mono" style={{ color: 'var(--sys-color-on-surface-variant)' }}>emphasizeTitleWhenOpen (expanded)</code>
+              <PlanCard title="My EAP Plan" tag="Active" icon={<HeartIcon />} items={PLAN_ITEMS} expanded emphasizeTitleWhenOpen />
             </div>
           </div>
         </Surface>

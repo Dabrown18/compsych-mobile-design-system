@@ -6,7 +6,16 @@ import { MobilePlayground } from '@/components/mobile-playground/mobile-playgrou
 import { FoundationPageShell } from '@/components/foundation-page-shell';
 import { CodeBlock } from '@/components/code-block/code-block';
 
-const STYLES: BadgeStyle[] = ['filled', 'positive', 'danger', 'elevated', 'tonal', 'dot'];
+const STYLES: BadgeStyle[] = [
+  'filled',
+  'positive',
+  'danger',
+  'elevated',
+  'tonal',
+  'dot',
+  'positiveContainer',
+  'informativeContainer',
+];
 const SIZES: BadgeSize[] = ['sm', 'md', 'lg'];
 
 export default function MobileBadgePage() {
@@ -14,7 +23,7 @@ export default function MobileBadgePage() {
     <FoundationPageShell
       eyebrow="Mobile"
       title="Badge"
-      description="Compact indicator for counts, status, and notification states. Six semantic styles cover every use case. All colours resolve through sys.* tokens and re-theme automatically."
+      description="Compact indicator for counts, status, and notification states. Eight semantic styles cover every use case, including two muted 'container' tiers for lower-emphasis positive/informative status. All colours resolve through sys.* tokens and re-theme automatically."
     >
       <Section heading="Playground" lead="Adjust badgeStyle, size, and label to preview every combination.">
         <MobilePlayground
@@ -50,7 +59,7 @@ export default function Screen() {
 }`} language="tsx" />
       </Section>
 
-      <Section heading="Styles" lead="Six visual styles — filled (primary), positive (success), danger (error), elevated (surface + shadow), tonal (surface-container), dot (presence indicator).">
+      <Section heading="Styles" lead="Eight visual styles — filled (primary), positive (success), danger (error), elevated (surface + shadow), tonal (surface-container), dot (presence indicator), plus muted positiveContainer/informativeContainer tiers for lower-emphasis status.">
         <Surface>
           <div className="flex flex-wrap gap-8 items-center justify-center">
             {STYLES.map((s) => (
@@ -82,6 +91,21 @@ export default function Screen() {
             {['1', '9', '99', '999'].map((n) => (
               <Badge key={n} label={n} />
             ))}
+          </div>
+        </Surface>
+      </Section>
+
+      <Section heading="Dot with custom color" lead="dotColor overrides the dot's fill — useful when the dot sits on a background where the default sys-color-primary wouldn't read correctly, or its color needs to change based on sibling state (e.g. an active vs. inactive tab).">
+        <Surface>
+          <div className="flex gap-8 items-center justify-center">
+            <div className="flex flex-col items-center gap-2">
+              <Badge badgeStyle="dot" />
+              <code className="ref-caption font-mono" style={{ color: 'var(--sys-color-on-surface-variant)' }}>default</code>
+            </div>
+            <div className="flex flex-col items-center gap-2">
+              <Badge badgeStyle="dot" dotColor="#ffffff" style={{ background: 'var(--sys-color-primary)', borderRadius: 8 }} />
+              <code className="ref-caption font-mono" style={{ color: 'var(--sys-color-on-surface-variant)' }}>dotColor=&quot;#ffffff&quot;</code>
+            </div>
           </div>
         </Surface>
       </Section>

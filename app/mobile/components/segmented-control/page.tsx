@@ -48,7 +48,7 @@ export default function MobileSegmentedControlPage() {
     <FoundationPageShell
       eyebrow="Mobile"
       title="SegmentedControl"
-      description="A tabbed toggle for switching between mutually exclusive views. Each option has a label (required) and an optional icon. The active segment gets a filled blue pill; inactive segments get a gray pill. Always full width — scrolls horizontally when options overflow."
+      description="A tabbed toggle for switching between mutually exclusive views. Each option has an optional label and an optional icon — omit the label for an icon-only segment (pass accessibilityLabel so it's still announced correctly). The active segment gets a filled blue pill; inactive segments get a gray pill. Always full width — scrolls horizontally when options overflow."
     >
       <Section heading="Playground" lead="Pick an icon to preview how it looks alongside labels.">
         <MobilePlayground
@@ -145,6 +145,46 @@ export default function Screen() {
         <Surface>
           <SegmentedDemo options={BASE_OPTIONS} />
         </Surface>
+      </Section>
+
+      <Section
+        heading="Icon-only"
+        lead="Omit label for a compact icon-only segment — always pass accessibilityLabel so screen readers still announce what each segment does."
+      >
+        <Surface>
+          <SegmentedDemo
+            options={[
+              { value: 'list', icon: resolveIconNode('ListIcon'), accessibilityLabel: 'List view' },
+              { value: 'grid', icon: resolveIconNode('LayoutGridIcon'), accessibilityLabel: 'Grid view' },
+              { value: 'map', icon: resolveIconNode('MapIcon'), accessibilityLabel: 'Map view' },
+            ]}
+          />
+        </Surface>
+      </Section>
+
+      <Section heading="Icon-only — code example">
+        <CodeBlock code={`import { useState } from 'react';
+import { View } from 'react-native';
+import { SegmentedControl } from '@compsych/mobile-ui';
+
+export default function Screen() {
+  const [view, setView] = useState('list');
+
+  return (
+    <View style={{ padding: 16 }}>
+      {/* No label — pass accessibilityLabel so it's still announced correctly */}
+      <SegmentedControl
+        options={[
+          { value: 'list', icon: 'ListIcon', accessibilityLabel: 'List view' },
+          { value: 'grid', icon: 'LayoutGridIcon', accessibilityLabel: 'Grid view' },
+          { value: 'map', icon: 'MapIcon', accessibilityLabel: 'Map view' },
+        ]}
+        value={view}
+        onChange={setView}
+      />
+    </View>
+  );
+}`} language="tsx" />
       </Section>
 
       <Section heading="Many options (scrolls)" lead="When options overflow the container width the row scrolls horizontally.">

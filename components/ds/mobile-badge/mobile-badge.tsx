@@ -3,12 +3,21 @@
 import type { HTMLAttributes } from 'react';
 
 export type BadgeSize = 'sm' | 'md' | 'lg';
-export type BadgeStyle = 'filled' | 'positive' | 'danger' | 'elevated' | 'tonal' | 'dot';
+export type BadgeStyle =
+  | 'filled'
+  | 'positive'
+  | 'danger'
+  | 'elevated'
+  | 'tonal'
+  | 'dot'
+  | 'positiveContainer'
+  | 'informativeContainer';
 
 export interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
   label?: number | string;
   size?: BadgeSize;
   badgeStyle?: BadgeStyle;
+  dotColor?: string;
 }
 
 const SIZE: Record<BadgeSize, { size: number; fontSize: number; px: number }> = {
@@ -24,9 +33,11 @@ const COLORS: Record<BadgeStyle, { bg: string; color: string; shadow?: string }>
   elevated: { bg: 'var(--sys-color-surface-container-lowest)', color: 'var(--sys-color-on-surface)', shadow: '0 2px 8px rgba(0,0,0,.10)' },
   tonal:    { bg: 'var(--sys-color-surface-container)', color: 'var(--sys-color-on-surface)' },
   dot:      { bg: 'transparent', color: 'transparent' },
+  positiveContainer:    { bg: 'var(--sys-color-success-container)', color: 'var(--sys-color-on-success-container)' },
+  informativeContainer: { bg: 'var(--sys-color-info-container)', color: 'var(--sys-color-on-info-container)' },
 };
 
-export function Badge({ label, size = 'md', badgeStyle = 'filled', style, ...rest }: BadgeProps) {
+export function Badge({ label, size = 'md', badgeStyle = 'filled', dotColor, style, ...rest }: BadgeProps) {
   const s = SIZE[size];
   const c = COLORS[badgeStyle];
   const displayLabel = label !== undefined ? String(label) : '';
@@ -49,7 +60,7 @@ export function Badge({ label, size = 'md', badgeStyle = 'filled', style, ...res
           width: dotSize,
           height: dotSize,
           borderRadius: '50%',
-          background: 'var(--sys-color-primary)',
+          background: dotColor ?? 'var(--sys-color-primary)',
           display: 'block',
         }} />
       </span>

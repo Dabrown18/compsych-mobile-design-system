@@ -3,9 +3,12 @@
 import type { HTMLAttributes } from 'react';
 
 export interface SegmentedControlOption {
-  label: string;
+  /** Omit for an icon-only segment. */
+  label?: string;
   value: string;
   icon?: React.ReactNode;
+  /** Required for accessibility when `label` is omitted. */
+  accessibilityLabel?: string;
 }
 
 export interface SegmentedControlProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> {
@@ -38,6 +41,7 @@ export function SegmentedControl({ options, value, onChange, style, ...rest }: S
             type="button"
             role="tab"
             aria-selected={isActive}
+            aria-label={opt.accessibilityLabel ?? opt.label}
             onClick={() => onChange(opt.value)}
             style={{
               flexShrink: 0,

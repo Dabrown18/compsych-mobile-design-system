@@ -3,7 +3,14 @@
 import type { HTMLAttributes, ReactNode } from 'react';
 
 export type ChipSize = 'sm' | 'md' | 'lg' | 'xl';
-export type ChipUsage = 'neutral' | 'informative' | 'positive' | 'danger' | 'warning';
+export type ChipUsage =
+  | 'neutral'
+  | 'informative'
+  | 'positive'
+  | 'danger'
+  | 'warning'
+  | 'positiveContainer'
+  | 'informativeContainer';
 
 export interface ChipProps extends HTMLAttributes<HTMLSpanElement> {
   label: string;
@@ -13,6 +20,10 @@ export interface ChipProps extends HTMLAttributes<HTMLSpanElement> {
   dismissible?: boolean;
   onDismiss?: () => void;
   badge?: number | string;
+  onPress?: () => void;
+  selected?: boolean;
+  trailingIcon?: ReactNode;
+  textColor?: string;
 }
 
 const SIZE: Record<ChipSize, { h: number; px: number; fontSize: number; gap: number }> = {
@@ -28,14 +39,41 @@ const COLORS: Record<ChipUsage, { bg: string; color: string; elevated?: boolean 
   positive:    { bg: 'var(--sys-color-success)', color: 'var(--sys-color-on-success)' },
   danger:      { bg: 'var(--sys-color-error)', color: 'var(--sys-color-on-error)' },
   warning:     { bg: 'var(--sys-color-warning)', color: 'var(--sys-color-on-warning)' },
+  positiveContainer:    { bg: 'var(--sys-color-success-container)', color: 'var(--sys-color-on-success-container)' },
+  informativeContainer: { bg: 'var(--sys-color-info-container)', color: 'var(--sys-color-on-info-container)' },
 };
 
-export function Chip({ label, size = 'md', usage = 'neutral', leadingIcon, dismissible, onDismiss, badge, style, ...rest }: ChipProps) {
+export function Chip({
+  label,
+  size = 'md',
+  usage = 'neutral',
+  leadingIcon,
+  dismissible,
+  onDismiss,
+  badge,
+  onPress,
+  selected,
+  trailingIcon,
+  textColor,
+  style,
+  ...rest
+}: ChipProps) {
   const s = SIZE[size];
-  const c = COLORS[usage];
+  // A tappable, default-usage chip is a selection toggle (e.g. a filter pill) —
+  // its unselected state should read as muted/available, not full-emphasis text.
+  const isToggle = Boolean(onPress) && usage === 'neutral';
+  const c = selected
+    ? { bg: 'var(--sys-color-primary)', color: 'var(--sys-color-on-primary)' }
+    : isToggle
+      ? { ...COLORS[usage], color: 'var(--sys-color-on-surface-variant)' }
+      : COLORS[usage];
+  const labelColor = textColor ?? c.color;
 
   return (
     <span
+      role={onPress ? 'button' : undefined}
+      tabIndex={onPress ? 0 : undefined}
+      onClick={onPress}
       style={{
         display: 'inline-flex',
         alignItems: 'center',
@@ -48,15 +86,15 @@ export function Chip({ label, size = 'md', usage = 'neutral', leadingIcon, dismi
         fontSize: s.fontSize,
         fontWeight: 500,
         lineHeight: 1,
-        boxShadow: c.elevated ? '0 2px 8px rgba(0,0,0,.10)' : undefined,
-        cursor: 'default',
+        boxShadow: !selected && COLORS[usage].elevated ? '0 2px 8px rgba(0,0,0,.10)' : undefined,
+        cursor: onPress ? 'pointer' : 'default',
         userSelect: 'none',
         ...style,
       }}
       {...rest}
     >
       {leadingIcon && <span style={{ display: 'flex', alignItems: 'center', fontSize: s.fontSize + 2 }}>{leadingIcon}</span>}
-      {label}
+      <span style={{ color: labelColor }}>{label}</span>
       {badge !== undefined && (
         <span style={{
           display: 'inline-flex',
@@ -74,10 +112,16 @@ export function Chip({ label, size = 'md', usage = 'neutral', leadingIcon, dismi
           {badge}
         </span>
       )}
+      {trailingIcon && (
+        <span style={{ display: 'flex', alignItems: 'center', fontSize: s.fontSize + 2 }}>{trailingIcon}</span>
+      )}
       {dismissible && (
         <button
           type="button"
-          onClick={onDismiss}
+          onClick={(e) => {
+            e.stopPropagation();
+            onDismiss?.();
+          }}
           aria-label="Dismiss"
           style={{
             display: 'inline-flex',

@@ -9,11 +9,13 @@ import {
   StatusChip,
   type StatusChipVariant,
   type StatusChipAlign,
+  type StatusChipSize,
 } from '@/components/ds/mobile-status-chip/mobile-status-chip';
 import { type IconName } from '@/components/ds/mobile-icon/mobile-icon';
 
-const VARIANTS: StatusChipVariant[] = ['warning', 'error'];
+const VARIANTS: StatusChipVariant[] = ['warning', 'error', 'positive'];
 const ALIGNS: StatusChipAlign[] = ['left', 'center', 'right'];
+const SIZES: StatusChipSize[] = ['md', 'sm'];
 const ICON_OPTIONS: IconName[] = [
   'ClockFadingIcon',
   'ClockAlertIcon',
@@ -30,17 +32,19 @@ export default function MobileStatusChipPage() {
     <FoundationPageShell
       eyebrow="Mobile"
       title="StatusChip"
-      description="A pill-shaped status indicator with an icon and label. Two semantic variants — warning (amber) and error (red) — with configurable icon and text alignment."
+      description="A pill-shaped status indicator with an icon and label. Three semantic variants — warning (amber), error (red), positive (green) — with configurable icon, size, and text alignment."
     >
-      <Section heading="Playground" lead="Adjust variant, alignment, and icon to preview every combination.">
+      <Section heading="Playground" lead="Adjust variant, size, alignment, and icon to preview every combination.">
         <MobilePlayground
           render={(values) => (
             <div style={{ padding: 24, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <StatusChip
                 label={values.label as string}
                 variant={values.variant as StatusChipVariant}
+                size={values.size as StatusChipSize}
                 align={values.align as StatusChipAlign}
                 icon={(values.icon as string) || undefined}
+                hideIcon={values.hideIcon as boolean}
                 fullWidth={values.fullWidth as boolean}
               />
             </div>
@@ -48,8 +52,10 @@ export default function MobileStatusChipPage() {
           controls={[
             { name: 'label', type: 'string', label: 'Label', defaultValue: '10 minutes remaining' },
             { name: 'variant', type: 'select', label: 'Variant', options: VARIANTS, defaultValue: 'warning' },
+            { name: 'size', type: 'select', label: 'Size', options: SIZES, defaultValue: 'md' },
             { name: 'align', type: 'select', label: 'Align', options: ALIGNS, defaultValue: 'center' },
             { name: 'icon', type: 'select', label: 'Icon', options: ICON_OPTIONS, defaultValue: 'ClockFadingIcon', placeholder: '— default —' },
+            { name: 'hideIcon', type: 'boolean', label: 'Hide icon', defaultValue: false },
             { name: 'fullWidth', type: 'boolean', label: 'Full width', defaultValue: false },
           ]}
         />
@@ -58,9 +64,18 @@ export default function MobileStatusChipPage() {
       <Section heading="Variants">
         <Surface>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 12, alignItems: 'flex-start' }}>
-            {VARIANTS.map((v) => (
-              <StatusChip key={v} variant={v} label={v === 'warning' ? '10 minutes remaining' : 'Your session has ended'} />
-            ))}
+            <StatusChip variant="warning" label="10 minutes remaining" />
+            <StatusChip variant="error" label="Your session has ended" />
+            <StatusChip variant="positive" label="Confirmed" />
+          </div>
+        </Surface>
+      </Section>
+
+      <Section heading="Compact, icon-less size" lead="size=&quot;sm&quot; with hideIcon — for a status tag used inline in a list row, where the default md size and mandatory icon are too large.">
+        <Surface>
+          <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
+            <StatusChip variant="warning" size="sm" hideIcon label="Pending" />
+            <StatusChip variant="error" size="sm" hideIcon label="Cancelled" />
           </div>
         </Surface>
       </Section>
@@ -97,6 +112,20 @@ export default function MobileStatusChipPage() {
   label="Session paused"
   variant="warning"
   icon="TimerIcon"
+/>
+
+// Positive variant
+<StatusChip
+  label="Confirmed"
+  variant="positive"
+/>
+
+// Compact, icon-less — for inline list rows
+<StatusChip
+  label="Pending"
+  variant="warning"
+  size="sm"
+  hideIcon
 />`} />
       </Section>
     </FoundationPageShell>

@@ -16,9 +16,27 @@ export interface PlanCardProps extends HTMLAttributes<HTMLDivElement> {
   expanded?: boolean;
   onToggle?: () => void;
   children?: ReactNode;
+  completed?: boolean;
+  hideIcon?: boolean;
+  emphasizeTitleWhenOpen?: boolean;
+  accessibilityLabel?: string;
 }
 
-export function PlanCard({ title, icon, tag, items, expanded = false, onToggle, children, style, ...rest }: PlanCardProps) {
+export function PlanCard({
+  title,
+  icon,
+  tag,
+  items,
+  expanded = false,
+  onToggle,
+  children,
+  completed = false,
+  hideIcon = false,
+  emphasizeTitleWhenOpen = false,
+  accessibilityLabel,
+  style,
+  ...rest
+}: PlanCardProps) {
   return (
     <div
       style={{
@@ -34,6 +52,9 @@ export function PlanCard({ title, icon, tag, items, expanded = false, onToggle, 
       {/* Header row */}
       <div
         onClick={onToggle}
+        role={onToggle ? 'button' : undefined}
+        aria-label={onToggle ? (accessibilityLabel ?? (expanded ? 'Collapse' : 'Expand')) : undefined}
+        aria-expanded={onToggle ? expanded : undefined}
         style={{
           display: 'flex',
           alignItems: 'center',
@@ -43,7 +64,7 @@ export function PlanCard({ title, icon, tag, items, expanded = false, onToggle, 
           userSelect: 'none',
         }}
       >
-        {icon && (
+        {icon && !hideIcon && (
           <span style={{
             width: 40, height: 40, borderRadius: '50%',
             background: 'var(--sys-color-primary-container)',
@@ -53,7 +74,18 @@ export function PlanCard({ title, icon, tag, items, expanded = false, onToggle, 
             {icon}
           </span>
         )}
-        <span style={{ flex: 1, fontSize: 16, fontWeight: 500, color: 'var(--sys-color-on-surface)' }}>{title}</span>
+        <span style={{ flex: 1, fontSize: 16, fontWeight: expanded && emphasizeTitleWhenOpen ? 700 : 500, color: 'var(--sys-color-on-surface)' }}>{title}</span>
+        {completed && (
+          <span
+            aria-label="Completed"
+            style={{
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              color: 'var(--sys-color-success)', fontSize: 16, flexShrink: 0,
+            }}
+          >
+            ✓
+          </span>
+        )}
         {tag && (
           <span style={{
             fontSize: 12, fontWeight: 500,

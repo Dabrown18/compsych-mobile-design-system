@@ -86,6 +86,7 @@ const NAV_SECTIONS: NavSection[] = [
     items: [
       { href: '/mobile/components/action-sheet', label: 'ActionSheet' },
       { href: '/mobile/components/info-action-sheet', label: 'InfoActionSheet' },
+      { href: '/mobile/components/dialog', label: 'Dialog' },
       { href: '/mobile/components/appointment-confirmation-sheet', label: 'AppointmentConfirmationSheet' },
       { href: '/mobile/components/calendar', label: 'Calendar' },
       { href: '/mobile/components/chat-bubble', label: 'ChatBubble' },
